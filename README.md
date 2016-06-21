@@ -34,4 +34,4 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 ##License
 
-This project is licensed under the MIT Open Source license. For more information, see the [LICENSE](LICENSE.md) file in this repository.
+This project is licensed under the MIT Open Source license. For more information, see the [LICENSE](LICENSE) file in this repository.
