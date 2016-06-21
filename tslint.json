@@ -113,7 +113,6 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     
-    "import-destructuring-spacing": true,
     "no-internal-module": true,
     "directive-selector-prefix": [true, "as"],
     "component-selector-prefix": [true, "as"],
