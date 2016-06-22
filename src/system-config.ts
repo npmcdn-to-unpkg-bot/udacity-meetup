@@ -7,10 +7,14 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'ng2-page-scroll': 'vendor/ng2-page-scroll/src/ng2-page-scroll.directive.js'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'vendor/ng2-page-scroll': {
+    defaultExtension: 'js'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +39,8 @@ const barrels: string[] = [
   'app/shared',
   'app/as-navbar',
   'app/navbar',
+  'app/front/front',
+  'app/front/home',
   /** @cli-barrel */
 ];
 
