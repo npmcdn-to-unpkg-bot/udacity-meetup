@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+  .navbar-collapse {
+		// ** Added because ng2-bootstrap was throwing error:
+		//    'WARNING: sanitizing unsafe style value '
+		//    while using [collapse]="isCollapsed" in the HTML 
+		//    It started after upgrading the @angular/...2.0.0-rc.3 ** //
+		&.navbar-closed {
+			display: none;
+		}
+  }
+}

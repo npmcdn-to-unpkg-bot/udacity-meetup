@@ -7,12 +7,22 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'ng2-page-scroll': 'vendor/ng2-page-scroll/src/ng2-page-scroll.directive.js'
+  'ng2-page-scroll': 'vendor/ng2-page-scroll/ng2-page-scroll.js',
+  'moment': 'vendor/moment/moment.js',
+  'angular2-moment': 'vendor/angular2-moment/index.js',
+  'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
+
 };
 
 /** User packages configuration. */
 const packages: any = {
   'vendor/ng2-page-scroll': {
+    defaultExtension: 'js'
+  },
+  'vendor/angular2-moment': {
+    defaultExtension: 'js'
+  },
+  'vendor/ng2-bootstrap': {
     defaultExtension: 'js'
   }
 };
@@ -41,6 +51,9 @@ const barrels: string[] = [
   'app/navbar',
   'app/front/front',
   'app/front/home',
+  'app/front/contact',
+  'app/front/components/footer',
+  'app/front/components/events',
   /** @cli-barrel */
 ];
 

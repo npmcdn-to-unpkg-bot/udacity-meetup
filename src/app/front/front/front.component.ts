@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavbarComponent } from '../components/navbar/navbar.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +11,8 @@ import { NavbarComponent } from '../components/navbar/navbar.component';
   styleUrls: ['front.component.css'],
   directives: [
     ROUTER_DIRECTIVES,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
 ]
 })
 export class FrontComponent implements OnInit {
