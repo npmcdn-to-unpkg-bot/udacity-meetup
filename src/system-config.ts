@@ -11,7 +11,7 @@ const map: any = {
   'moment': 'vendor/moment/moment.js',
   'angular2-moment': 'vendor/angular2-moment/index.js',
   'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
-
+  'bootstrap': 'vendor/bootstrap/dist', 
 };
 
 /** User packages configuration. */

@@ -19,7 +19,8 @@ module.exports = function(defaults) {
       'ng2-page-scroll/**',
       'angular2-moment/**',
       'moment/moment.js',
-      'ng2-bootstrap/**'
+      'ng2-bootstrap/**',
+      'bootstrap/dist/css/bootstrap.css'
     ]
   });
 };
