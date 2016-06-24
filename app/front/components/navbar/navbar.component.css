@@ -1,0 +1,3 @@
+@media (max-width: 768px) {
+  .navbar-collapse.navbar-closed {
+    display: none; } }

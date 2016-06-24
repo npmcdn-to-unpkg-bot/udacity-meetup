@@ -1,0 +1,103 @@
+{
+  "_args": [
+    [
+      "ng2-page-scroll@github:adriancarriger/ng2-page-scroll#temp-compiled",
+      "/Users/adriancarriger/school-projects/udacity-meetup"
+    ]
+  ],
+  "_from": "adriancarriger/ng2-page-scroll#temp-compiled",
+  "_id": "ng2-page-scroll@1.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ng2-page-scroll",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/adriancarriger/ng2-page-scroll/temp-compiled/package.json",
+      "gitUrl": "git://github.com/adriancarriger/ng2-page-scroll.git#temp-compiled",
+      "httpsUrl": "git+https://github.com/adriancarriger/ng2-page-scroll.git#temp-compiled",
+      "shortcut": "github:adriancarriger/ng2-page-scroll#temp-compiled",
+      "ssh": "git@github.com:adriancarriger/ng2-page-scroll.git#temp-compiled",
+      "sshUrl": "git+ssh://git@github.com/adriancarriger/ng2-page-scroll.git#temp-compiled",
+      "type": "github"
+    },
+    "name": "ng2-page-scroll",
+    "raw": "ng2-page-scroll@github:adriancarriger/ng2-page-scroll#temp-compiled",
+    "rawSpec": "github:adriancarriger/ng2-page-scroll#temp-compiled",
+    "scope": null,
+    "spec": "github:adriancarriger/ng2-page-scroll#temp-compiled",
+    "type": "hosted"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git://github.com/adriancarriger/ng2-page-scroll.git#9ee7b8928c32096230f59a3ae78da08005cf799c",
+  "_shasum": "779f6947de1ecb3d4e95eba53a17c07773fe90af",
+  "_shrinkwrap": null,
+  "_spec": "ng2-page-scroll@github:adriancarriger/ng2-page-scroll#temp-compiled",
+  "_where": "/Users/adriancarriger/school-projects/udacity-meetup",
+  "author": {
+    "email": "sebastian.fuss@googlemail.com",
+    "name": "Sebastian Fuss"
+  },
+  "bugs": {
+    "url": "https://github.com/Nolanus/ng2-page-scroll/issues"
+  },
+  "dependencies": {},
+  "description": "Pure angular2 directive for scrolling to html anchors",
+  "devDependencies": {
+    "@angular/common": "~2.0.0-rc.3",
+    "@angular/compiler": "~2.0.0-rc.3",
+    "@angular/core": "~2.0.0-rc.3",
+    "@angular/platform-browser": "~2.0.0-rc.3",
+    "@angular/router": "~3.0.0-alpha.7",
+    "codelyzer": "0.0.20",
+    "rxjs": "5.0.0-beta.6",
+    "systemjs-builder": "^0.15.0",
+    "tslint": "^3.10.2",
+    "typescript": "1.8.9",
+    "typings": "0.7.9",
+    "zone.js": "~0.6.12"
+  },
+  "gitHead": "9ee7b8928c32096230f59a3ae78da08005cf799c",
+  "homepage": "https://github.com/Nolanus/ng2-page-scroll#readme",
+  "keywords": [
+    "angular2",
+    "angularjs",
+    "page",
+    "scroll",
+    "pagescroll",
+    "animate",
+    "move",
+    "scrollto",
+    "anchor"
+  ],
+  "license": "MIT",
+  "main": "ng2-page-scroll.js",
+  "name": "ng2-page-scroll",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "@angular/common": "~2.0.0-rc.3",
+    "@angular/compiler": "~2.0.0-rc.3",
+    "@angular/core": "~2.0.0-rc.3",
+    "@angular/platform-browser": "~2.0.0-rc.3",
+    "@angular/router": "~3.0.0-alpha.7",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "~0.6.12"
+  },
+  "readme": "[![npm version](https://img.shields.io/npm/v/ng2-page-scroll.svg?style=flat)](https://www.npmjs.com/package/ng2-page-scroll)\n[![Code Climate](https://codeclimate.com/github/Nolanus/ng2-page-scroll/badges/gpa.svg)](https://codeclimate.com/github/Nolanus/ng2-page-scroll)\n[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)\n[![Dependency Status](https://david-dm.org/Nolanus/ng2-page-scroll.svg)](https://david-dm.org/Nolanus/ng2-page-scroll)\n[![devDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll#info=devDependencies)\n\n# ng2-page-scroll\n\nAnimated \"Scroll to element\" functionality rewritten in a pure angular2 \ndirective with no additional dependencies\n\n## Features\n\n- scroll to the top edge of an element referenced in the href-attribute \n(`href=\"#mytarget`)\n- customizable: stops scrolling if the user interrupts \n([read more](https://github.com/Nolanus/ng2-page-scroll/wiki/Scroll-Interruption-Interference))\n- works across routes (scrolls to target element as soon as the \nrouting has finished)\n- custom easing functions to calculate the scroll position over time\n\n## Setup\n\nFirst you need to install the npm module:\n```sh\nnpm install ng2-page-scroll --save\n```\n\nThen import the directive and add it to the `directives` array of you\n component. In your template you may now add the `pageScroll` attribute \n to elements with an `href` attribute pointing towards an anchor on the \n same page (e.g. `#anchor`).\n\n```js\nimport {PageScroll} from 'ng2-page-scroll';\n\n\n@Component({\n   ...\n   template: `...\n        <a pageScroll href=\"#myanchor\">Go there</a>\n   ...`,\n    directives: [PageScroll]\n})\nexport class MyComponent  {\n}\n```\n\n## Configuration\n\nThe class `PageScrollConfig` offers static properties to be manipulated to \nconfigure the default behavior. Override the respective properties to change \nall page scroll-animation defaults.\n\n### Configuration properties\n\n- `defaultScrollOffset` (`?:number=0`) - Pixels to offset from the top of \nthe element when scrolling to (positive value = scrolling will stop given \npixels atop the target element).\n- `defaultDuration` (`?:number=0`) - Duration in milliseconds the whole \nscroll-animation should last.\n- `defaultInterruptible` (`?:boolean=true`) - Whether the scroll animation \nshould stop if the user interferes with it (true) or not (false).\n- `defaultEasingFunction` (`?:IEasingFunction=_linearEasing`) - Easing method \nto be used while calculating the scroll position over time \n(default is linear easing).\n\n### Example\n\n```js\nimport {PageScrollConfig} from 'ng2-page-scroll';\n\nexport class AppComponent {\n    constructor() {\n        PageScrollConfig.defaultScrollOffset = 50;\n        PageScrollConfig.defaultEasingFunction = (t:number, b:number, c:number, d:number):number => {\n            // easeInOutExpo easing\n            if (t === 0) return b;\n            if (t === d) return b + c;\n            if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;\n            return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;\n        };\n    }\n}\n```\n\n## API\n\nAll properties may be set on individual elements as well. They take precedence \nover the default settings specified in `PageScrollConfig` class. Thereby it is \npossible to have all page scroll-animations last e.g. 2 seconds, but a \nspecific one should be performed with a custom easing function and a duration \nof only 1 second.\n\n### PageScroll properties\n\n- `pageScroll` - Attribute to add scroll-animation behavior when the \n`click`-event happens to an existing element.\n- `pageScrollOffset` (`?:number=0`) - Pixels to offset from the top of the \nelement when scrolling to (positive value = scrolling will stop given pixels \natop the target element).\n- `pageScrollDuration` (`?:number=1250`) - Duration in milliseconds the whole \nscroll-animation should last.\n- `pageScrollInterruptible` (`?:boolean=true`) - Whether the scroll animation \nshould stop if the user interferes with it (true) or not (false).\n- `pageScrollEasing` (`?:IEasingFunction=linearEasing`) - Easing method to be \nused while calculating the scroll position over time (default is linear easing).\n\n### PageScroll events\n\n- `pageScrollFinish` - fired when the scroll-animation stops. Emits a boolean \nvalue which indicates whether the scroll animation finished successfully and \nreached its target (true) or whether it got interrupted due to another scroll \nanimation starting or user interaction (false).\n\n### Example\n\nMost basic example:\n\n```html\n <a pageScroll href=\"#myanchor\">Go there</a>\n```\n\nThe following example will check whether the route _Home_ is currently loaded. \nIf this is true, the scroll-animation will be performed with the default \nproperties. If a different route is loaded, a subscription for route changes \nwill be made and the scroll-animation will be performed as soon as the new \nroute is loaded.\n\n```html\n <a pageScroll [routerLink]=\"['Home']\" href=\"#myanchor\">Go there</a>\n```\n\nOverriding all possible properties. `doSmth()` and `linearEasing` are \ndefined in the component\n\n```html\n <a pageScroll [pageScrollOffset]=\"0\" [pageScrollDuration]=\"2000\" [pageScrollEasing]=\"linearEasing\" [pageScrollInterruptible]=\"false\" (pageScrollFinish)=\"doSmth($event)\" href=\"#theanchor\">Visit</a>\n```\n\n```js\n    linearEasing:IEasingFunction = (t:number, b:number, c:number, d:number):number => {\n        // Linear easing\n        return c * t / d + b;\n    };\n\n    doSmth(reachedTarget:boolean) {\n        if (reachedTarget){\n            console.log('Yeah, we reached our destination');\n        } else {\n            console.log('Ohoh, something interrupted us');\n        }\n    }\n```\n\n## Example App\n\nThe [_example_](example) subfolder contains a clone of the \n[angular2 quickstart](https://github.com/angular/quickstart) repository \nadapted to showcase the functionality of ng2-page-scroll. Run the \nexample app by checking out that repository and execute the \nfollowing command in the project root directory:\n\n ```\n npm run example\n ```\n  \n This will perform the following steps:\n\n ```\n // Install the ng2-page-scroll project\n npm install\n // Change into the example website folder\n cd example/\n // Uninstall the current ng2-page-scroll version\n npm uninstall ng2-page-scroll\n // Install the example website's dependencies\n npm install\n // Run the server\n npm start\n ```\n\n## TODO:\n\n* Unit tests\n* Test across browsers\n\n## License\n\n[MIT](LICENSE)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Nolanus/ng2-page-scroll.git"
+  },
+  "scripts": {
+    "compile": "tsc && npm run lint",
+    "example": "npm install && cd example/ && npm uninstall ng2-page-scroll && npm install && npm start",
+    "install:typings": "typings install",
+    "lint": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
+    "prepublish": "npm run install:typings && npm run compile && node ./make.js"
+  },
+  "typings": "ng2-page-scroll.d.ts",
+  "version": "1.1.1"
+}

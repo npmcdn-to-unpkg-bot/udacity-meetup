@@ -5,9 +5,25 @@
  * User Configuration.
  **********************************************************************************************/
 /** Map relative paths to URLs. */
-var map = {};
+var map = {
+    'ng2-page-scroll': 'vendor/ng2-page-scroll/ng2-page-scroll.js',
+    'moment': 'vendor/moment/moment.js',
+    'angular2-moment': 'vendor/angular2-moment/index.js',
+    'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
+    'bootstrap': 'vendor/bootstrap/dist',
+};
 /** User packages configuration. */
-var packages = {};
+var packages = {
+    'vendor/ng2-page-scroll': {
+        defaultExtension: 'js'
+    },
+    'vendor/angular2-moment': {
+        defaultExtension: 'js'
+    },
+    'vendor/ng2-bootstrap': {
+        defaultExtension: 'js'
+    }
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
  * Everything underneath this line is managed by the CLI.
@@ -26,6 +42,13 @@ var barrels = [
     // App specific barrels.
     'app',
     'app/shared',
+    'app/as-navbar',
+    'app/navbar',
+    'app/front/front',
+    'app/front/home',
+    'app/front/contact',
+    'app/front/components/footer',
+    'app/front/components/events',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
@@ -42,4 +65,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-aJVf6JBE.tmp/0/src/system-config.js.map
