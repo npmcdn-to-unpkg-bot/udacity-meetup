@@ -1,7 +1,9 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventsComponent } from '../components/events/index';
 import { Autofocus } from '../../shared/directives/autofocus.directive';
 import { ApiService } from '../../shared/services/api.service';
+import { GlobalEventsService } from '../../shared/services/global-events.service';
+import { Observable } from 'rxjs/Rx';
 
 declare let Vimeo: any;
 
@@ -14,8 +16,15 @@ declare let Vimeo: any;
 })
 export class HomeComponent implements OnInit {
   public video: any;
+  public searchFixed = false;
+  public events;
   private intervalReference;
-  constructor(public element: ElementRef, private apiService: ApiService) {}
+  private yPos = 0;
+  private minScroll = 999999;
+  @ViewChild('videoContainer') videoContainer;
+  constructor(
+    private apiService: ApiService,
+    private globalEventsService: GlobalEventsService) {}
 
   ngOnInit() {
     let iframe = document.getElementById('hero-video');
@@ -36,12 +45,38 @@ export class HomeComponent implements OnInit {
     this.apiService.observe(testParams)
     .subscribe(data => {
       console.log(data);
+      this.events = data;
     });
 
-
+    this.getMinScroll();
+    this.globalEventsService.resize$.subscribe(data => {
+      this.getMinScroll();
+    });
+    this.globalEventsService.scroll$.subscribe(data => {
+      this.yPos = data.path[1].pageYOffset;
+      this.updateFixed();
+    });
   }
+
   ngOnDestroy() {
     clearInterval(this.intervalReference);
   }
 
+  getMinScroll() {
+    let winHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    // This is how far down the search bar is before any scrolling
+    let vcHeight = this.videoContainer.nativeElement.offsetHeight;
+    let vcTop = this.videoContainer.nativeElement.offsetTop;
+    // search bar height is 22px
+    this.minScroll = (0.49 * vcHeight) + vcTop + 22 - (0.017 * winHeight);
+    this.updateFixed();
+  }
+  updateFixed() {
+    if (this.yPos >= this.minScroll) {
+      this.searchFixed = true;
+    }
+    else {
+      this.searchFixed = false;
+    }
+  }
 }

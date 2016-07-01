@@ -1,3 +1,4 @@
-<p>
-  events works!
-</p>
+<div *ngFor="let event of events | appEvents">
+  <h3>{{event.name.text}}</h3>
+  <img class="tile__img" src="{{event.logo?.url}}" alt=""  />
+</div>

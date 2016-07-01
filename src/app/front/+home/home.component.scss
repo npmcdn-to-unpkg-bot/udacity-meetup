@@ -19,11 +19,41 @@
       color: gray;
       font-size: 23px;
     }
-    .search-container {
-      width: 50%;
-      margin-right: auto;
-      margin-left: auto;
-      .search { // input 
+  }
+  .search-container {
+    position: absolute;
+    top: 49%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    &.search-fixed {
+      z-index: 3;
+      .search-box {
+        position: fixed;
+        top: 1.7%;
+        right: 6%;
+        margin: 0px;
+        left: initial;
+        width: 37%;
+      }
+      .button-pair {
+        display: none;
+      }
+    }
+    .search-box {
+      width: 100%;
+      position: relative;
+      margin: 20px 0;
+      .glyphicon-search {
+        position: absolute;
+        left: 14px;
+        top: 11px;
+        color: gray;
+      }
+      .search { // input element
         border-radius: 25px;
         padding: 6px 10px 6px 40px;
         border: none;
@@ -33,7 +63,41 @@
         color: $fadedBlack;
         line-height: 1;
         font-size: 18px;
-        margin: 20px 0;
+        max-width: 500px;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+    .button-pair {
+      margin-top: 10px;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      .btn, .btn:focus {
+        display: block;
+        float: left;
+        width: 200px;
+        color: white;
+        transition: all 0.5s ease;
+        border: solid 1px $primaryColor;
+      }
+      .button-left {
+        border-radius: 25px 0 0 25px;
+        background-color: transparent;
+        
+        &:hover {
+          color: white;
+          background-color: $primaryColor;
+          & + .button-right {
+            background-color: transparent;
+          }
+        }
+      }
+      .button-right {
+        border-radius: 0 25px 25px 0;
+        background-color: $primaryColor;
+        color: white;
       }
     }
   }
@@ -61,35 +125,7 @@
   outline: none !important; 
 }
 
-.button-pair {
-  margin-top: 10px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  .btn, .btn:focus {
-    display: block;
-    float: left;
-    width: 200px;
-    color: white;
-    transition: all 0.5s ease;
-    border: solid 1px $primaryColor;
-  }
-  .button-left {
-    border-radius: 25px 0 0 25px;
-    background-color: transparent;
-    
-    &:hover {
-      color: white;
-      background-color: $primaryColor;
-      & + .button-right {
-        background-color: transparent;
-      }
-    }
-  }
-  .button-right {
-    border-radius: 0 25px 25px 0;
-    background-color: $primaryColor;
-    color: white;
-  }
-}
+
+
+
+

@@ -1,3 +1,25 @@
+@import '../../../shared/styles/variables';
+.navbar {
+	z-index: 3;
+	background-color: $primaryColor;
+	border-bottom: none;
+	height: 60px;
+	&.navbar-default {
+		.navbar-brand, .navbar-nav > li > a {
+			color: white;
+			margin: 5px 0;
+			&.sign-in {
+				margin: 0;
+			}
+		}
+	}
+	.navbar-pull-right {
+		float: right;
+	}
+	.sign-in {
+		font-size: 30px;
+	}
+}
 @media (max-width: 768px) {
   .navbar-collapse {
 		// ** Added because ng2-bootstrap was throwing error:
@@ -8,4 +30,28 @@
 			display: none;
 		}
   }
+}
+.extra-nav {
+	position: fixed;
+	right: 3%;
+	bottom: 3%;
+	z-index: 2;
+	.extra-item {
+		height: 50px;
+		width: 50px;
+		font-size: 40px;
+		background-color: $primaryColor;
+		color: white;
+		border-radius: 50%;
+		cursor: pointer;
+    float: left;
+    margin: 0 15px;
+    position: relative;
+		i {
+			position: absolute;
+			top: 7%;
+   		left: 27%;
+			font-size: 32px;
+		}
+	}
 }
