@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
@@ -8,11 +8,5 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   styleUrls: ['footer.component.css'],
   directives: [ROUTER_DIRECTIVES]
 })
-export class FooterComponent implements OnInit {
-
-  constructor() {}
-
-  ngOnInit() {
-  }
-
+export class FooterComponent {
 }

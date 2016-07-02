@@ -1,9 +1,9 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
-import { FrontRoutes } from './front/front.routes';
+import { frontRoutes } from './front/front.routes';
 
 const appRoutes: RouterConfig = [
-  ...FrontRoutes
+  ...frontRoutes
 ];
 
 export const APP_ROUTER_PROVIDERS = [

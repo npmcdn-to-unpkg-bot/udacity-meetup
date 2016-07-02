@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { NavbarComponent } from '../components/navbar/navbar.component';
@@ -15,11 +15,5 @@ import { FooterComponent } from '../components/footer/footer.component';
     FooterComponent
 ]
 })
-export class FrontComponent implements OnInit {
-
-  constructor() {}
-
-  ngOnInit() {
-  }
-
+export class FrontComponent {
 }

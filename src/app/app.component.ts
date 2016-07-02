@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { GlobalEventsService } from './shared/services/global-events.service';
 
@@ -13,12 +13,8 @@ import { APP_PROVIDERS } from './app.providers';
   directives: [ROUTER_DIRECTIVES],
   providers: [APP_PROVIDERS]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   constructor(private globalEventsService: GlobalEventsService) {
     globalEventsService.init();
   }
-  ngOnInit() {
-
-  }
-
 }

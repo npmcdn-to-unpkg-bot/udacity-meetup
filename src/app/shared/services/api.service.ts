@@ -7,8 +7,9 @@ export class ApiService {
   constructor(public http: Http, public searchParamsService: SearchParamsService) {}
 
   observe(paramsObj) {
+    let url = 'https://www.eventbriteapi.com/v3/events/search/?token=S6S7G427VEDSLNEQRE6B';
     let searchParams = this.searchParamsService.transform(paramsObj);
-    return this.http.get('https://www.eventbriteapi.com/v3/events/search/?token=S6S7G427VEDSLNEQRE6B', {
+    return this.http.get(url, {
         search: searchParams
     })
     .map( (responseData) => {

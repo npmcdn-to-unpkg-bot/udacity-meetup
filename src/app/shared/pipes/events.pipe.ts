@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'appEvents'
 })
 export class EventsPipe implements PipeTransform {
-  
+
   transform(value: any, args?: any): any {
     if (value === undefined || value === null) { return; };
     let found = [];

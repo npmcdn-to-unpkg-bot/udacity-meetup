@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { EventsComponent } from '../components/events/index';
-import { Autofocus } from '../../shared/directives/autofocus.directive';
+import { AutofocusDirective } from '../../shared/directives/autofocus.directive';
 import { ApiService } from '../../shared/services/api.service';
 import { GlobalEventsService } from '../../shared/services/global-events.service';
-import { Observable } from 'rxjs/Rx';
 
 declare let Vimeo: any;
 
@@ -12,16 +11,16 @@ declare let Vimeo: any;
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  directives: [EventsComponent, Autofocus]
+  directives: [EventsComponent, AutofocusDirective]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public video: any;
   public searchFixed = false;
   public events;
+  @ViewChild('videoContainer') videoContainer;
   private intervalReference;
   private yPos = 0;
   private minScroll = 999999;
-  @ViewChild('videoContainer') videoContainer;
   constructor(
     private apiService: ApiService,
     private globalEventsService: GlobalEventsService) {}
@@ -74,8 +73,7 @@ export class HomeComponent implements OnInit {
   updateFixed() {
     if (this.yPos >= this.minScroll) {
       this.searchFixed = true;
-    }
-    else {
+    } else {
       this.searchFixed = false;
     }
   }

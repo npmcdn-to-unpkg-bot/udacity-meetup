@@ -1,9 +1,9 @@
-import { Directive, Renderer, ElementRef } from '@angular/core';
+import { Directive, Renderer, ElementRef, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[autofocus]'
 })
-export class Autofocus {
+export class AutofocusDirective implements OnInit {
   constructor(public renderer: Renderer, public elementRef: ElementRef) {}
   ngOnInit() {
     this.renderer.invokeElementMethod(
