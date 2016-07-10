@@ -1,124 +1,134 @@
 @import '../../shared/styles/variables';
-.video-container {
-  position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 0;
-	height: 0;
-  .text-container {
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 20%;
-    text-align: center;
-    color: white;
-    h1 {
-      font-size: 50px;
-    }
-    h2 {
-      color: gray;
-      font-size: 23px;
-    }
+.video-section {
+  overflow: hidden;
+  max-height: 600px;
+  @media (max-width: 800px) {
+    //height: 500px;
   }
-  .search-container {
-    position: absolute;
-    top: 49%;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    width: 50%;
-    margin-right: auto;
-    margin-left: auto;
-    &.search-fixed {
-      z-index: 3;
-      .search-box {
-        position: fixed;
-        top: 1.7%;
-        right: 6%;
-        margin: 0px;
-        left: initial;
-        width: 37%;
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 0;
+    height: 0;
+    .text-container {
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 130px;
+      text-align: center;
+      color: white;
+      h1 {
+        font-size: 50px;
       }
-      .button-pair {
-        display: none;
-      }
-    }
-    .search-box {
-      width: 100%;
-      position: relative;
-      margin: 20px 0;
-      .glyphicon-search {
-        position: absolute;
-        left: 14px;
-        top: 11px;
+      h2 {
         color: gray;
-      }
-      .search { // input element
-        border-radius: 25px;
-        padding: 6px 10px 6px 40px;
-        border: none;
-        outline: none;
-        width: 100%;
-        background-color: white;
-        color: $fadedBlack;
-        line-height: 1;
-        font-size: 18px;
-        max-width: 500px;
-        margin: 0 auto;
-        display: block;
+        font-size: 23px;
       }
     }
-    .button-pair {
-      margin-top: 10px;
-      width: 400px;
-      margin-left: auto;
+    .search-container {
+      position: absolute;
+      top: 260px;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      width: 50%;
       margin-right: auto;
-      overflow: hidden;
-      .btn, .btn:focus {
-        display: block;
-        float: left;
-        width: 200px;
-        color: white;
-        transition: all 0.5s ease;
-        border: solid 1px $primaryColor;
-      }
-      .button-left {
-        border-radius: 25px 0 0 25px;
-        background-color: transparent;
-        
-        &:hover {
-          color: white;
-          background-color: $primaryColor;
-          & + .button-right {
-            background-color: transparent;
-          }
+      margin-left: auto;
+      &.search-fixed {
+        z-index: 3;
+        .search-box {
+          position: fixed;
+          top: 1.7%;
+          right: 6%;
+          margin: 0px;
+          left: initial;
+          width: 37%;
+        }
+        .button-pair {
+          display: none;
         }
       }
-      .button-right {
-        border-radius: 0 25px 25px 0;
-        background-color: $primaryColor;
-        color: white;
+      .search-box {
+        width: 100%;
+        position: relative;
+        max-width: 500px;
+        margin: 25px auto;
+        .glyphicon-search {
+          position: absolute;
+          left: 14px;
+          top: 11px;
+          color: gray;
+        }
+        .search { // input element
+          border-radius: 25px;
+          padding: 6px 10px 6px 40px;
+          border: none;
+          outline: none;
+          width: 100%;
+          background-color: white;
+          color: $fadedBlack;
+          line-height: 1;
+          font-size: 18px;
+          
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      .button-pair {
+        margin-top: 10px;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        .btn, .btn:focus {
+          display: block;
+          float: left;
+          width: 200px;
+          color: white;
+          transition: all 0.5s ease;
+          border: solid 1px $primaryColor;
+        }
+        .button-left {
+          border-radius: 25px 0 0 25px;
+          background-color: transparent;
+          
+          &:hover {
+            color: white;
+            background-color: $primaryColor;
+            & + .button-right {
+              background-color: transparent;
+            }
+          }
+        }
+        .button-right {
+          border-radius: 0 25px 25px 0;
+          background-color: $primaryColor;
+          color: white;
+        }
       }
     }
-  }
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    //background-color: rgba(0, 0, 0, 0.73);
-    background-color: rgba(45, 45, 45, 0.86);
-    z-index: 1;
-  }
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      //background-color: rgba(0, 0, 0, 0.73);
+      background-color: rgba(45, 45, 45, 0.86);
+      z-index: 1;
+    }
+    iframe {
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
+
 // Bootstrap override
 .btn {
   box-shadow: none !important;

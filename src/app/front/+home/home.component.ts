@@ -63,11 +63,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getMinScroll() {
     let winHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    //let winWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     // This is how far down the search bar is before any scrolling
-    let vcHeight = this.videoContainer.nativeElement.offsetHeight;
+    // let vcHeight = this.videoContainer.nativeElement.offsetHeight;
     let vcTop = this.videoContainer.nativeElement.offsetTop;
     // search bar height is 22px
-    this.minScroll = (0.49 * vcHeight) + vcTop + 22 - (0.017 * winHeight);
+    // (0.49 * vcHeight)
+    this.minScroll = 260 + vcTop + 22 - (0.017 * winHeight);
     this.updateFixed();
   }
   updateFixed() {

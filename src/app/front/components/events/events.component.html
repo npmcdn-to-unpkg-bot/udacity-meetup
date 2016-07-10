@@ -1,4 +1,14 @@
-<div *ngFor="let event of events | appEvents">
-  <h3>{{event.name.text}}</h3>
-  <img class="tile__img" src="{{event.logo?.url}}" alt=""  />
+<div class="cards">
+  <div *ngFor="let event of events | appEvents" class="card">
+    <div class="content">
+      <img class="card-img-top" src="{{event.logo?.url}}" alt=""  />
+      <div class="card-block">
+        <h4>{{ event.name.text | appCleanDates }}</h4>
+        <div class="date"><i class="ion-calendar"></i>Jan 8, 2017</div>
+        <div class="location"><i class="ion-location"></i>Camarillo, Ca</div>
+        <button class="show-details ion-chevron-down"></button>
+      </div>
+    </div>
+  </div>
 </div>
+

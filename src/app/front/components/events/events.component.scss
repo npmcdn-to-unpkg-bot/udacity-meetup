@@ -1,0 +1,48 @@
+@import '../../../shared/styles/variables';
+.cards {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  .card {
+    width: 33%;
+    padding: 2%;
+    position: relative;
+    cursor: pointer;
+    .content {
+      border: solid 1px lightgray;
+      height: 320px;
+      .card-img-top {
+        width: 100%;
+      }
+      .card-block {
+        padding: 7%;
+        h1 {
+          text-transform: capitalize;
+        }
+        .show-details {
+          position: absolute;
+          bottom: 15px;
+          left: 0;
+          right: 0;
+          width: 150px;
+          margin: auto;
+          background-color: transparent;
+          font-size: 35px;
+          color: lightgray;
+          border: none;
+          transition: all 0.5s ease;
+          outline: none;
+          &:hover {
+            color: $primaryColor;
+          }
+        }
+      }
+    }
+    :hover .show-details {
+      transform: translateY(5px);
+      font-size: 38px;
+    }
+  }
+}
