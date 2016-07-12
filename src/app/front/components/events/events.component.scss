@@ -13,6 +13,7 @@
     .content {
       border: solid 1px lightgray;
       height: 320px;
+      position: relative;
       .card-img-top {
         width: 100%;
       }
@@ -21,28 +22,19 @@
         h1 {
           text-transform: capitalize;
         }
-        .show-details {
+        .show-details-container {
           position: absolute;
-          bottom: 15px;
+          bottom: 10px;
           left: 0;
           right: 0;
-          width: 150px;
-          margin: auto;
-          background-color: transparent;
-          font-size: 35px;
-          color: lightgray;
-          border: none;
-          transition: all 0.5s ease;
-          outline: none;
-          &:hover {
-            color: $primaryColor;
+          width: 100%;
+          text-align: center;
+          .show-details-link {
+            font-size: 17px;
+            color: $blue;
           }
         }
       }
-    }
-    :hover .show-details {
-      transform: translateY(5px);
-      font-size: 38px;
     }
   }
 }
