@@ -1,5 +1,5 @@
 <div class="cards">
-  <div *ngFor="let event of events | appEvents" class="card">
+  <div *ngFor="let event of events | appEvents" class="card" [routerLink]="['/event', event.id]">
     <div class="content">
       <img class="card-img-top" src="{{event.logo?.url}}" alt=""  />
       <div class="card-block">

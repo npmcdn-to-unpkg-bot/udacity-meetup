@@ -55,6 +55,7 @@ const barrels: string[] = [
   'app/front/contact',
   'app/front/components/footer',
   'app/front/components/events',
+  'app/front/event',
   /** @cli-barrel */
 ];
 
