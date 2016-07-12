@@ -1,4 +1,5 @@
 export * from './directives/autofocus.directive';
+export * from './new-event';
 export * from './pipes/clean-dates.pipe';
 export * from './pipes/events.pipe';
 export * from './services/api.service';
