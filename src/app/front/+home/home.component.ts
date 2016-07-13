@@ -41,6 +41,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       'location.longitude': '-119.0752'
     };
 
+
+
+    
+    
     this.apiService.observe(testParams)
     .subscribe(data => {
       console.log(data);
