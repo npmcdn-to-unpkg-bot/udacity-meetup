@@ -1,78 +1,108 @@
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  /* 16:9 */
-  padding-top: 0;
-  height: 0; }
-  .video-container .text-container {
-    z-index: 2;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 20%;
-    text-align: center;
-    color: white; }
-    .video-container .text-container h1 {
-      font-size: 50px; }
-    .video-container .text-container h2 {
-      color: gray;
-      font-size: 23px; }
-    .video-container .text-container .search-container {
+.video-section {
+  overflow: hidden;
+  max-height: 600px; }
+  .video-section .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 0;
+    height: 0; }
+    .video-section .video-container .text-container {
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 130px;
+      text-align: center;
+      color: white; }
+      .video-section .video-container .text-container h1 {
+        font-size: 50px; }
+      .video-section .video-container .text-container h2 {
+        color: gray;
+        font-size: 23px; }
+    .video-section .video-container .search-container {
+      position: absolute;
+      top: 260px;
+      left: 0;
+      right: 0;
+      z-index: 2;
       width: 50%;
       margin-right: auto;
       margin-left: auto; }
-      .video-container .text-container .search-container .search {
-        border-radius: 25px;
-        padding: 6px 10px 6px 40px;
-        border: none;
-        outline: none;
+      .video-section .video-container .search-container.search-fixed {
+        z-index: 3; }
+        .video-section .video-container .search-container.search-fixed .search-box {
+          position: fixed;
+          top: 1.7%;
+          right: 6%;
+          margin: 0px;
+          left: initial;
+          width: 37%; }
+        .video-section .video-container .search-container.search-fixed .button-pair {
+          display: none; }
+      .video-section .video-container .search-container .search-box {
         width: 100%;
-        background-color: white;
-        color: #3c3c3c;
-        line-height: 1;
-        font-size: 18px;
-        margin: 20px 0; }
-  .video-container .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(45, 45, 45, 0.86);
-    z-index: 1; }
-  .video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%; }
+        position: relative;
+        max-width: 500px;
+        margin: 25px auto; }
+        .video-section .video-container .search-container .search-box .glyphicon-search {
+          position: absolute;
+          left: 14px;
+          top: 11px;
+          color: gray; }
+        .video-section .video-container .search-container .search-box .search {
+          border-radius: 25px;
+          padding: 6px 10px 6px 40px;
+          border: none;
+          outline: none;
+          width: 100%;
+          background-color: white;
+          color: #3c3c3c;
+          line-height: 1;
+          font-size: 18px;
+          margin: 0 auto;
+          display: block; }
+      .video-section .video-container .search-container .button-pair {
+        margin-top: 10px;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden; }
+        .video-section .video-container .search-container .button-pair .btn, .video-section .video-container .search-container .button-pair .btn:focus {
+          display: block;
+          float: left;
+          width: 200px;
+          color: white;
+          transition: all 0.5s ease;
+          border: solid 1px hotpink; }
+        .video-section .video-container .search-container .button-pair .button-left {
+          border-radius: 25px 0 0 25px;
+          background-color: transparent; }
+          .video-section .video-container .search-container .button-pair .button-left:hover {
+            color: white;
+            background-color: hotpink; }
+            .video-section .video-container .search-container .button-pair .button-left:hover + .button-right {
+              background-color: transparent; }
+        .video-section .video-container .search-container .button-pair .button-right {
+          border-radius: 0 25px 25px 0;
+          background-color: hotpink;
+          color: white; }
+    .video-section .video-container .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(45, 45, 45, 0.86);
+      z-index: 1; }
+    .video-section .video-container iframe {
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
 
 .btn {
   box-shadow: none !important;
   outline: none !important; }
-
-.button-pair {
-  margin-top: 10px;
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden; }
-  .button-pair .btn, .button-pair .btn:focus {
-    display: block;
-    float: left;
-    width: 200px;
-    color: white;
-    transition: all 0.5s ease;
-    border: solid 1px hotpink; }
-  .button-pair .button-left {
-    border-radius: 25px 0 0 25px;
-    background-color: transparent; }
-    .button-pair .button-left:hover {
-      color: white;
-      background-color: hotpink; }
-      .button-pair .button-left:hover + .button-right {
-        background-color: transparent; }
-  .button-pair .button-right {
-    border-radius: 0 25px 25px 0;
-    background-color: hotpink;
-    color: white; }

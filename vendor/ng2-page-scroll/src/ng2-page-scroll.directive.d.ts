@@ -13,12 +13,14 @@ export declare class PageScroll implements OnDestroy {
     pageScrollFinish: EventEmitter<boolean>;
     private document;
     private body;
+    private scrollTopSources;
     private timer;
     private interruptListenersAttached;
+    private static isUndefinedOrNull(variable);
     constructor(el: ElementRef, router: Router);
     ngOnDestroy(): any;
     stop(): boolean;
-    private handleClick(event);
+    private handleClick(clickEvent);
     private scrollView(anchor);
     private stopInternal(interrupted);
 }

@@ -1,8 +1,8 @@
 <nav id="navbar" class="navbar navbar-fixed-top navbar-default">
 	<div class="">
 		<div class="navbar-header">
-			<a pageScroll [routerLink]="['/']" href="#app-home" class="navbar-brand">
-				Home
+			<a pageScroll [routerLink]="['/']" href="#app-home" class="navbar-brand glyphicon glyphicon-home">
+				
 			</a>
 			<button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
 				<span class="sr-only">Toggle navigation</span>
@@ -14,7 +14,21 @@
 		<div class="navbar-collapse fix-on-init" [ngClass]="{'navbar-closed': isCollapsed}">
 			<ul class="nav navbar-nav">
         <li>
-					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-events" >Events</a>
+					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-events">Events</a>
+        </li>
+				<li>
+					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-home">Item #1</a>
+        </li>
+				<li>
+					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-home">Item #2</a>
+        </li>
+				<li>
+					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-home">Item #3</a>
+        </li>
+			</ul>
+			<ul class="nav navbar-nav navbar-pull-right">
+				<li>
+					<a class="ion-log-in sign-in"></a>
         </li>
 			</ul>
 		</div>

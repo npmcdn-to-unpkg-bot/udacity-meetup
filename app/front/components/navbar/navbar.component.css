@@ -1,3 +1,18 @@
+.navbar {
+  z-index: 3;
+  background-color: hotpink;
+  border-bottom: none;
+  height: 60px; }
+  .navbar.navbar-default .navbar-brand, .navbar.navbar-default .navbar-nav > li > a {
+    color: white;
+    margin: 5px 0; }
+    .navbar.navbar-default .navbar-brand.sign-in, .navbar.navbar-default .navbar-nav > li > a.sign-in {
+      margin: 0; }
+  .navbar .navbar-pull-right {
+    float: right; }
+  .navbar .sign-in {
+    font-size: 30px; }
+
 @media (max-width: 768px) {
   .navbar-collapse.navbar-closed {
     display: none; } }

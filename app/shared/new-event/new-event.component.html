@@ -1,0 +1,23 @@
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">Done</span>
+        </button>
+        <h4 class="modal-title">New event</h4>
+      </div>
+      <div class="modal-body">
+        new event form goes here
+      </div>
+    </div>
+  </div>
+</div>
+<div class="extra-nav">
+	<div class="extra-item">
+		<i class="ion-chatbubbles"></i>
+	</div>
+	<div (click)="lgModal.show()" class="extra-item">
+		<i class="ion-plus-round"></i>
+	</div>
+</div>

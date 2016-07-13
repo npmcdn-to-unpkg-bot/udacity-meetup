@@ -33,6 +33,7 @@ var barrels = [
     '@angular/core',
     '@angular/common',
     '@angular/compiler',
+    '@angular/forms',
     '@angular/http',
     '@angular/router',
     '@angular/platform-browser',
@@ -49,6 +50,8 @@ var barrels = [
     'app/front/contact',
     'app/front/components/footer',
     'app/front/components/events',
+    'app/front/event',
+    'app/shared/new-event',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
@@ -65,4 +68,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-sskFcmdZ.tmp/0/src/system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-Z1KguZTm.tmp/0/src/system-config.js.map
