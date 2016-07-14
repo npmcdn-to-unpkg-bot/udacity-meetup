@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import { CleanDatesPipe } from '../../../shared/pipes/clean-dates.pipe';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ApiService } from '../../../shared/services/api.service';
@@ -16,5 +16,5 @@ export class EventsComponent {
   constructor(public apiService: ApiService) {
     this.events = apiService.events$;
   }
-  
+
 }

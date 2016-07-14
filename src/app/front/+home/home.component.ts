@@ -32,25 +32,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.video.setCurrentTime(231);
     }, 15000);
 
-
-    // Testing using Camarillo cordinates
-    // TODO: base off of IP using http://freegeoip.net/json/[ip-address-here]
-    let testParams = {
-      'location.within': '5mi',
-      'location.latitude': '34.2321',
-      'location.longitude': '-119.0752'
-    };
-
-
-
-    
-    
-    this.apiService.observe(testParams)
-    .subscribe(data => {
-      console.log(data);
-      this.events = data;
-    });
-
     this.getMinScroll();
     this.globalEventsService.resize$.subscribe(data => {
       this.getMinScroll();

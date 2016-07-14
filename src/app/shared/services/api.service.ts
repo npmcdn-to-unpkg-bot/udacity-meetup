@@ -1,7 +1,7 @@
 import { Injectable} from '@angular/core';
 import { Http } from '@angular/http';
 import { SearchParamsService } from './search-params.service';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventsPipe } from '../pipes/events.pipe';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class ApiService {
   constructor(
     public http: Http,
     public searchParamsService: SearchParamsService) {
-    this.preEvents$ = new Subject();
+    this.preEvents$ = new BehaviorSubject(this.events);
   }
 
   observe(paramsObj) {
@@ -26,6 +26,8 @@ export class ApiService {
   }
 
   loadEvents() {
+    // Testing using Camarillo cordinates
+    // TODO: base off of IP using http://freegeoip.net/json/[ip-address-here]
     for (let i = 1; i <= 4; i++) {
       let testParams = {
         'location.within': '10mi',
