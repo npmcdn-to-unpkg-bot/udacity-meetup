@@ -1,40 +1,49 @@
 @import '../../../shared/styles/variables';
-.cards {
-  padding-top: 30px;
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  flex-flow: row wrap;
-  .card {
-    width: 33%;
-    padding: 2%;
-    position: relative;
-    cursor: pointer;
-    .content {
-      border: solid 1px lightgray;
-      height: 320px;
+.events-container {
+  min-height: 700px;
+  .cards {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex-flow: row wrap;
+    .card {
+      width: 33%;
+      padding: 2%;
       position: relative;
-      .card-img-top {
-        width: 100%;
-      }
-      .card-block {
-        padding: 7%;
-        h1 {
-          text-transform: capitalize;
-        }
-        .show-details-container {
-          position: absolute;
-          bottom: 10px;
-          left: 0;
-          right: 0;
+      cursor: pointer;
+      .content {
+        border: solid 1px lightgray;
+        height: 320px;
+        position: relative;
+        .card-img-top {
           width: 100%;
-          text-align: center;
-          .show-details-link {
-            font-size: 17px;
-            color: $blue;
+        }
+        .card-block {
+          padding: 7%;
+          h1 {
+            text-transform: capitalize;
+          }
+          .show-details-container {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            text-align: center;
+            .show-details-link {
+              font-size: 17px;
+              color: $blue;
+            }
           }
         }
       }
     }
+  }
+  .no-results {
+    text-align: center;
+    height: 300px;
+    margin-top: 100px;
+    font-size: 20px;
   }
 }

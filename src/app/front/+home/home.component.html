@@ -6,7 +6,7 @@
     </div>
     <div class="search-container" [ngClass]="{'search-fixed': searchFixed}">
       <div class="search-box">
-        <input class="search" [autofocus] autofocus="true">
+        <input #search class="search" (input)="onInput()" [autofocus] autofocus="true">
         <i class="glyphicon glyphicon-search"></i>
       </div>
       <div class="button-pair">
@@ -19,5 +19,5 @@
   </div>
 </div>
 <div class="container">
-  <app-events id="app-events" [events]="events?.events"></app-events>
+  <app-events id="app-events" [events]="events?.events" [search]="search.value"></app-events>
 </div>

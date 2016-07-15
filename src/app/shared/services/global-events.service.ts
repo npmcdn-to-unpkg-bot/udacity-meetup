@@ -18,10 +18,15 @@ export class GlobalEventsService {
   init() {
     // Tried to addapt this (AngularJS): http://stackoverflow.com/a/23323821/5357459
     // using this (Angular 2): http://stackoverflow.com/a/34703015/5357459
+    let scrollStop;
     const scrollEventStream = Observable.fromEvent(document, 'scroll')
       .throttleTime( this.throttleConfig.scroll );
     scrollEventStream.subscribe(event => {
-      this.scroll$.emit(event);
+      this.scroll$.emit();
+      clearTimeout(scrollStop);
+      scrollStop = setTimeout( () => {
+        this.scroll$.emit();
+      }, 250);
     });
     const resizeEventStream = Observable.fromEvent(window, 'resize')
       .throttleTime( this.throttleConfig.resize );
