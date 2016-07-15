@@ -54,6 +54,7 @@ export class CleanDatesPipe implements PipeTransform {
 
     value = this.toTitleCase( sections[max] );
     value = value.replace(/ *\([^)]*\) */g, '');
+    value = this.limitLength(value);
     return value;
   }
 
@@ -70,6 +71,14 @@ export class CleanDatesPipe implements PipeTransform {
   // http://stackoverflow.com/a/196991/5357459
   toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
+  limitLength(str) {
+    let limit = 50;
+    if (str.length > limit) {
+      str = str.substr(0, limit) + '...';
+    }
+    return str;
   }
 
 }

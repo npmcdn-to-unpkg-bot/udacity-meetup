@@ -20,6 +20,7 @@ module.exports = function(defaults) {
       'angular2-moment/**',
       'moment/moment.js',
       'ng2-bootstrap/**',
+      'angular2-google-maps/**',
       'bootstrap/dist/css/bootstrap.css'
     ]
   });

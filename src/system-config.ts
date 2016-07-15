@@ -12,6 +12,7 @@ const map: any = {
   'angular2-moment': 'vendor/angular2-moment/index.js',
   'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
   'bootstrap': 'vendor/bootstrap/dist',
+  'angular2-google-maps': 'vendor/angular2-google-maps',
 };
 
 /** User packages configuration. */
@@ -23,6 +24,10 @@ const packages: any = {
     defaultExtension: 'js'
   },
   'vendor/ng2-bootstrap': {
+    defaultExtension: 'js'
+  },
+  'angular2-google-maps/core':  {
+    main: 'index.js',
     defaultExtension: 'js'
   }
 };

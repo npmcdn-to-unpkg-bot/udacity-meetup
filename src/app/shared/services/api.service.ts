@@ -40,6 +40,7 @@ export class ApiService {
           this.events.push(...data.events);
           let filtered = new EventsPipe().transform(this.events);
           this.preEvents$.next( filtered );
+          console.log(filtered);
         });
     }
     
