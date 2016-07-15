@@ -1,5 +1,5 @@
 <div class="cards">
-  <div *ngFor="let event of events | async" class="card" [routerLink]="['/event', event.id]">
+  <div *ngFor="let event of events | async | paginate: config;" class="card" [routerLink]="['/event', event.id]">
     <div class="content">
       <img class="card-img-top" src="{{event.logo?.url}}" alt=""  />
       <div class="card-block">
@@ -13,3 +13,4 @@
     </div>
   </div>
 </div>
+<app-pagination (pageChange)="config.currentPage = $event" [config]="config"></app-pagination>

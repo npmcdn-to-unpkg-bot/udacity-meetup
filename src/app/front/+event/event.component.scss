@@ -1,6 +1,6 @@
 .container-image {
-  $image_large: 600px;
-  $image_medium: 400px;
+  $image_large: 400px;
+  $image_medium: 350px;
   $image_small: 300px;
   //max-height: $image_large;
   height: $image_large;
@@ -79,5 +79,8 @@
   margin: 70px 0 50px 0;
   .sebm-google-map-container {
     height: 300px;
+  }
+  h2 {
+    text-align: center;
   }
 }

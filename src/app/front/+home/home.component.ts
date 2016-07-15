@@ -3,6 +3,7 @@ import { EventsComponent } from '../components/events/index';
 import { AutofocusDirective } from '../../shared/directives/autofocus.directive';
 import { ApiService } from '../../shared/services/api.service';
 import { GlobalEventsService } from '../../shared/services/global-events.service';
+import { PaginatePipe, IPaginationInstance, PaginationService } from 'ng2-pagination';
 
 declare let Vimeo: any;
 
@@ -11,7 +12,8 @@ declare let Vimeo: any;
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  directives: [EventsComponent, AutofocusDirective]
+  directives: [EventsComponent, AutofocusDirective],
+  providers: [PaginationService]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public video: any;

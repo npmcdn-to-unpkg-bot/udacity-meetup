@@ -13,6 +13,7 @@ const map: any = {
   'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
   'bootstrap': 'vendor/bootstrap/dist',
   'angular2-google-maps': 'vendor/angular2-google-maps',
+  'ng2-pagination': 'vendor/ng2-pagination/index.js',
 };
 
 /** User packages configuration. */
@@ -29,7 +30,10 @@ const packages: any = {
   'angular2-google-maps/core':  {
     main: 'index.js',
     defaultExtension: 'js'
-  }
+  },
+   'vendor/ng2-pagination': {
+    defaultExtension: 'js'
+  },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +66,7 @@ const barrels: string[] = [
   'app/front/components/events',
   'app/front/event',
   'app/shared/new-event',
+  'app/front/components/pagination',
   /** @cli-barrel */
 ];
 

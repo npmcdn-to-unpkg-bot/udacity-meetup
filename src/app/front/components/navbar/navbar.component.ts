@@ -12,8 +12,4 @@ import { PageScroll } from 'ng2-page-scroll';
 })
 export class NavbarComponent {
   public isCollapsed: boolean = true;
-  clicked(event) {
-    event.preventDefault();
-  }
-
 }
