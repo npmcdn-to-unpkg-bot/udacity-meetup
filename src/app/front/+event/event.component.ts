@@ -1,211 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
+import { ActivatedRoute } from '@angular/router';
+import { MapStyles } from './map-styles';
+import { ApiService } from '../../shared/services/api.service';
+import { SanitizeHtmlPipe } from '../../shared/pipes/sanitize-html.pipe';
 
 @Component({
   moduleId: module.id,
   selector: 'app-event',
   templateUrl: 'event.component.html',
   styleUrls: ['event.component.css'],
-  directives: [GOOGLE_MAPS_DIRECTIVES]
+  directives: [GOOGLE_MAPS_DIRECTIVES],
+  pipes: [SanitizeHtmlPipe]
 })
 export class EventComponent implements OnInit {
-  public zoom: number = 8;
-  public lat: number = 51.673858;
-  public lng: number = 7.815982;
-  public styles = [
-    {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#FFFAF0"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "color": "#d9edf7"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "lightness": 40
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on",
-                "color": "#c5dac6"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#CCAA88"
-            },
-            {
-                "lightness": 40
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#EEEEEE"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            },
-            {
-                "color": "#ff69b4"
-            },
-            {
-                "gamma": 9
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#ff69b4"
-            },
-            {
-                "gamma": 8
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway.controlled_access",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#FF0000"
-            },
-            {
-                "gamma": 4
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.government",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#DDDDDD"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#CCCCCC"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#AAAAAA"
-            },
-            {
-                "gamma": 4
-            }
-        ]
-    }
-];
+  public zoom: number = 15;
+  public lat: number;
+  public lng: number;
+  public address= {
+    base: '',
+    full: ''
+  };
+  public styles = MapStyles;
+  public eventId: string;
+  public eventData$;
   
-  constructor() {}
+  constructor(public apiService: ApiService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
+    this.eventId = this.activatedRoute.snapshot.url[1].path;
+    this.eventData$ = this.apiService.events$
+      .map(events => events.find(item => item.id === this.eventId));
+    this.eventData$.subscribe( data => {
+      this.apiService.getEventDetails( this.eventId );
+      if (data !== undefined && 'details' in data && 'venue' in data.details) {
+        let venue = data.details.venue;
+        this.lat = Number(venue.latitude);
+        this.lng = Number(venue.longitude);
+        this.address['base'] = venue.address.city + ', ' + venue.address.region + ', ' + venue.address.country;
+        this.address['full'] = venue.address.address_1 + ', ' + this.address.base;
+      }
+    });
   }
 
 }
