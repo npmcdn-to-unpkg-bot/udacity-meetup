@@ -1,0 +1,10 @@
+.footer {
+  background-color: gray; }
+  .footer .links {
+    text-align: center;
+    margin: 0; }
+    .footer .links li {
+      display: inline-block;
+      margin: 20px; }
+      .footer .links li a, .footer .links li a:hover {
+        color: white; }

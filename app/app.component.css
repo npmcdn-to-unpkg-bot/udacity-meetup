@@ -1,2 +1,5 @@
-.fixed-nav-fix {
-  margin-top: 30px; }
+html, body {
+  height: 100%; }
+
+h2 {
+  font-size: 20px; }

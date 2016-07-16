@@ -11,6 +11,8 @@ var map = {
     'angular2-moment': 'vendor/angular2-moment/index.js',
     'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
     'bootstrap': 'vendor/bootstrap/dist',
+    'angular2-google-maps': 'vendor/angular2-google-maps',
+    'ng2-pagination': 'vendor/ng2-pagination/index.js',
 };
 /** User packages configuration. */
 var packages = {
@@ -22,7 +24,14 @@ var packages = {
     },
     'vendor/ng2-bootstrap': {
         defaultExtension: 'js'
-    }
+    },
+    'angular2-google-maps/core': {
+        main: 'index.js',
+        defaultExtension: 'js'
+    },
+    'vendor/ng2-pagination': {
+        defaultExtension: 'js'
+    },
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -52,6 +61,7 @@ var barrels = [
     'app/front/components/events',
     'app/front/event',
     'app/shared/new-event',
+    'app/front/components/pagination',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
@@ -68,4 +78,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-uMHnjvtS.tmp/0/src/system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-TcPSHFyS.tmp/0/src/system-config.js.map

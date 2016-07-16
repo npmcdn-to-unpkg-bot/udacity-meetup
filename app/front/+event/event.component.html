@@ -1,12 +1,38 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>
-  event works!
-</p>
+<div class="container-image">
+  <img src="{{(eventData$ | async)?.logo?.url}}" alt="" />
+  <div class="overlay"></div>
+  <div class="basic-info">
+    <h1>{{(eventData$ | async)?.name?.text}}</h1>
+    <div>Fri, Jul 15 1:00 PM</div>
+    <div>{{address.base}}</div>
+    <div class="register">
+      <button class="btn">Register externally</button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="description" [innerHTML]="(eventData$ | async)?.description?.html | appSanitizeHtml">
+  </div>
+  <div class="details">
+    <h2>Details</h2>
+    <div><i class="ion-calendar"></i> Friday July 15 2016 1:00 PM - 5:00 PM</div>
+    <div><i class="ion-location"></i> {{address.full}} - <a href="#">Map</a></div>
+  </div>
+</div>
+
+<div class="google-map" *ngIf="lat > 0">
+  <sebm-google-map 
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="true"
+    [scrollwheel]="false"
+    [zoomControl]="true"
+    [styles]="styles">
+    <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+  </sebm-google-map>
+  <h2>{{address.full}}</h2>
+</div>
+
+
+

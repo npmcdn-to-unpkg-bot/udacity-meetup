@@ -1,0 +1,15 @@
+.wrapper {
+  position: relative;
+  min-height: 100%; }
+  .wrapper .content-container {
+    display: block;
+    padding-bottom: 100px; }
+    .wrapper .content-container .content-area {
+      padding-top: 60px; }
+  .wrapper app-footer {
+    height: 60px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block; }

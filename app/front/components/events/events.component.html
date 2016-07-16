@@ -1,16 +1,22 @@
-<div class="cards">
-  <div *ngFor="let event of events | async" class="card" [routerLink]="['/event', event.id]">
-    <div class="content">
-      <img class="card-img-top" src="{{event.logo?.url}}" alt=""  />
-      <div class="card-block">
-        <h4>{{ event.name.text | appCleanDates }}</h4>
-        <div class="date"><i class="ion-calendar"></i>{{event.start.local}}</div>
-        <div class="location"><i class="ion-location"></i>Camarillo, Ca</div>
-        <div class="show-details-container">
-          <a class="show-details-link">Learn more</a>
+<div class="events-container">
+  <div class="cards">
+    <div *ngFor="let event of events | async | appEventSearch:search:filteredCount | paginate: config;" class="card" [routerLink]="['/event', event.id]">
+      <div class="content">
+        <img class="card-img-top" src="{{event.logo?.url}}" alt=""  />
+        <div class="card-block">
+          <h4>{{ event.name.text | appCleanDates }}</h4>
+          <div class="date"><i class="ion-calendar"></i> {{event.start.local}}</div>
+          <div class="location"><i class="ion-location"></i> Camarillo, Ca</div>
+          <div class="show-details-container">
+            <a class="show-details-link">Learn more</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div *ngIf="filteredCount?.count === 0" class="no-results">
+      No matches for "{{search}}"
+  </div>
+  <app-pagination (pageChange)="config.currentPage = $event" [config]="config"></app-pagination>
 </div>
 

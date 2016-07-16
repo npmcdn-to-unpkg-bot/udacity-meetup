@@ -8,6 +8,9 @@
     margin: 5px 0; }
     .navbar.navbar-default .navbar-brand.sign-in, .navbar.navbar-default .navbar-nav > li > a.sign-in {
       margin: 0; }
+  .navbar.navbar-default .navbar-brand {
+    padding: 12px 15px;
+    font-size: 25px; }
   .navbar .navbar-pull-right {
     float: right; }
   .navbar .sign-in {
