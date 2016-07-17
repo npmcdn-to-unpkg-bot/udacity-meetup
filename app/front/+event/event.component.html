@@ -1,12 +1,12 @@
 <div class="container-image">
-  <img src="{{(eventData$ | async)?.logo?.url}}" alt="" />
+  <img *ngIf="image" src="{{image}}" alt="" />
   <div class="overlay"></div>
-  <div class="basic-info">
+  <div class="basic-info" *ngIf="(eventData$ | async)">
     <h1>{{(eventData$ | async)?.name?.text}}</h1>
-    <div>Fri, Jul 15 1:00 PM</div>
+    <div>{{(eventData$ | async)?.start?.local | amDateFormat:'ddd, MMM D h:mm A'}}</div>
     <div>{{address.base}}</div>
     <div class="register">
-      <button class="btn">Register externally</button>
+      <a href="{{(eventData$ | async)?.url}}" target="_blank" class="btn">Register <i class="ion-android-open"></i></a>
     </div>
   </div>
 </div>
@@ -15,12 +15,12 @@
   </div>
   <div class="details">
     <h2>Details</h2>
-    <div><i class="ion-calendar"></i> Friday July 15 2016 1:00 PM - 5:00 PM</div>
-    <div><i class="ion-location"></i> {{address.full}} - <a href="#">Map</a></div>
+    <div *ngIf="(eventData$ | async)"><i class="ion-calendar"></i> {{(eventData$ | async)?.start?.local | amDateFormat:'dddd, MMMM D, YYYY h:mm A'}} - {{(eventData$ | async)?.end?.local | amDateFormat:'h:mm A'}}</div>
+    <div><i class="ion-location"></i> {{address.full}} - <a href="{{mapUrl}}" target="_blank">Map</a></div>
   </div>
 </div>
 
-<div class="google-map" *ngIf="lat > 0">
+<div class="google-map" *ngIf="isNumeric(lat)">
   <sebm-google-map 
     [latitude]="lat"
     [longitude]="lng"
