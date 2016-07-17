@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { ActivatedRoute } from '@angular/router';
-import { MapStyles } from './map-styles';
 import { ApiService } from '../../shared/services/api.service';
 import { SanitizeHtmlPipe } from '../../shared/pipes/sanitize-html.pipe';
 import { DateFormatPipe } from 'angular2-moment';
@@ -24,7 +23,6 @@ export class EventComponent implements OnInit {
     full: ''
   };
   public image: string;
-  public styles = MapStyles;
   public eventId: string;
   public eventData$;
   

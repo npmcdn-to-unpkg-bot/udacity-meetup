@@ -1,3 +1,4 @@
+@import '../../shared/styles/variables';
 .container-image {
   $image_large: 400px;
   $image_medium: 350px;
@@ -30,7 +31,7 @@
       width: 100%;
       .btn {
         left: 0;
-        background: hotpink;
+        background: $primaryColor;
         color: white;
         margin: 30px auto;
         display: block;
