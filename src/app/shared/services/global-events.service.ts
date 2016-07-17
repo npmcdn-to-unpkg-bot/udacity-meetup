@@ -1,11 +1,16 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class GlobalEventsService {
   public scroll$;
   public resize$;
-
+  public preModalState$;
+  private modalState: ModalState = {
+    open: false,
+    modal: undefined
+  };
   private throttleConfig = {
     scroll: 10,
     resize: 300
@@ -13,6 +18,7 @@ export class GlobalEventsService {
   constructor() {
     this.scroll$ = new EventEmitter();
     this.resize$ = new EventEmitter();
+    this.preModalState$ = new BehaviorSubject( this.modalState );
   }
 
   init() {
@@ -34,4 +40,19 @@ export class GlobalEventsService {
       this.resize$.emit(event);
     });
   }
+
+  newModalState(newState) {
+    this.modalState = newState;
+    this.preModalState$.next( this.modalState );
+  }
+
+  get modalState$() {
+    return this.preModalState$.asObservable();
+  }
+
+}
+
+interface ModalState {
+  open: boolean,
+  modal: string
 }

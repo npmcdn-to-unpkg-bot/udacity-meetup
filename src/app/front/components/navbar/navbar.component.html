@@ -22,9 +22,17 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-pull-right">
 				<li>
-					<a class="ion-log-in sign-in"></a>
+					<a (click)="globalEventsService.newModalState({open:true,modal:'auth'})" class="ion-log-in sign-in"></a>
         </li>
 			</ul>
 		</div>
 	</div>
 </nav>
+<div class="extra-nav">
+	<div class="extra-item">
+		<i class="ion-chatbubbles"></i>
+	</div>
+	<div (click)="globalEventsService.newModalState({open:true,modal:'new-event'})" class="extra-item">
+		<i class="ion-plus-round"></i>
+	</div>
+</div>

@@ -15,22 +15,26 @@ declare let Vimeo: any;
   directives: [EventsComponent, AutofocusDirective],
   providers: [PaginationService]
 })
-export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
-  public video: any;
-  public searchFixed = false;
-  public events;
-  public vcHeight;
-  public loaded: boolean = false;
+export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy  {
   @ViewChild('videoContainer') videoContainer;
-  private intervalReference;
-  private yPos = 0;
-  private minScroll = 999999;
+  
+  public video: any;
+  public searchFixed: boolean = false;
+  public events: Array<Object>;
+  public vcHeight: number;
+  public lastManuelFocus: number;
+  public loaded: boolean = false;
+  
+  private intervalReference: number;
+  private yPos: number = 0;
+  private minScroll: number = 999999;
   private scrollUpdateNeeded: boolean = false;
+  
   constructor(
-    private apiService: ApiService,
-    private globalEventsService: GlobalEventsService) {}
+    public globalEventsService: GlobalEventsService,
+    private apiService: ApiService) {}
 
-  getDimensions() {
+  private getDimensions(): void {
     let winHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     // This is how far down the search bar is before any scrolling
     let vcTop = this.videoContainer.nativeElement.offsetTop;
@@ -40,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.updateFixed();
   }
 
-  updateFixed() {
+  private updateFixed(): void {
     if (this.yPos >= this.minScroll) {
       this.searchFixed = true;
     } else {
@@ -48,8 +52,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
   
-  onInput() {
+  public onInput(): void {
     this.scrollUpdateNeeded = true;
+  }
+
+  public manuelFocus(): void {
+    let currentDate = new Date;
+    this.lastManuelFocus = currentDate.getTime();
   }
 
   ngOnInit() {
@@ -75,10 +84,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
     });
   }
 
-  ngOnDestroy() {
-    clearInterval(this.intervalReference);
-  }
-
   ngAfterViewChecked() {
     // http://stackoverflow.com/a/35493028/5357459
     if (this.scrollUpdateNeeded) {
@@ -89,5 +94,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
       }
     }    
   }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalReference);
+  }
+
+  
 
 }

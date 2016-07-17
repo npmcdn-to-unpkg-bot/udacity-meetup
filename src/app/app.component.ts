@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation, ViewContainerRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { GlobalEventsService } from './shared/services/global-events.service';
-import { NewEventComponent } from './shared/new-event/index';
+import { NewEventComponent } from './shared/components/new-event/index';
+import { AuthContainerComponent } from './shared/components/auth-container/index';
 
 import { APP_PROVIDERS } from './app.providers';
 
@@ -11,7 +12,11 @@ import { APP_PROVIDERS } from './app.providers';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [ROUTER_DIRECTIVES, NewEventComponent],
+  directives: [
+    ROUTER_DIRECTIVES,
+    NewEventComponent,
+    AuthContainerComponent
+  ],
   providers: [APP_PROVIDERS]
 })
 export class AppComponent {

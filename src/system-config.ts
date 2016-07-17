@@ -65,8 +65,10 @@ const barrels: string[] = [
   'app/front/components/footer',
   'app/front/components/events',
   'app/front/event',
-  'app/shared/new-event',
+  'app/shared/components/new-event',
   'app/front/components/pagination',
+  'app/shared/components/sign-in-up',
+  'app/shared/components/auth-container',
   /** @cli-barrel */
 ];
 
