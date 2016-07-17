@@ -8,13 +8,16 @@ export class EventsPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     if (value === undefined || value === null) { return; };
+    let currentTime = moment().valueOf();
     let temp = [];
     let found = [];
     let filtered = value.filter((item) => {
       if (item.logo !== null && found.indexOf(item.organizer_id) === -1) {
         found.push(item.organizer_id);
         item['unix'] = moment( item.start.utc ).valueOf();
-        return item;
+        if (currentTime < item.unix) {
+          return item;
+        }
       }
       else {
         temp.push(item);

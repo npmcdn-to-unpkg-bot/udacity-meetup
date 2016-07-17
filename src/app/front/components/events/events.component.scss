@@ -14,11 +14,16 @@
       cursor: pointer;
       .content {
         border: solid 1px lightgray;
-        height: 320px;
+        height: 300px;
         position: relative;
-        .card-img-top {
-          width: 100%;
+        .card-img-container {
+          height: 135px;
+          overflow: hidden;
+          .card-img-top {
+            width: 100%;
+          }
         }
+        
         .card-block {
           padding: 7%;
           h1 {
