@@ -10,6 +10,9 @@
     padding-bottom: 56.25%; /* 16:9 */
     padding-top: 0;
     height: 0;
+    img {
+      width: 100%;
+    }
     .text-container {
       z-index: 2;
       position: absolute;

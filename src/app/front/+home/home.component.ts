@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   public searchFixed = false;
   public events;
   public vcHeight;
+  public loaded: boolean = false;
   @ViewChild('videoContainer') videoContainer;
   private intervalReference;
   private yPos = 0;
@@ -54,6 +55,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnInit() {
     let iframe = document.getElementById('hero-video');
     this.video = new Vimeo.Player(iframe);
+    this.video.on('loaded', data => {
+        setTimeout( () => {
+          this.loaded = true;
+        }, 2500);
+    });
+    
     this.intervalReference = setInterval( () => {
       this.video.setCurrentTime(231);
     }, 15000);
