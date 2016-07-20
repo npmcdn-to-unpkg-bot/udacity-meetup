@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MODAL_DIRECTVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
+import { SignInUpComponent } from '../sign-in-up/index';
 
 @Component({
   moduleId: module.id,
   selector: 'app-auth-container',
   templateUrl: 'auth-container.component.html',
   styleUrls: ['auth-container.component.css'],
-  directives: [MODAL_DIRECTVES],
+  directives: [MODAL_DIRECTVES, SignInUpComponent],
   viewProviders:[BS_VIEW_PROVIDERS]
 })
 export class AuthContainerComponent implements OnInit {

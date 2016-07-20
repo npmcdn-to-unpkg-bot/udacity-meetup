@@ -2,13 +2,31 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
+        <div class="title">Sign up</div>
         <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
-          <span aria-hidden="true">Done</span>
+          <i class="ion-ios-close-empty"></i>
         </button>
-        <h4 class="modal-title">New event</h4>
       </div>
       <div class="modal-body">
-        new event form goes here
+        <div class="form-progress">
+          <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+1}">{{i+1}}</div>
+        </div>
+        <div class="slides">
+          <app-sign-in-up [signupMode]="true" [action]="'Create Event'" [ngClass]="{complete: currentSlide > 1}" (update)="next()" class="slide current"></app-sign-in-up>
+          <div [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}" class="slide">
+            Slide 2
+            <button (click)='next()'>Next</button>
+          </div>
+          <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
+            Slide 3
+            <button (click)='next()'>Confirm</button>
+            <button (click)='previous()'>Previous</button>
+          </div>
+          <div [ngClass]="{current: currentSlide >= 4}" class="slide">
+            Confirmation
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>

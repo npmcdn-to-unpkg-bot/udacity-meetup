@@ -1,1 +1,77 @@
 @import '../../styles/variables';
+.modal-content {
+  .modal-header {
+    background-color: $primaryColor;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    .title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 100px;
+      text-align: center;
+      height: 20px;
+      font-size: 20px;
+      line-height: 1;
+      color: white;
+    }
+    .close {
+      float: right;
+      margin-top: 4px;
+      color: $blue;
+      opacity: 1;
+      font-weight: normal;
+      color: white;
+      text-shadow: none;
+      i {
+        font-size: 30px;
+      }
+    }
+  }
+  .modal-body {
+    .form-progress {
+      margin: auto;
+      // This helped: https://www.impressivewebs.com/center-multiple-divs/
+      text-align: center;
+      font-size: 45px;
+      font-weight: 100;
+      .form-progress-item {
+        color: $lightGray;
+        width: 45px;
+        border-radius: 50%;
+        line-height: 1;
+        padding: 9px;
+        margin: 0 5px;
+        display: inline-block;
+        box-sizing: content-box;
+        &.current {
+          border: 1px solid;
+        }
+      }
+    }
+    .slides {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      .slide {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: block;
+        transition: all 1s;
+        transform: translateX(100%);
+        &.current {
+          transform: translateX(0);
+        }
+        &.complete {
+          transform: translateX(-100%);
+        }
+      }
+    }
+  }
+}
