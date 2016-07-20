@@ -19,7 +19,7 @@
           </div>
           <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
             Slide 3
-            <button (click)='next()'>Confirm</button>
+            <button (click)='formComplete()'>Confirm</button>
             <button (click)='previous()'>Previous</button>
           </div>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">

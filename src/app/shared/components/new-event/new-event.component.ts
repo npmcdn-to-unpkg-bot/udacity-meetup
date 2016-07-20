@@ -13,12 +13,17 @@ import { SignInUpComponent } from '../sign-in-up/index';
 })
 export class NewEventComponent implements OnInit {
   @ViewChild('lgModal') public lgModal;
+  public reset: boolean = true;
   public modalOpen = false;
-  public currentSlide = 1;
+  public currentSlide: number;
   constructor(private globalEventsService: GlobalEventsService) {
     globalEventsService.modalState$.subscribe(newState => {
       if (newState.modal === 'new-event' && newState.open === true) {
         this.open();
+        if (this.reset) {
+          this.reset = false;
+          this.currentSlide = 1;
+        }
       } else {
         this.close();
       }
@@ -43,6 +48,11 @@ export class NewEventComponent implements OnInit {
     if (this.modalOpen === true) {
       this.lgModal.hide();
     }
+  }
+
+  private formComplete() {
+    this.next();
+    this.reset = true;
   }
 
 }
