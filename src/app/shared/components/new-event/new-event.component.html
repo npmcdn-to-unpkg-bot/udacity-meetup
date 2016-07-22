@@ -2,6 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
+        <button [ngClass]="{reveal: currentSlide >= 3}" (click)='previous()' class="back-button btn"><i class="ion-chevron-left"></i> Back</button>
         <div class="title">Sign up</div>
         <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
           <i class="ion-ios-close-empty"></i>
@@ -13,14 +14,37 @@
         </div>
         <div class="slides">
           <app-sign-in-up [signupMode]="true" [action]="'Create Event'" [ngClass]="{complete: currentSlide > 1}" (update)="next()" class="slide current"></app-sign-in-up>
+          
+          
+          
           <div [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}" class="slide">
-            Slide 2
-            <button (click)='next()'>Next</button>
+            <form class="default-form">
+              <div class="instructions">Event info</div>
+              <input type="text" placeholder="Event title"/>
+              <input type="text" placeholder="Event type"/>
+              <input type="text" placeholder="Location" />
+              <input type="text" placeholder="Start" />
+              <input type="text" placeholder="End" />
+              <button (click)="next()" class="submit btn">Next <i class="ion-chevron-right"></i></button>
+            </form>
           </div>
+
+
           <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
-            Slide 3
-            <button (click)='formComplete()'>Confirm</button>
-            <button (click)='previous()'>Previous</button>
+            <form class="default-form">
+              <div class="instructions">Profile info</div>
+              <input type="text" placeholder="Event image"/>
+              <input type="text" placeholder="Host"/>
+              <input type="text" placeholder="Guest list"/>
+              <input type="text" placeholder="Optional message"/>
+              <input type="text" placeholder="description" />
+              <input type="text" placeholder="employer" />
+              <input type="text" placeholder="job title" />
+              <input type="text" placeholder="birthday" />
+              <input type="text" placeholder="" />
+              <button (click)="formComplete()" class="submit btn">Submit <i class="ion-chevron-right"></i></button>
+            </form>
+            
           </div>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">
             Confirmation

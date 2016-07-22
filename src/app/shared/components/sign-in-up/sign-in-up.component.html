@@ -1,10 +1,10 @@
-<form class="sign-in-up-form">
+<form class="default-form">
   <div *ngIf="signupMode" class="instructions">To create an event create an account.</div>
   <input *ngIf="signupMode" type="text" placeholder="Name"/>
   <input type="email" placeholder="Email" />
   <input type="password" placeholder="Password" />
-  <button (click)="submit()" class="btn">{{mode.action}} <i class="ion-chevron-right"></i></button>
-  <div class="change-mode">
+  <button (click)="submit()" class="submit btn">{{mode.action}} <i class="ion-chevron-right"></i></button>
+  <div class="extra-info">
     <a (click)="toggleSignupMode()" class="change-mode">{{mode.change}}</a>
   </div>
 </form>

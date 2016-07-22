@@ -16,6 +16,7 @@ export class NewEventComponent implements OnInit {
   public reset: boolean = true;
   public modalOpen = false;
   public currentSlide: number;
+  public items = [1, 2, 3];
   constructor(private globalEventsService: GlobalEventsService) {
     globalEventsService.modalState$.subscribe(newState => {
       if (newState.modal === 'new-event' && newState.open === true) {

@@ -4,6 +4,22 @@
     background-color: $primaryColor;
     border-radius: 5px 5px 0 0;
     position: relative;
+    .back-button {
+      background: transparent;
+      color: white;
+      font-size: 18px;
+      outline: none;
+      position: absolute;
+      transition: 0.2s all;
+      opacity: 0;
+      &:active {
+        box-shadow: none;
+      }
+      &.reveal {
+        opacity: 1;
+        transition: 0.5s all;
+      }
+    }
     .title {
       position: absolute;
       left: 0;
@@ -55,7 +71,7 @@
     .slides {
       position: relative;
       height: 500px;
-      overflow: hidden;
+      overflow-y: scroll;
       .slide {
         position: absolute;
         left: 0;
