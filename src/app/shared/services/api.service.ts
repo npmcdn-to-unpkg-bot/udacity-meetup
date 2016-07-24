@@ -21,6 +21,19 @@ export class ApiService {
     this.preMedia$ = new BehaviorSubject(this.media);
   }
 
+  checkEmail(email) {
+    let api_key = 'pubkey-b7fb0c2576ed98d64fafc660d9ad42e2';
+    let url = 'https://api.mailgun.net/v2/address/validate?api_key=' + api_key;
+    let searchParams = this.searchParamsService.transform( {address: email} );
+    return this.http.get(url, {
+        search: searchParams
+    })
+    .map( (responseData) => {
+      let response = responseData.json();
+      return response
+    });
+  }
+
   observe(paramsObj, apiLocation) {
     let url = 'https://www.eventbriteapi.com/v3/' + apiLocation + '/?token=S6S7G427VEDSLNEQRE6B';
     let searchParams = this.searchParamsService.transform(paramsObj);

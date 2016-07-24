@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy  {
   }
 
   ngOnInit() {
+    this.apiService.checkEmail('meow@dog.com').subscribe( data => console.log(data) );
     let iframe = document.getElementById('hero-video');
     this.video = new Vimeo.Player(iframe);
     this.video.on('loaded', data => {

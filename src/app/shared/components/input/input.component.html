@@ -1,0 +1,4 @@
+<div class="input-item" [ngClass]="{'active-item': inputLength > 0 || inputFocused === true}">
+  <label for="app-input">{{name}}</label>
+  <input #inputElement (input)="onInput(inputElement.value)" (focus)="onFocus()" (blur)="onBlur()" id="app-input" type="{{type}}" />
+</div>

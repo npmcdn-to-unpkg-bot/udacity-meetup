@@ -1,17 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { InputComponent } from '../input';
 
 @Component({
   moduleId: module.id,
   selector: 'app-sign-in-up',
   templateUrl: 'sign-in-up.component.html',
-  styleUrls: ['sign-in-up.component.css']
+  styleUrls: ['sign-in-up.component.css'],
+  directives: [InputComponent]
 })
 export class SignInUpComponent implements OnInit {
   @Input() signupMode: boolean;
   @Input() action: string;
   @Output() update = new EventEmitter();
+  @ViewChild('nameElement') nameElement;
+  @ViewChild('emailElement') emailElement;
   public mode: Object;
-  public test: boolean = false;
+  public showingProfileFields: boolean;
   private modeOptions = {
     signup: {
       title: 'Sign up',
@@ -26,26 +30,44 @@ export class SignInUpComponent implements OnInit {
   };
   constructor() {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.updateMode();
+    this.showingProfileFields = false;
     //this.modeOptions.signup.action = this.action; 
   }
 
-  updateMode() {
+  public toggleSignupMode(): void {
+    this.signupMode = !this.signupMode;
+    this.updateMode();
+    this.setFocus();
+  }
+
+  public submit(): void {
+    this.update.emit( true );
+  }
+
+  public showProfileFields(): void {
+    this.showingProfileFields = true;
+  }
+
+  public setFocus(): void {
+    console.log('about to set focus');
+    setTimeout( () => { // fix this soon # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+      if (this.signupMode === true) {
+        this.nameElement.setFocus();
+      } else {
+        this.emailElement.setFocus();
+      }
+    }, 100);
+    
+  }
+
+  private updateMode(): void {
     if (this.signupMode === true) {
       this.mode = this.modeOptions.signup;
     } else {
       this.mode = this.modeOptions.signin;
     }
-  }
-
-  toggleSignupMode() {
-    this.signupMode = !this.signupMode;
-    this.updateMode();
-  }
-
-  submit() {
-    this.update.emit( true );
   }
 
 }
