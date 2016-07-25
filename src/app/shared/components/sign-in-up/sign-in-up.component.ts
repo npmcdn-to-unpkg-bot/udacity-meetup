@@ -11,9 +11,11 @@ import { InputComponent } from '../input';
 export class SignInUpComponent implements OnInit {
   @Input() signupMode: boolean;
   @Input() action: string;
+  @Input() tabIndex: number;
   @Output() update = new EventEmitter();
   @ViewChild('nameElement') nameElement;
   @ViewChild('emailElement') emailElement;
+  @ViewChild('firstProfileField') firstProfileField;
   public mode: Object;
   public showingProfileFields: boolean;
   private modeOptions = {
@@ -32,14 +34,13 @@ export class SignInUpComponent implements OnInit {
 
   public ngOnInit(): void {
     this.updateMode();
-    this.showingProfileFields = false;
-    //this.modeOptions.signup.action = this.action; 
+    this.reset(); 
   }
 
   public toggleSignupMode(): void {
     this.signupMode = !this.signupMode;
     this.updateMode();
-    this.setFocus();
+    this.setFocus(0);
   }
 
   public submit(): void {
@@ -48,18 +49,21 @@ export class SignInUpComponent implements OnInit {
 
   public showProfileFields(): void {
     this.showingProfileFields = true;
+    this.firstProfileField.setFocus(0);
   }
 
-  public setFocus(): void {
-    console.log('about to set focus');
-    setTimeout( () => { // fix this soon # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
-      if (this.signupMode === true) {
-        this.nameElement.setFocus();
-      } else {
-        this.emailElement.setFocus();
-      }
-    }, 100);
+  public setFocus(delay: number): void {
+    if (this.signupMode === true) {
+      this.nameElement.setFocus(delay);
+    } else {
+      this.emailElement.setFocus(delay);
+    }
     
+  }
+
+  public reset(): void {
+    this.showingProfileFields = false;
+    // It should also set fields values to null 
   }
 
   private updateMode(): void {

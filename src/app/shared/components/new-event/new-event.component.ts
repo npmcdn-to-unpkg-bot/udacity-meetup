@@ -36,11 +36,29 @@ export class NewEventComponent implements OnInit {
       title: 'Confirmation'
     }
   ];
+  public eventTypes: Array<string> = [
+  'Conference', 'Seminar', 'Meeting', 'Team Building',
+  'Trade Show', 'Business Dinner', 'Press Conference',
+  'Networking', 'Opening Ceremony', 'Product Launche',
+  'Theme Party', 'VIP Event', 'Trade Fair', 'Shareholder Meeting',
+  'Award Ceremony', 'Board Meeting', 'Executive Retreat',
+  'Wedding', 'Birthday', 'Wedding Anniversary', 'Family Event'
+  ];
   constructor(private globalEventsService: GlobalEventsService) {}
+
+  public tabIndex(slideNumber): number {
+    if (slideNumber !== this.currentSlide) {
+      return -1;
+    }
+  }
 
   public next(): void {
     this.currentSlide++;
     this.onSlideChange();
+  }
+
+  public onShown(): void {
+    this.onSlideChange(0);
   }
 
   public previous(): void {
@@ -66,10 +84,11 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  private onSlideChange(): void {
+  private onSlideChange(delay?: number): void {
+    if (delay === undefined) { delay = 1000 }
     this.slideTitle = this.itemsInfo[this.currentSlide-1].title;
     if (this.currentSlide < 4) {
-      this['form' + this.currentSlide].setFocus();
+      this['form' + this.currentSlide].setFocus(delay);
     }
   }
 
@@ -85,7 +104,7 @@ export class NewEventComponent implements OnInit {
 
   private formInit(): void {
     this.currentSlide = 1;
-    this.onSlideChange();
+    this.form1.reset();
   }
 
   private formComplete(): void {

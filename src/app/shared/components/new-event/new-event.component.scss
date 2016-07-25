@@ -49,6 +49,7 @@
   }
   .modal-body {
     padding: 0;
+    overflow: hidden;
     .form-progress {
       margin: auto;
       padding: 15px;
@@ -56,6 +57,10 @@
       text-align: center;
       font-size: 45px;
       font-weight: 100;
+      transition: 1s all; 
+      &.slide-out {
+        transform: translateX(-100%);
+      }
       .form-progress-item {
         color: $lightGray;
         width: 45px;

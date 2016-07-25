@@ -8,7 +8,7 @@ h2 {
 .default-form {
   $itemWidth: 90%;
   .instructions {
-    width: 90%;
+    width: $itemWidth;
     margin: 0 auto;
     text-align: center;
     font-size: 18px;
@@ -19,6 +19,7 @@ h2 {
     width: $itemWidth;
     margin: 0 auto;
     margin-bottom: 30px;
+    height: 47.44px;
     label {
       position: absolute;
       top: 25%;
@@ -27,9 +28,28 @@ h2 {
       font-weight: normal;
       font-size: 18px;
       background: white;
-      padding: 0 5px;
+      z-index: 999;
       transition: all 0.15s;
       margin: 0;
+      padding: 0 5px;
+      margin-left: -5px;
+      // Make label appear to not affect cursor
+      cursor: text;
+      &:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 50%;
+        content: "";
+        cursor: text;
+      }
+      &.select-box {
+        cursor: pointer;
+        &:after {
+          cursor: pointer;
+        }
+      }
     }
     input {
       display: block;
@@ -39,11 +59,97 @@ h2 {
       border-width: 1px;
       padding: 2%;
       width: 100%;
+      box-shadow: none;
+    }
+    // ng2-select
+    .ui-select-container {
+      //position: initial;
+      input {
+        border-radius: 0;
+        height: initial;
+        &::placeholder {
+          display: none;
+        }
+      }
+      .ui-select-match {
+        .ui-select-match-text {
+          font-size: 18px;
+          line-height: initial;
+        }
+      }
+      .ui-select-choices {
+        border-radius: 0;
+        .dropdown-item {
+          text-decoration: none;
+          color: gray;
+          font-size: 18px;
+          & > div {
+            padding: 1px 5px;
+          }
+        }
+      }
+      .form-control {
+        &:focus {
+          border-color: initial;
+          box-shadow: initial;
+          outline-color: rgb(59, 153, 252); // -webkit-focus-ring-color
+          outline-style: auto;
+          outline-width: 5px;
+        }
+        &.ui-select-toggle {
+          padding: 2%;
+          border-radius: 0;
+          box-shadow: none;
+          line-height: 1;
+          height: 47.44px;
+          width: 100%;
+          border-color: $lightGray;
+          &:hover {
+            color: inherit;
+            background-color: initial;
+            border-color: $lightGray;
+          }
+          .ui-select-placeholder {
+            font-size: 18px;
+            color: #adadad;
+            line-height: 1.42857143;
+            position: absolute;
+            transition: 1s all;
+          }
+          .close {
+            display: none;
+          }
+          .pull-right.caret {
+            border: none;
+            margin-right: 16px;
+            margin-top: 5px;
+            &:before {
+              content: "\f123";
+              display: inline-block;
+              font-family: "Ionicons";
+              font-style: normal;
+              font-weight: normal;
+              font-variant: normal;
+              text-transform: none;
+              text-rendering: auto;
+              line-height: 1;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            } 
+          }
+        }
+      }
     }
     &.active-item {
       label {
         transition: all 0.2s;
         transform: translateY(-100%);
+        cursor: default;
+      }
+      .ui-select-container {
+        .ui-select-placeholder {
+          transform: translateY(-100%);
+        }
       }
     }
   }
@@ -63,7 +169,7 @@ h2 {
     }
   }
   .form-options {
-    width: 90%;
+    width: $itemWidth;
     margin: 0 auto;
     .option {
       box-shadow: none;

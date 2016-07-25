@@ -1,31 +1,33 @@
-<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div bsModal #lgModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button [ngClass]="{reveal: currentSlide >= 3}" (click)='previous()' class="back-button btn"><i class="ion-chevron-left"></i> Back</button>
+        <button [ngClass]="{reveal: currentSlide === 3}" tabindex="-1" (click)='previous()' class="back-button btn"><i class="ion-chevron-left"></i> Back</button>
         <div class="title">{{slideTitle}}</div>
-        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+        <button  tabindex="-1" type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
           <i class="ion-ios-close-empty"></i>
         </button>
       </div>
       <div class="modal-body">
-        <div class="form-progress">
+        <div class="form-progress" [ngClass]="{'slide-out': currentSlide > 3}">
           <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+1}">{{i+1}}</div>
         </div>
         <div class="slides">
-          <app-sign-in-up #form1 [signupMode]="true" [action]="'Create Event'" [ngClass]="{complete: currentSlide > 1}" (update)="next()" class="slide current"></app-sign-in-up>
+          <app-sign-in-up #form1 [signupMode]="true" [action]="'Create Event'" [ngClass]="{complete: currentSlide > 1}"  [tabIndex]="tabIndex(1)" (update)="next()" class="slide current"></app-sign-in-up>
           
           
           
           <div [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}" class="slide">
             <form class="default-form">
               <div class="instructions">Event info</div>
-              <app-input #form2 [name]="'Event title'" [type]="'text'"></app-input>
-              <app-input [name]="'Event type'" [type]="'text'"></app-input>
-              <app-input [name]="'Location'" [type]="'text'"></app-input>
-              <app-input [name]="'Start'" [type]="'text'"></app-input>
-              <app-input [name]="'End'" [type]="'text'"></app-input>
-              <button (click)="next()" class="submit btn">Next <i class="ion-chevron-right"></i></button>
+              <app-input #form2 [name]="'Event name'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+
+              <app-input [name]="'Event type'" [type]="'select'"></app-input>
+              
+              <app-input [name]="'Location'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+              <app-input [name]="'Start'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+              <app-input [name]="'End'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+              <button (click)="next()" tabIndex="{{tabIndex(2)}}" class="submit btn">Next <i class="ion-chevron-right" tabindex="-"></i></button>
             </form>
           </div>
 
@@ -33,12 +35,12 @@
           <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
             <form class="default-form">
               <div class="instructions">Profile info</div>
-              <app-input #form3 [name]="'Event image'" [type]="'text'"></app-input>
-              <app-input [name]="'Host'" [type]="'text'"></app-input>
-              <app-input [name]="'Guest list'" [type]="'text'"></app-input>
-              <app-input [name]="'Optional message'" [type]="'text'"></app-input>
-              <app-input [name]="'description'" [type]="'text'"></app-input>
-              <button (click)="formComplete()" class="submit btn">Submit <i class="ion-chevron-right"></i></button>
+              <app-input #form3 [name]="'Event image'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input [name]="'Host'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input [name]="'Guest list'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input [name]="'Optional message'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input [name]="'description'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <button (click)="formComplete()" tabIndex="{{tabIndex(3)}}" class="submit btn">Submit <i class="ion-chevron-right"></i></button>
             </form>
             
           </div>

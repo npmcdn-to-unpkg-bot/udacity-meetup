@@ -1,18 +1,18 @@
 <form class="default-form">
   <div *ngIf="signupMode" class="instructions">To create an event create an account.</div>
-  <app-input *ngIf="signupMode" #nameElement [name]="'Name'" [type]="'text'"></app-input>
-  <app-input #emailElement [name]="'Email'" [type]="'email'"></app-input>
-  <app-input [name]="'Password'" [type]="'password'"></app-input>
+  <app-input [hidden]="!signupMode" #nameElement [name]="'Name'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
+  <app-input #emailElement [name]="'Email'" [type]="'email'" [tabIndex]="tabIndex"></app-input>
+  <app-input [name]="'Password'" [type]="'password'" [tabIndex]="tabIndex"></app-input>
   <div class="form-options">
     <a *ngIf="signupMode && !showingProfileFields" class="btn option" (click)="showProfileFields()">+profile info</a>
   </div>
-  <div *ngIf="signupMode && showingProfileFields">
-    <div class="instructions">Optional profile info</div>
-    <app-input [name]="'Employer'" [type]="'text'"></app-input>
-    <app-input [name]="'Job title'" [type]="'text'"></app-input>
-    <app-input [name]="'Birthday'" [type]="'text'"></app-input>
+  <div [hidden]="!signupMode || !showingProfileFields">
+    <div class="instructions">Optional Profile Info</div>
+    <app-input #firstProfileField [name]="'Employer'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
+    <app-input [name]="'Job title'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
+    <app-input [name]="'Birthday'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
   </div>
-  <button (click)="submit()" class="submit btn">{{mode.action}} <i class="ion-chevron-right"></i></button>
+  <button (click)="submit()" tabindex="{{tabIndex}}" class="submit btn">{{mode.action}} <i class="ion-chevron-right"></i></button>
   <div class="extra-info">
     <a (click)="toggleSignupMode()" class="change-mode">{{mode.change}}</a>
   </div>

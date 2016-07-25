@@ -12,6 +12,7 @@ const map: any = {
   'angular2-moment': 'vendor/angular2-moment/index.js',
   'ng2-bootstrap': 'vendor/ng2-bootstrap/ng2-bootstrap.js',
   'bootstrap': 'vendor/bootstrap/dist',
+  'ng2-select': 'vendor/ng2-select/ng2-select.js',
   'angular2-google-maps': 'vendor/angular2-google-maps',
   'ng2-pagination': 'vendor/ng2-pagination/index.js',
 };
@@ -34,6 +35,9 @@ const packages: any = {
    'vendor/ng2-pagination': {
     defaultExtension: 'js'
   },
+  'vendor/ng2-select': {
+    defaultExtension: 'js'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

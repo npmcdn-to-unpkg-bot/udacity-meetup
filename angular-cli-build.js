@@ -21,6 +21,7 @@ module.exports = function(defaults) {
       'moment/moment.js',
       'ng2-pagination/**',
       'ng2-bootstrap/**',
+      'ng2-select/**',
       'angular2-google-maps/**',
       'bootstrap/dist/css/bootstrap.css'
     ]
