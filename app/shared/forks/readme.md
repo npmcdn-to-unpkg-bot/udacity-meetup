@@ -1,0 +1,1 @@
+This folder contains TS modules that are altered or newer than their npm version.

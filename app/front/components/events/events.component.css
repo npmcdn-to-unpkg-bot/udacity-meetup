@@ -13,10 +13,13 @@
       cursor: pointer; }
       .events-container .cards .card .content {
         border: solid 1px lightgray;
-        height: 320px;
+        height: 300px;
         position: relative; }
-        .events-container .cards .card .content .card-img-top {
-          width: 100%; }
+        .events-container .cards .card .content .card-img-container {
+          height: 135px;
+          overflow: hidden; }
+          .events-container .cards .card .content .card-img-container .card-img-top {
+            width: 100%; }
         .events-container .cards .card .content .card-block {
           padding: 7%; }
           .events-container .cards .card .content .card-block h1 {

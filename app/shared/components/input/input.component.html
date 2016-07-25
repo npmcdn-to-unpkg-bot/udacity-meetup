@@ -1,0 +1,26 @@
+<div class="input-item" [ngClass]="{'active-item': inputLength > 0 || inputFocused === true}">
+  <label
+    (mousedown)="setFocus(0)"
+    [ngClass]="{'select-box': type === 'select'}"
+    attr.for="app-input-{{name}}">{{name}}</label>
+  <input
+    *ngIf="type !== 'select'"
+    #inputElement
+    (input)="onInput(inputElement.value)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    id="app-input-{{name}}"
+    type="{{type}}"
+    tabindex="{{tabIndex}}" />
+  <ng-select 
+    #selectElement
+    *ngIf="type === 'select'"
+    [allowClear]="true"
+    [items]="eventTypes"
+    (selected)="onInput($event.id)"
+    (removed)="onInput('')"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    placeholder="No city selected">
+  </ng-select>
+</div>

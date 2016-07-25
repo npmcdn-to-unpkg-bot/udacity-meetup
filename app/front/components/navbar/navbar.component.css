@@ -3,6 +3,8 @@
   background-color: hotpink;
   border-bottom: none;
   height: 60px; }
+  .navbar a {
+    cursor: pointer; }
   .navbar.navbar-default .navbar-brand, .navbar.navbar-default .navbar-nav > li > a {
     color: white;
     margin: 5px 0; }
@@ -19,3 +21,25 @@
 @media (max-width: 768px) {
   .navbar-collapse.navbar-closed {
     display: none; } }
+
+.extra-nav {
+  position: fixed;
+  right: 3%;
+  bottom: 3%;
+  z-index: 2; }
+  .extra-nav .extra-item {
+    height: 50px;
+    width: 50px;
+    font-size: 40px;
+    background-color: hotpink;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    float: left;
+    margin: 0 15px;
+    position: relative; }
+    .extra-nav .extra-item i {
+      position: absolute;
+      top: 7%;
+      left: 27%;
+      font-size: 32px; }
