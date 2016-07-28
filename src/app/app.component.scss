@@ -23,7 +23,7 @@ h2 {
     label {
       position: absolute;
       top: 25%;
-      left: 2%;
+      left: 10.219px;
       color: #adadad;
       font-weight: normal;
       font-size: 18px;
@@ -57,7 +57,7 @@ h2 {
       border-style: solid;
       border-color: $lightGray;
       border-width: 1px;
-      padding: 2%;
+      padding: 10.219px;
       width: 100%;
       box-shadow: none;
     }
@@ -97,7 +97,7 @@ h2 {
           outline-width: 5px;
         }
         &.ui-select-toggle {
-          padding: 2%;
+          padding: 10.219px;
           border-radius: 0;
           box-shadow: none;
           line-height: 1;
@@ -153,7 +153,29 @@ h2 {
       }
     }
   }
-  
+  .date-group {
+    width: $itemWidth;
+    margin: 0 auto;
+    height: 100px;
+    .group-label {
+      margin-left: 10px;
+      font-size: 18px;
+      padding: 10px 0;
+    }
+    .input-item {
+      width: 48%;
+      float: left;
+      
+    }
+    app-input {
+      &:first-of-type .input-item {
+        margin-right: 2%;
+      }
+      &:last-of-type .input-item {
+        margin-left: 2%;
+      }
+    }
+  }
   .submit.btn {
     background-color: $primaryColor;
     width: $itemWidth;

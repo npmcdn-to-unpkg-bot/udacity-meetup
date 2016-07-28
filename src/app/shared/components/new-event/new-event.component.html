@@ -19,14 +19,25 @@
           
           <div [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}" class="slide">
             <form class="default-form">
-              <div class="instructions">Event info</div>
+              <div class="instructions">Fill out your event info here.</div>
               <app-input #form2 [name]="'Event name'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
 
-              <app-input [name]="'Event type'" [type]="'select'"></app-input>
+              <app-input [name]="'Event type'" [type]="'select'" [data]="eventTypes"></app-input>
               
+              
+
               <app-input [name]="'Location'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
-              <app-input [name]="'Start'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
-              <app-input [name]="'End'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+              <div class="date-group">
+                <div class="group-label">Start</div>
+                <app-input [name]="'date'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+                <app-input [name]="'time'" [type]="'select'" [data]="times"></app-input>
+              </div>
+              <div class="date-group">
+                <div class="group-label">End</div>
+                <app-input [name]="'date'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+                <app-input [name]="'time'" [type]="'select'" [data]="times"></app-input>
+              </div>
+              
               <button (click)="next()" tabIndex="{{tabIndex(2)}}" class="submit btn">Next <i class="ion-chevron-right" tabindex="-"></i></button>
             </form>
           </div>
@@ -34,7 +45,7 @@
 
           <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
             <form class="default-form">
-              <div class="instructions">Profile info</div>
+              <div class="instructions">Fill out your event details here.</div>
               <app-input #form3 [name]="'Event image'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
               <app-input [name]="'Host'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
               <app-input [name]="'Guest list'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>

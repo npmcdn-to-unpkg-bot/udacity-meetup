@@ -142,7 +142,6 @@ let optionsTemplate = `
     </div>
     <input type="text" autocomplete="false" tabindex="-1"
            #inputElement
-           id="app-input-{{placeholder}}"
            (keydown)="inputEvent($event)"
            (keyup)="inputEvent($event, true)"
            (focus)="focus.emit( true )"

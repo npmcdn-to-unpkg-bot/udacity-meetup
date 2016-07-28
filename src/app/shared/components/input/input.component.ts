@@ -12,18 +12,12 @@ export class InputComponent implements OnInit {
   @Input() tabIndex:number;
   @Input() type:string;
   @Input() name:string;
+  @Input() data;
   @ViewChild('inputElement') inputElement;
   @ViewChild('selectElement') selectElement;
   public inputLength: number = 0;
   public inputFocused: boolean = false;
-  public eventTypes: Array<string> = [
-  'Conference', 'Seminar', 'Meeting', 'Team Building',
-  'Trade Show', 'Business Dinner', 'Press Conference',
-  'Networking', 'Opening Ceremony', 'Product Launche',
-  'Theme Party', 'VIP Event', 'Trade Fair', 'Shareholder Meeting',
-  'Award Ceremony', 'Board Meeting', 'Executive Retreat',
-  'Wedding', 'Birthday', 'Wedding Anniversary', 'Family Event'
-  ];
+  public inputId: string;
   constructor(private element: ElementRef,  private renderer: Renderer) {}
 
   public setFocus(delay:number):void {
@@ -38,7 +32,9 @@ export class InputComponent implements OnInit {
     
   }
 
-  public ngOnInit():void {}
+  public ngOnInit():void {
+    this.inputId = this.name + Math.floor((Math.random() * 100000) + 1);
+  }
 
   private onFocus():void {
     this.inputFocused = true;

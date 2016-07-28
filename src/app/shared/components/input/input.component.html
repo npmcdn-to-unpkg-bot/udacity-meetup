@@ -2,21 +2,21 @@
   <label
     (mousedown)="setFocus(0)"
     [ngClass]="{'select-box': type === 'select'}"
-    attr.for="app-input-{{name}}">{{name}}</label>
+    attr.for="app-input-{{inputId}}">{{name}}</label>
   <input
     *ngIf="type !== 'select'"
     #inputElement
     (input)="onInput(inputElement.value)"
     (focus)="onFocus()"
     (blur)="onBlur()"
-    id="app-input-{{name}}"
+    id="app-input-{{inputId}}"
     type="{{type}}"
     tabindex="{{tabIndex}}" />
   <ng-select 
     #selectElement
     *ngIf="type === 'select'"
     [allowClear]="true"
-    [items]="eventTypes"
+    [items]="data"
     (selected)="onInput($event.id)"
     (removed)="onInput('')"
     (focus)="onFocus()"
