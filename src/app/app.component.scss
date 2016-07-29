@@ -19,10 +19,10 @@ h2 {
     width: $itemWidth;
     margin: 0 auto;
     margin-bottom: 30px;
-    height: 47.44px;
+    min-height: 47.44px;
     label {
       position: absolute;
-      top: 25%;
+      top: 12px;
       left: 10.219px;
       color: #adadad;
       font-weight: normal;
@@ -51,14 +51,14 @@ h2 {
         }
       }
     }
-    input {
+    input, textarea {
       display: block;
       font-size: 18px;
       border-style: solid;
       border-color: $lightGray;
       border-width: 1px;
       padding: 10.219px;
-      width: 100%;
+      width: 100% !important; // !important prevents textarea width resizing 
       box-shadow: none;
     }
     // ng2-select

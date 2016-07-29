@@ -70,6 +70,8 @@ export class NewEventComponent implements OnInit {
     }
   }
 
+  
+
   public next(): void {
     this.currentSlide++;
     this.onSlideChange();

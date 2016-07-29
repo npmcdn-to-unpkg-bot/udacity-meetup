@@ -1,10 +1,10 @@
-<div class="input-item" [ngClass]="{'active-item': inputLength > 0 || inputFocused === true}">
+<div class="input-item" [ngClass]="{'active-item': inputLength > 0 || inputFocused === true || type === 'file'}">
   <label
     (mousedown)="setFocus(0)"
     [ngClass]="{'select-box': type === 'select'}"
     attr.for="app-input-{{inputId}}">{{name}}</label>
   <input
-    *ngIf="type !== 'select'"
+    *ngIf="type !== 'select' && type !== 'textarea'"
     #inputElement
     [(ngModel)]="inputModel"
     (input)="onInput(inputElement.value)"
@@ -14,6 +14,17 @@
     type="{{type}}"
     tabindex="{{tabIndex}}"
     placeholder="" />
+  <textarea
+    *ngIf="type === 'textarea'"
+    #inputElement
+    rows="4"
+    [(ngModel)]="inputModel"
+    (input)="onInput(inputElement.value)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    id="app-input-{{inputId}}"
+    tabindex="{{tabIndex}}"
+    placeholder=""></textarea>
   <ng-select 
     #selectElement
     *ngIf="type === 'select'"

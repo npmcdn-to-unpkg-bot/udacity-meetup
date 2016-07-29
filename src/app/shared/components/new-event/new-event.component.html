@@ -18,6 +18,7 @@
             <form class="default-form">
               <div class="instructions">Fill out your event info here.</div>
               <app-input #form2 [name]="'Event name'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
+              <app-input [name]="'Event description'" [type]="'textarea'" [tabIndex]="tabIndex(3)"></app-input>
               <app-input [name]="'Event type'" [type]="'select'" [data]="eventTypes"></app-input>
               <app-input [name]="'Location'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
               <div class="date-group">
@@ -36,11 +37,11 @@
           <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
             <form class="default-form">
               <div class="instructions">Fill out your event details here.</div>
-              <app-input #form3 [name]="'Event image'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'Host'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input #form3 [name]="'Event Host'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input [name]="'Event image'" [type]="'file'" [tabIndex]="tabIndex(3)"></app-input>
               <app-input [name]="'Guest list'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'Optional message'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'description'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
+              <app-input [name]="'Optional message to guests'" [type]="'textarea'" [tabIndex]="tabIndex(3)"></app-input>
+              
               <button (click)="formComplete()" tabIndex="{{tabIndex(3)}}" class="submit btn">Submit <i class="ion-chevron-right"></i></button>
             </form>
           </div>

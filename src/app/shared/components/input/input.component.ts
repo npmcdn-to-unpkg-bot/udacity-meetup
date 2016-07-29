@@ -63,7 +63,21 @@ export class InputComponent implements OnInit {
     this.showDatepicker = false;
   }
 
-  autocomplete() {
+  public getBase64() {
+    let filesSelected = this.inputElement.nativeElement.files;
+    if (filesSelected.length > 0) {
+      let fileToLoad = filesSelected[0];
+      let fileReader = new FileReader();
+      fileReader.onload = (fileLoadedEvent) => {
+          let item = fileLoadedEvent.target;
+          let base64 = item['result'];
+          console.log(item);
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+
+  private autocomplete() {
     this._loader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete( this.inputElement.nativeElement, {});
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
