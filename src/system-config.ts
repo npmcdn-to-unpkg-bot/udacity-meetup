@@ -74,7 +74,6 @@ const barrels: string[] = [
   'app/shared/components/sign-in-up',
   'app/shared/components/auth-container',
   'app/shared/components/input',
-  'app/shared/components/datepicker',
   /** @cli-barrel */
 ];
 

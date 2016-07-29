@@ -3,7 +3,6 @@ import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { SignInUpComponent } from '../sign-in-up';
 import { InputComponent } from '../input';
-import { DatepickerComponent } from '../datepicker';
 
 
 
@@ -12,7 +11,7 @@ import { DatepickerComponent } from '../datepicker';
   selector: 'app-new-event',
   templateUrl: 'new-event.component.html',
   styleUrls: ['new-event.component.css'],
-  directives: [MODAL_DIRECTIVES, SignInUpComponent, InputComponent, DatepickerComponent],
+  directives: [MODAL_DIRECTIVES, SignInUpComponent, InputComponent],
   viewProviders:[BS_VIEW_PROVIDERS]
 })
 export class NewEventComponent implements OnInit {
