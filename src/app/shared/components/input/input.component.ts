@@ -48,7 +48,6 @@ export class InputComponent implements OnInit {
       document.addEventListener("click", (event) => this.checkOutsideClicked(event) );
     }
     if (this.name === 'Location') {
-      console.log('test test');
       this.autocomplete();
     }
     
@@ -63,7 +62,7 @@ export class InputComponent implements OnInit {
     this.showDatepicker = false;
   }
 
-  public getBase64() {
+  private getBase64():void {
     let filesSelected = this.inputElement.nativeElement.files;
     if (filesSelected.length > 0) {
       let fileToLoad = filesSelected[0];
@@ -77,7 +76,7 @@ export class InputComponent implements OnInit {
     }
   }
 
-  private autocomplete() {
+  private autocomplete():void {
     this._loader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete( this.inputElement.nativeElement, {});
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
@@ -87,7 +86,7 @@ export class InputComponent implements OnInit {
     });
   }
 
-  private checkOutsideClicked(event) {		
+  private checkOutsideClicked(event):void {		
 		if (event.target !== this.element.nativeElement && !this.element.nativeElement.contains(event.target)) {
 			this.hidePopup();
 		}
