@@ -10,5 +10,8 @@ export const APP_PROVIDERS = [
     SearchParamsService,
     GlobalEventsService,
     GOOGLE_MAPS_PROVIDERS,
-    provideLazyMapsAPILoaderConfig({ apiKey: 'AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI' })
+    provideLazyMapsAPILoaderConfig({
+        apiKey: 'AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI',
+        libraries: ['places']
+    })
 ];

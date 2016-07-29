@@ -2,6 +2,9 @@ import { Component, OnInit, Input, HostListener, ViewChild, ElementRef, Renderer
 import { SELECT_DIRECTIVES } from '../../forks/ng2-select/select';
 import { DATEPICKER_DIRECTIVES } from 'ng2-bootstrap';
 import * as moment from 'moment';
+import { MapsAPILoader } from 'angular2-google-maps/core';
+
+declare var google: any;
 
 @Component({
   moduleId: module.id,
@@ -25,7 +28,7 @@ export class InputComponent implements OnInit {
   public inputModel;
   private showDatepicker: boolean = false;
   
-  constructor(private element: ElementRef, private renderer: Renderer) {}
+  constructor(private element: ElementRef, private renderer: Renderer, private _loader: MapsAPILoader) {}
 
   public setFocus(delay:number):void {
     if (this.type === 'select') {
@@ -44,6 +47,11 @@ export class InputComponent implements OnInit {
     if (this.type === 'datepicker') { // Datepicker
       document.addEventListener("click", (event) => this.checkOutsideClicked(event) );
     }
+    if (this.name === 'Location') {
+      console.log('test test');
+      this.autocomplete();
+    }
+    
   }
 
   public onDatepickerSelection(newDate):void { // Datepicker
@@ -53,6 +61,16 @@ export class InputComponent implements OnInit {
 
   public hidePopup():void { // Datepicker
     this.showDatepicker = false;
+  }
+
+  autocomplete() {
+    this._loader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete( this.inputElement.nativeElement, {});
+      google.maps.event.addListener(autocomplete, 'place_changed', () => {
+          let place = autocomplete.getPlace();
+          console.log(place);
+      });
+    });
   }
 
   private checkOutsideClicked(event) {		
