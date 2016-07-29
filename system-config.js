@@ -68,7 +68,7 @@ var barrels = [
     'app/front/components/pagination',
     'app/shared/components/sign-in-up',
     'app/shared/components/auth-container',
-    'app/shared/components/input'
+    'app/shared/components/input',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
@@ -85,4 +85,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-OultA2xQ.tmp/0/src/system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-eg0Il5kW.tmp/0/src/system-config.js.map

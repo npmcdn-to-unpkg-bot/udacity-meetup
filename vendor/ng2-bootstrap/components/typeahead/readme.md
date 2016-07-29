@@ -9,12 +9,12 @@ import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/components/typeahead';
 ```typescript
 // directive Typeahead
 @Directive({
-  selector: 'typeahead, [typeahead]'
+  selector: '[typeahead][ngModel]'
 })
 export class TypeaheadDirective implements OnInit {
   @Output() public typeaheadLoading:EventEmitter<boolean>;
   @Output() public typeaheadNoResults:EventEmitter<boolean>;
-  @Output() public typeaheadOnSelect:EventEmitter<{item: any}>;
+  @Output() public typeaheadOnSelect:EventEmitter&lt;{item: any}&gt;;
 
   @Input() public typeahead:any;
   @Input() public typeaheadMinLength:number;
@@ -41,7 +41,7 @@ export class TypeaheadDirective implements OnInit {
 ### Typeahead properties
 
   - `ngModel` (`string`) - binds to string user's input
-  - `typeahead` (`any`) - options source, can be Array of strings or objects or function that return Promise for external matching process
+  - `typeahead` (`any`) - options source, can be Array of strings, objects or an Observable for external matching process
   - `typeaheadMinLength` (`?number=1`) - minimal no of characters that needs to be entered before typeahead kicks-in. When set to 0, typeahead shows on focus with full list of options (limited as normal by typeaheadOptionsLimit)
   - `typeaheadWaitMs` (`?number=0`) - minimal wait time after last character typed before typeahead kicks-in
   - `typeaheadOptionsLimit` (`?number=20`) - maximum length of options items list

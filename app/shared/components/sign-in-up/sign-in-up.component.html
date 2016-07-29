@@ -1,5 +1,6 @@
 <form class="default-form">
   <div *ngIf="signupMode" class="instructions">To create an event create an account.</div>
+  <div *ngIf="!signupMode" class="instructions">Sign in</div>
   <app-input [hidden]="!signupMode" #nameElement [name]="'Name'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
   <app-input #emailElement [name]="'Email'" [type]="'email'" [tabIndex]="tabIndex"></app-input>
   <app-input [name]="'Password'" [type]="'password'" [tabIndex]="tabIndex"></app-input>

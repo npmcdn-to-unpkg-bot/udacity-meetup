@@ -16,11 +16,11 @@ h2 {
   width: 90%;
   margin: 0 auto;
   margin-bottom: 30px;
-  height: 47.44px; }
+  min-height: 47.44px; }
   .default-form .input-item label {
     position: absolute;
-    top: 25%;
-    left: 2%;
+    top: 12px;
+    left: 10.219px;
     color: #adadad;
     font-weight: normal;
     font-size: 18px;
@@ -43,14 +43,14 @@ h2 {
       cursor: pointer; }
       .default-form .input-item label.select-box:after {
         cursor: pointer; }
-  .default-form .input-item input {
+  .default-form .input-item input, .default-form .input-item textarea {
     display: block;
     font-size: 18px;
     border-style: solid;
     border-color: #b9b9b9;
     border-width: 1px;
-    padding: 2%;
-    width: 100%;
+    padding: 10.219px;
+    width: 100% !important;
     box-shadow: none; }
   .default-form .input-item .ui-select-container input {
     border-radius: 0;
@@ -75,7 +75,7 @@ h2 {
     outline-style: auto;
     outline-width: 5px; }
   .default-form .input-item .ui-select-container .form-control.ui-select-toggle {
-    padding: 2%;
+    padding: 10.219px;
     border-radius: 0;
     box-shadow: none;
     line-height: 1;
@@ -117,6 +117,22 @@ h2 {
   .default-form .input-item.active-item .ui-select-container .ui-select-placeholder {
     transform: translateY(-100%); }
 
+.default-form .date-group {
+  width: 90%;
+  margin: 0 auto;
+  height: 100px; }
+  .default-form .date-group .group-label {
+    margin-left: 10px;
+    font-size: 18px;
+    padding: 10px 0; }
+  .default-form .date-group .input-item {
+    width: 48%;
+    float: left; }
+  .default-form .date-group app-input:first-of-type .input-item {
+    margin-right: 2%; }
+  .default-form .date-group app-input:last-of-type .input-item {
+    margin-left: 2%; }
+
 .default-form .submit.btn {
   background-color: hotpink;
   width: 90%;
@@ -147,3 +163,6 @@ h2 {
   .default-form .extra-info a, .default-form .extra-info a:hover, .default-form .extra-info a:active {
     cursor: pointer;
     text-decoration: none; }
+
+.pac-container {
+  z-index: 1050; }

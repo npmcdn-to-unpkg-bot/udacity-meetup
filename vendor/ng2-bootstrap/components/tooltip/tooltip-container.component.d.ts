@@ -6,6 +6,7 @@ export declare class TooltipContainerComponent implements AfterViewInit {
     private left;
     private display;
     private content;
+    private htmlContent;
     private placement;
     private popupClass;
     private animation;

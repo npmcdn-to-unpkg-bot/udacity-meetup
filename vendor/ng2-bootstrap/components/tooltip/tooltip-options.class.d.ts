@@ -3,5 +3,7 @@ export declare class TooltipOptions {
     popupClass: string;
     animation: boolean;
     isOpen: boolean;
+    content: string;
+    htmlContent: string;
     constructor(options: Object);
 }
