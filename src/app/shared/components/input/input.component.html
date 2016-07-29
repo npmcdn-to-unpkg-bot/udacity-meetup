@@ -6,6 +6,7 @@
   <input
     *ngIf="type !== 'select'"
     #inputElement
+    [(ngModel)]="inputModel"
     (input)="onInput(inputElement.value)"
     (focus)="onFocus()"
     (blur)="onBlur()"
@@ -23,4 +24,12 @@
     (blur)="onBlur()"
     placeholder="No city selected">
   </ng-select>
+  <datepicker
+    class="popup"
+    *ngIf="type === 'datepicker' && showDatepicker"
+    [(ngModel)]="dateModel"
+    (selectionDone)="onDatepickerSelection($event)"
+    [maxMode]="'day'"
+    [showWeeks]="false"
+    (ngModelChange)="hidePopup()"></datepicker>
 </div>

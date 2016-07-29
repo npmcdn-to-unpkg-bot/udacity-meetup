@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DATEPICKER_DIRECTIVES } from 'ng2-bootstrap';
+import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { SignInUpComponent } from '../sign-in-up';
 import { InputComponent } from '../input';
+import { DatepickerComponent } from '../datepicker';
 
 
 
@@ -11,7 +12,7 @@ import { InputComponent } from '../input';
   selector: 'app-new-event',
   templateUrl: 'new-event.component.html',
   styleUrls: ['new-event.component.css'],
-  directives: [MODAL_DIRECTIVES, SignInUpComponent, InputComponent, DATEPICKER_DIRECTIVES],
+  directives: [MODAL_DIRECTIVES, SignInUpComponent, InputComponent, DatepickerComponent],
   viewProviders:[BS_VIEW_PROVIDERS]
 })
 export class NewEventComponent implements OnInit {
@@ -58,8 +59,7 @@ export class NewEventComponent implements OnInit {
   ];
 
 
-  public minDate:Date = void 0;
-  public dt:Date = new Date();
+  
 
 
 
@@ -86,7 +86,6 @@ export class NewEventComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    (this.minDate = new Date()).setDate(this.minDate.getDate() - 1000);
     this.globalEventsService.modalState$.subscribe(newState => {
       if (newState.modal === 'new-event' && newState.open === true) {
         this.open();
