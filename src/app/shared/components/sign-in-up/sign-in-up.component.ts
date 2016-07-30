@@ -43,7 +43,7 @@ export class SignInUpComponent implements OnInit {
     this.setFocus(0);
   }
 
-  public submit(): void {
+  public onSubmit(): void {
     this.update.emit( true );
   }
 

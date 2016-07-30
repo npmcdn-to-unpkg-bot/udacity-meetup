@@ -18,6 +18,7 @@ export class InputComponent implements OnInit {
   @Input() type:string;
   @Input() name:string;
   @Input() data;
+  @Input() required;
   @ViewChild('inputElement') inputElement;
   @ViewChild('selectElement') selectElement;
   
@@ -50,7 +51,6 @@ export class InputComponent implements OnInit {
     if (this.name === 'Location') {
       this.autocomplete();
     }
-    
   }
 
   public onDatepickerSelection(newDate):void { // Datepicker

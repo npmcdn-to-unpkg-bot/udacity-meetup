@@ -11,9 +11,11 @@
     (focus)="onFocus()"
     (blur)="onBlur()"
     id="app-input-{{inputId}}"
+    name="app-input-{{inputId}}"
     type="{{type}}"
     tabindex="{{tabIndex}}"
-    placeholder="" />
+    placeholder=""
+    [attr.required]="required ? true : null" />
   <textarea
     *ngIf="type === 'textarea'"
     #inputElement
@@ -24,7 +26,8 @@
     (blur)="onBlur()"
     id="app-input-{{inputId}}"
     tabindex="{{tabIndex}}"
-    placeholder=""></textarea>
+    placeholder=""
+    required="required"></textarea>
   <ng-select 
     #selectElement
     *ngIf="type === 'select'"

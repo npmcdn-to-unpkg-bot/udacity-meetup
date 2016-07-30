@@ -5,6 +5,9 @@ html, body {
 h2 {
   font-size: 20px;
 }
+img {
+  max-width: 100%;
+}
 .default-form {
   $itemWidth: 90%;
   .instructions {
@@ -188,6 +191,9 @@ h2 {
     i {
       font-size: 23px;
       margin-bottom: 10px;
+    }
+    &[disabled] {
+      opacity: 0.6;
     }
   }
   .form-options {
