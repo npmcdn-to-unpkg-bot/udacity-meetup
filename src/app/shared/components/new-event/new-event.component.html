@@ -13,38 +13,28 @@
           <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+1}">{{i+1}}</div>
         </div>
         <div class="slides">
-          <app-sign-in-up #form1 [signupMode]="true" [action]="'Create Event'" [ngClass]="{complete: currentSlide > 1}"  [tabIndex]="tabIndex(1)" (update)="next()" class="slide current"></app-sign-in-up>
-          <div [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}" class="slide">
-            <form class="default-form">
-              <div class="instructions">Fill out your event info here.</div>
-              <app-input #form2 [name]="'Event name'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
-              <app-input [name]="'Event description'" [type]="'textarea'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'Event type'" [type]="'select'" [data]="eventTypes"></app-input>
-              <app-input [name]="'Location'" [type]="'text'" [tabIndex]="tabIndex(2)"></app-input>
-              <div class="date-group">
-                <div class="group-label">Start</div>
-                <app-input [name]="'date'" [type]="'datepicker'" [tabIndex]="tabIndex(2)"></app-input>
-                <app-input [name]="'time'" [type]="'select'" [data]="times"></app-input>
-              </div>
-              <div class="date-group">
-                <div class="group-label">End</div>
-                <app-input [name]="'date'" [type]="'datepicker'" [tabIndex]="tabIndex(2)"></app-input>
-                <app-input [name]="'time'" [type]="'select'" [data]="times"></app-input>
-              </div>
-              <button (click)="next()" tabIndex="{{tabIndex(2)}}" class="submit btn">Next <i class="ion-chevron-right" tabindex="-"></i></button>
-            </form>
-          </div>
-          <div [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}" class="slide">
-            <form class="default-form">
-              <div class="instructions">Fill out your event details here.</div>
-              <app-input #form3 [name]="'Event Host'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'Event image'" [type]="'file'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'Guest list'" [type]="'text'" [tabIndex]="tabIndex(3)"></app-input>
-              <app-input [name]="'Optional message to guests'" [type]="'textarea'" [tabIndex]="tabIndex(3)"></app-input>
-              
-              <button (click)="formComplete()" tabIndex="{{tabIndex(3)}}" class="submit btn">Submit <i class="ion-chevron-right"></i></button>
-            </form>
-          </div>
+          <app-sign-in-up
+            #form1
+            [ngClass]="{complete: currentSlide > 1}"
+            [tabIndex]="tabIndex(1)"
+            class="slide current"            
+            (submit)="next()"></app-sign-in-up>
+          <app-form
+            #form2
+            [formInfo]="form2Info"
+            [modeInit]="'form2'"
+            [tabIndex]="tabIndex(2)"
+            [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}"
+            class="slide"
+            (submit)="next()"></app-form>
+          <app-form
+            #form3
+            [formInfo]="form3Info"
+            [modeInit]="'form3'"
+            [tabIndex]="tabIndex(3)"
+            [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}"
+            class="slide"
+            (submit)="formComplete()"></app-form>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">
             Confirmation
           </div>

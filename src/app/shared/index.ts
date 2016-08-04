@@ -1,3 +1,5 @@
+export * from './components/form';
+export * from './components/form-element';
 export * from './components/new-event';
 export * from './directives/autofocus.directive';
 export * from './pipes/clean-dates.pipe';
@@ -8,3 +10,4 @@ export * from './services/api.service';
 export * from './services/auth.service';
 export * from './services/global-events.service';
 export * from './services/search-params.service';
+export * from './services/validation.service';

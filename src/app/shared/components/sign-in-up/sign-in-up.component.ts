@@ -1,77 +1,141 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { InputComponent } from '../input';
+import {
+  REACTIVE_FORM_DIRECTIVES,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { FormComponent } from '../form';
+import { ValidationService } from '../../services/validation.service';
 
 @Component({
   moduleId: module.id,
   selector: 'app-sign-in-up',
   templateUrl: 'sign-in-up.component.html',
   styleUrls: ['sign-in-up.component.css'],
-  directives: [InputComponent]
+  directives: [FormComponent]
 })
 export class SignInUpComponent implements OnInit {
-  @Input() signupMode: boolean;
-  @Input() action: string;
-  @Input() tabIndex: number;
-  @Output() update = new EventEmitter();
-  @ViewChild('nameElement') nameElement;
-  @ViewChild('emailElement') emailElement;
-  @ViewChild('firstProfileField') firstProfileField;
-  public mode: Object;
-  public showingProfileFields: boolean;
-  private modeOptions = {
+  @Input() tabIndex;
+  @ViewChild('signForm') appForm;
+  public formInfo:any = {
     signup: {
-      title: 'Sign up',
-      change: 'Already have an account? Sign in',
-      action : 'Next'
+      description: 'Sign up - primary',
+      instructions: 'To create an event create an account.',
+      fields: [
+        {
+          name: 'Name',
+          type: 'input',
+          inputType: 'text',
+          control: ['', [Validators.required, ValidationService.passwordValidator]],
+          mode: 'signup'
+        },
+        {
+          name: 'Email',
+          type: 'input',
+          inputType: 'email',
+          control: ['', [Validators.required, ValidationService.emailValidator]]
+        },
+        {
+          name: 'Password',
+          type: 'input',
+          inputType: 'password',
+          passwordType: 'password',
+          control: ['', Validators.required]
+        },
+        {
+          name: 'Confirm password',
+          type: 'input',
+          inputType: 'password',
+          passwordType: 'confirm',
+          control: ['', Validators.required],
+          mode: 'signup'
+        },
+        {
+          type: 'instructions',
+          message: 'Optional Profile Info',
+          group: 'optional'
+        },
+        {
+          name: 'Employer',
+          type: 'input',
+          inputType: 'text',
+          control: ['', Validators.required],
+          group: 'optional'
+        },
+        {
+          name: 'Job title',
+          type: 'input',
+          inputType: 'text',
+          control: ['', Validators.required],
+          group: 'optional'
+        },
+        {
+          name: 'Birthday',
+          type: 'datepicker',
+          control: ['', Validators.required],
+          group: 'optional'
+        },
+        {
+          name: '+Profile info',
+          type: 'option',
+          group: 'optional'
+        },
+        {
+          type: 'submit',
+          text: 'Next'
+        },
+        {
+          name: 'Already have an account? Sign in',
+          type: 'special',
+          value: {
+            action: 'switch',
+            newForm: 'signin'
+          }
+        }
+      ]
     },
     signin: {
-      title: 'Sign in',
-      change: 'Need an account? Sign up',
-      action: 'Next'
+      description: 'Sign in',
+      instructions: 'To sign in.',
+      fields: [
+        {
+          name: 'Email',
+          type: 'input',
+          inputType: 'email',
+          control: ['', Validators.required, ValidationService.emailValidator]
+        },
+        {
+          name: 'Password',
+          type: 'input',
+          inputType: 'password',
+          control: ['', Validators.required]
+        },
+        {
+          type: 'submit',
+          text: 'Next'
+        },
+        {
+          name: 'Already have an account? Sign in',
+          type: 'special',
+          value: {
+            action: 'switch',
+            newForm: 'signup'
+          }
+        }
+      ]
     }
   };
   constructor() {}
 
-  public ngOnInit(): void {
-    this.updateMode();
-    this.reset(); 
-  }
-
-  public toggleSignupMode(): void {
-    this.signupMode = !this.signupMode;
-    this.updateMode();
-    this.setFocus(0);
-  }
-
-  public onSubmit(): void {
-    this.update.emit( true );
-  }
-
-  public showProfileFields(): void {
-    this.showingProfileFields = true;
-    this.firstProfileField.setFocus(0);
-  }
+  public ngOnInit(): void {}
 
   public setFocus(delay: number): void {
-    if (this.signupMode === true) {
-      this.nameElement.setFocus(delay);
-    } else {
-      this.emailElement.setFocus(delay);
-    }
-    
+    this.appForm.setFocus(delay);
   }
 
   public reset(): void {
-    this.showingProfileFields = false;
-    // It should also set fields values to null 
-  }
-
-  private updateMode(): void {
-    if (this.signupMode === true) {
-      this.mode = this.modeOptions.signup;
-    } else {
-      this.mode = this.modeOptions.signin;
-    }
+    this.appForm.reset();
   }
 
 }

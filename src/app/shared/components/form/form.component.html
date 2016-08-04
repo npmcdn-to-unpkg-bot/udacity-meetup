@@ -1,0 +1,5 @@
+<app-form-element
+  #appForm
+  *ngIf="active"
+  [formInfo]="currentForm"
+  (feSpecial)="onSpecial($event)"></app-form-element>

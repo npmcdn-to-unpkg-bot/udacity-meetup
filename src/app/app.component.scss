@@ -64,6 +64,12 @@ img {
       width: 100% !important; // !important prevents textarea width resizing 
       box-shadow: none;
     }
+    .error-message {
+      background-color: #f2dede;
+      color: #b15655;
+      font-size: 18px;
+      padding: 12px 20px;
+    }
     // ng2-select
     .ui-select-container {
       //position: initial;
@@ -156,28 +162,21 @@ img {
       }
     }
   }
-  .date-group {
-    width: $itemWidth;
-    margin: 0 auto;
-    height: 100px;
-    .group-label {
-      margin-left: 10px;
-      font-size: 18px;
-      padding: 10px 0;
-    }
-    .input-item {
-      width: 48%;
-      float: left;
-      
-    }
-    app-input {
-      &:first-of-type .input-item {
-        margin-right: 2%;
-      }
-      &:last-of-type .input-item {
-        margin-left: 2%;
-      }
-    }
+  // Date Group
+  .group-label {
+    text-align: left;
+    padding: 10px 0;
+    padding-left: 2%;
+  }
+  .left-input {
+    float: left;
+    width: 40%;
+    margin-left: 5%;
+  }
+  .right-input {
+    float: left;
+    width: 40%;
+    margin-left: 10%;
   }
   .submit.btn {
     background-color: $primaryColor;

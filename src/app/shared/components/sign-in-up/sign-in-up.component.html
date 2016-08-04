@@ -1,21 +1,5 @@
-<form class="default-form" #signinForm="ngForm" (ngSubmit)="onSubmit()">
-  <div *ngIf="signupMode" class="instructions">To create an event create an account.</div>
-  <div *ngIf="!signupMode" class="instructions">Sign in</div>
-  <app-input [hidden]="!signupMode" #nameElement [name]="'Name'" [type]="'text'" [tabIndex]="tabIndex" [required]="true"></app-input>
-  <app-input #emailElement [name]="'Email'" [type]="'email'" [tabIndex]="tabIndex" [required]="true"></app-input>
-  <app-input [name]="'Password'" [type]="'password'" [tabIndex]="tabIndex" [required]="true"></app-input>
-  <app-input [name]="'Confirm password'" [type]="'password'" [tabIndex]="tabIndex" [required]="true"></app-input>
-  <div class="form-options">
-    <a *ngIf="signupMode && !showingProfileFields" class="btn option" (click)="showProfileFields()">+profile info</a>
-  </div>
-  <div [hidden]="!signupMode || !showingProfileFields">
-    <div class="instructions">Optional Profile Info</div>
-    <app-input #firstProfileField [name]="'Employer'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
-    <app-input [name]="'Job title'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
-    <app-input [name]="'Birthday'" [type]="'text'" [tabIndex]="tabIndex"></app-input>
-  </div>
-  <button type="submit" [disabled]="!signinForm.form.valid" tabindex="{{tabIndex}}" class="submit btn">{{mode.action}} <i class="ion-chevron-right"></i></button>
-  <div class="extra-info">
-    <a (click)="toggleSignupMode()" class="change-mode">{{mode.change}}</a>
-  </div>
-</form>
+<app-form
+  #signForm
+  [formInfo]="formInfo"
+  [modeInit]="'signup'"
+  [tabIndex]="tabIndex"></app-form>

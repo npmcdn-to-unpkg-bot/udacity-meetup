@@ -1,0 +1,9 @@
+<div class="this-is-just-a-test">
+<datepicker
+  *ngIf="showDatepicker"
+  class="popup"
+  id="{{id}}-datepicker"
+  name="{{id}}-datepicker"
+  [(ngModel)]="dateModel"
+  (selectionDone)="onDatepickerSelection($event)"></datepicker>
+</div>
