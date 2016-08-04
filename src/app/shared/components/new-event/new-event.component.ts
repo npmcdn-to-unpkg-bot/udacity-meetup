@@ -219,7 +219,7 @@ export class NewEventComponent implements OnInit {
     this.form3.reset();
   }
 
-  private formComplete():void {
+  private formComplete(event):void {
     this.next();
     this.reset = true;
   }

@@ -1,5 +1,78 @@
-<app-form-element
-  #appForm
-  *ngIf="active"
-  [formInfo]="currentForm"
-  (feSpecial)="onSpecial($event)"></app-form-element>
+<form *ngIf="active" [formGroup]="registerForm">
+  <!-- Form Instructions -->
+  <div class="instructions">{{formInfo.instructions}}</div>
+  <div *ngFor="let field of formInfo.fields" #fieldContainer>
+    <!-- Field Instructions -->
+    <div *ngIf="field.type === 'instructions' && field.show === true" class="instructions {{field.classes}}">
+      {{field.message}}
+    </div>
+    <!-- Input Items -->
+    <div
+      *ngIf="(field.type === 'input' || field.type === 'datepicker' || field.type === 'select' || field.type === 'textarea') && field.show === true"
+      [ngClass]="{'active-item': field.length > 0 || field.focused === true || field.inputType === 'file'}"
+      class="input-item {{field.classes}}">
+      <label
+        attr.for="{{field.id}}">{{field.name}}</label>
+      <!-- Input -->
+      <input
+        *ngIf="field.type === 'input' || field.type === 'datepicker'"
+        id="{{field.id}}"
+        type="{{field.inputType}}"
+        formControlName="{{field.id}}"
+        (input)="field.length = onInput($event, field.type); field.dateModel = updateDate($event, field.type, field.dateModel)"
+        (focus)="field.focused = true; field.showDatepicker = showPopup(field.type)"
+        (blur)="field.focused = false"
+        tabindex="{{tabIndex}}"
+        placeholder="">
+      <!-- Textarea -->
+      <textarea
+        *ngIf="field.type === 'textarea'"
+        id="{{field.id}}"
+        rows="4"
+        formControlName="{{field.id}}"
+        (input)="field.length = onInput($event, field.type);"
+        (focus)="field.focused = true;"
+        (blur)="field.focused = false"
+        tabindex="{{tabIndex}}"
+        placeholder=""></textarea>
+      <!-- Select -->
+      <ng-select 
+        *ngIf="field.type === 'select'"
+        [allowClear]="true"
+        [items]="field.selectType === 'default' ? field.selectData : getSelectData(field.selectType)"
+        (selected)="field.length = onInput($event.id, field.type)"
+        (removed)="field.length = 0"
+        (focus)="field.focused = true"
+        (blur)="field.focused = false"
+        placeholder="No city selected">
+      </ng-select>
+      <!-- Datepicker -->
+      <app-datepicker
+        *ngIf="field.type === 'datepicker'"
+        [id]="field.id"
+        [showDatepicker]="field.showDatepicker"
+        [dateModel]="field.dateModel"
+        (closed)="field.showDatepicker = false"
+        (selectionDone)="field.showDatepicker = false; field.length = onDatepickerSelection($event, field.id)"></app-datepicker>
+      <!-- Validation errors -->
+      <p
+        *ngIf="
+          !registerForm.pristine &&
+          registerForm.controls[field.id].touched &&
+          registerForm.controls[field.id].errors"
+        class="error-message">This field is required!</p>
+    </div>
+    <!-- Special buttons -->
+    <div *ngIf="field.type === 'option'" class="form-options {{field.classes}}">
+      <a *ngIf="field.show === true" class="btn option" (click)="showGroup(field.group); field.show = false">{{field.name}}</a>
+    </div>
+    <button
+      *ngIf="field.type === 'submit'"
+      type="submit"
+      class="submit btn {{field.classes}}"
+      tabindex="{{tabIndex}}">{{field.text}} <i class="ion-chevron-right"></i></button>
+    <div *ngIf="field.type === 'special'" class="extra-info {{field.classes}}">
+      <a (click)="onSpecial(field.value)" class="change-mode">{{field.name}}</a>
+    </div>
+  </div>
+</form>

@@ -21,7 +21,7 @@
             (submit)="next()"></app-sign-in-up>
           <app-form
             #form2
-            [formInfo]="form2Info"
+            [allFormInfo]="form2Info"
             [modeInit]="'form2'"
             [tabIndex]="tabIndex(2)"
             [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}"
@@ -29,12 +29,12 @@
             (submit)="next()"></app-form>
           <app-form
             #form3
-            [formInfo]="form3Info"
+            [allFormInfo]="form3Info"
             [modeInit]="'form3'"
             [tabIndex]="tabIndex(3)"
             [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}"
             class="slide"
-            (submit)="formComplete()"></app-form>
+            (submit)="formComplete($event)"></app-form>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">
             Confirmation
           </div>
