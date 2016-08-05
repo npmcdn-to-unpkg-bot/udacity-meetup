@@ -1,0 +1,13 @@
+<input
+  id="{{id}}"
+  type="text"
+  [formControl]="control"
+  (focus)="showDatepicker = true"
+  placeholder="">
+<datepicker
+  *ngIf="showDatepicker"
+  class="popup"
+  id="{{id}}-datepicker"
+  name="{{id}}-datepicker"
+  [(ngModel)]="dateModel"
+  (selectionDone)="onDatepickerSelection($event)"></datepicker>

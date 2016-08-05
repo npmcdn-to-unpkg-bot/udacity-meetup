@@ -1,0 +1,9 @@
+<input
+  id="{{field.id}}"
+  type="{{field.inputType}}"
+  [formControl]="control"
+  (input)="field.length = onInput($event, field.type);"
+  (focus)="field.focused = true;"
+  (blur)="field.focused = false"
+  tabindex="{{tabIndex}}"
+  placeholder="">
