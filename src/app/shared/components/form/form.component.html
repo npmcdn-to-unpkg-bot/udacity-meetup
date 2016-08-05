@@ -14,16 +14,11 @@
       <label
         attr.for="{{field.id}}">{{field.name}}</label>
       <!-- Input -->
-      <input
-        *ngIf="field.type === 'input' || field.type === 'datepicker'"
-        id="{{field.id}}"
-        type="{{field.inputType}}"
-        formControlName="{{field.id}}"
-        (input)="field.length = onInput($event, field.type); field.dateModel = updateDate($event, field.type, field.dateModel)"
-        (focus)="field.focused = true; field.showDatepicker = showPopup(field.type)"
-        (blur)="field.focused = false"
-        tabindex="{{tabIndex}}"
-        placeholder="">
+      <app-textbox
+        *ngIf="field.type === 'input'"
+        [control]="registerForm.controls[field.id]"
+        [field]="field"
+        [tabindex]="tabindex"></app-textbox>
       <!-- Textarea -->
       <textarea
         *ngIf="field.type === 'textarea'"
@@ -51,6 +46,7 @@
         *ngIf="field.type === 'datepicker'"
         [id]="field.id"
         [showDatepicker]="field.showDatepicker"
+        [control]="registerForm.controls[field.id]"
         [dateModel]="field.dateModel"
         (closed)="field.showDatepicker = false"
         (selectionDone)="field.showDatepicker = false; field.length = onDatepickerSelection($event, field.id)"></app-datepicker>

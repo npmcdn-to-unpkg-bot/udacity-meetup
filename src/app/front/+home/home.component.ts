@@ -78,10 +78,10 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy  {
     }, 15000);
 
     this.getDimensions();
-    this.globalEventsService.resize$.subscribe(data => {
+    this.globalEventsService.elementsCollection['resize'].emitter$.subscribe(data => {
       this.getDimensions();
     });
-    this.globalEventsService.scroll$.subscribe( () => {
+    this.globalEventsService.elementsCollection['scroll'].emitter$.subscribe( () => {
       this.yPos = document.body.scrollTop;
       this.updateFixed();
     });

@@ -1,24 +1,35 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { DATEPICKER_DIRECTIVES } from 'ng2-bootstrap';
+import {
+  REACTIVE_FORM_DIRECTIVES,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 @Component({
   moduleId: module.id,
   selector: 'app-datepicker',
   templateUrl: 'datepicker.component.html',
   styleUrls: ['datepicker.component.css'],
-  directives: [DATEPICKER_DIRECTIVES]
+  directives: [DATEPICKER_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 export class DatepickerComponent implements OnInit {
   @Input() showDatepicker;
   @Input() id;
+  @Input() control;
   @Input() dateModel;
   @Output() closed = new EventEmitter();
   @Output() selectionDone = new EventEmitter();
   
+  public firstName;
+
   constructor(private element: ElementRef) {}
 
   ngOnInit() {
     document.addEventListener("click", event => this.checkOutsideClicked(event) );
+    this.firstName = this.control;
   }
 
   public hidePopup():void {

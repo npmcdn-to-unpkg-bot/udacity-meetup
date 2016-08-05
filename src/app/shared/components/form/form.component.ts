@@ -22,6 +22,7 @@ import { DatepickerComponent } from '../datepicker';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { ValidationService } from '../../services/validation.service';
 import { SELECT_DIRECTIVES } from '../../forks/ng2-select/select';
+import { TextboxComponent } from '../textbox';
 import * as moment from 'moment';
 declare var google: any;
 
@@ -31,7 +32,12 @@ declare var google: any;
   selector: 'app-form',
   templateUrl: 'form.component.html',
   styleUrls: ['form.component.css'],
-  directives: [REACTIVE_FORM_DIRECTIVES, DatepickerComponent, SELECT_DIRECTIVES]
+  directives: [
+    REACTIVE_FORM_DIRECTIVES,
+    DatepickerComponent,
+    SELECT_DIRECTIVES,
+    TextboxComponent
+  ]
 })
 export class FormComponent implements OnInit {
   @Input() modeInit;
@@ -134,45 +140,47 @@ export class FormComponent implements OnInit {
     for (let i = 0; i < this.formInfo.fields.length; i++) {
       if (this.formInfo.fields[i].group === groupName) {
         this.formInfo.fields[i].show = true;
-        this.checkListeners(this.formInfo.fields[i]);
       }
     }
     this.setFocus(0);
-  }
-
-  public showPopup(type):boolean { // Datepicker
-    if (type === 'datepicker') {
-      return true;
-    }
   }
 
   private sortInput():void {
     let inputId = 0;
     let fbGroup = {}; // Form builder group object
     let passwordId, confirmPasswordId;
+    let allowedTypes = [
+      'input', 'datepicker', 'select', 
+      'textarea', 'instructions',
+      'option', 'submit', 'special'
+    ];
     for (let i = 0; i < this.formInfo.fields.length; i++) {
-      // Create unique id
-      inputId++;
-      let idString = this.formComponentId + '-id-' + inputId;
-      // Get group
-      let group = null;
-      if ('group' in this.formInfo.fields[i]) { group = this.formInfo.fields[i].group; }
-      // Get default show
-      let show = true;
-      if (group !== null &&  this.formInfo.fields[i].type !== 'option') { show = false; }
-      // Set field info
-      this.formInfo.fields[i]['id'] = idString;
-      this.formInfo.fields[i]['show'] = show;
-      this.formInfo.fields[i]['length'] = 0;
-      // Save password info
-      if ('passwordType' in this.formInfo.fields[i]) {
-        if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }
-        if (this.formInfo.fields[i].passwordType === 'confirm') { confirmPasswordId = idString; }
+      // Check type
+      if (allowedTypes.indexOf(this.formInfo.fields[i].type) !== -1) {
+        // Create unique id
+        inputId++;
+        let idString = this.formComponentId + '-id-' + inputId;
+        // Get group
+        let group = null;
+        if ('group' in this.formInfo.fields[i]) { group = this.formInfo.fields[i].group; }
+        // Get default show
+        let show = true;
+        if (group !== null &&  this.formInfo.fields[i].type !== 'option') { show = false; }
+        // Set field info
+        this.formInfo.fields[i]['id'] = idString;
+        this.formInfo.fields[i]['show'] = show;
+        this.formInfo.fields[i]['length'] = 0;
+        // Save password info
+        if ('passwordType' in this.formInfo.fields[i]) {
+          if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }
+          if (this.formInfo.fields[i].passwordType === 'confirm') { confirmPasswordId = idString; }
+        }
+        // Add to form builder group object
+        fbGroup[idString] = this.formInfo.fields[i].control;
+      } else {
+        // Warn if invalid type
+        console.warn('Skipping invalid form field type "' + this.formInfo.fields[i].type + '"');
       }
-      // Add event listeners
-      this.checkListeners(this.formInfo.fields[i]);
-      // Add to form builder group object
-      fbGroup[idString] = this.formInfo.fields[i].control;
     }
     // Add confirm password validation
     if (confirmPasswordId !== undefined) {
@@ -192,20 +200,12 @@ export class FormComponent implements OnInit {
     } 
   }
 
-  public onDatepickerSelection(newDate, id):number { // Datepicker
+  // Datepicker => Sets the input value related to the datepicker
+  public onDatepickerSelection(newDate, id):number {
     console.log(newDate);
     let input:any = document.getElementById(id);
     input.value = moment( new Date(newDate) ).format('MMMM D, YYYY');
     return input.value.length;
-  }
-
-  updateDate(event, type, oldValue) { // Datepicker
-    let newInput = event.target.value;
-    if (type === 'datepicker' && moment( new Date(newInput) ).isValid() ) {
-      return newInput;
-    } else {
-      return oldValue;
-    }
   }
 
   getSelectData(selectType):Array<string> { // ng-select
@@ -227,27 +227,6 @@ export class FormComponent implements OnInit {
       }
       fileReader.readAsDataURL(fileToLoad);
     }
-  }
-
-  private checkListeners(field) {
-    if ('addListener' in field) {
-      if (field.addListener === 'location' && field.show === true) {
-        this.autocomplete(field.id);
-      }
-    }
-  }
-
-  private autocomplete(id):void {
-    setTimeout( () => { // Wait for field.show to apply
-      let inputElement:any = document.getElementById(id);
-      this._loader.load().then(() => {
-        let autocomplete = new google.maps.places.Autocomplete( inputElement, {});
-        google.maps.event.addListener(autocomplete, 'place_changed', () => {
-            let place = autocomplete.getPlace();
-            console.log(place);
-        });
-      });
-    }, 0);
   }
 
 }

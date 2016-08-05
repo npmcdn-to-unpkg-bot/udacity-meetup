@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { SignInUpComponent } from '../sign-in-up';
@@ -10,6 +10,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   moduleId: module.id,
@@ -20,10 +21,10 @@ import { ValidationService } from '../../services/validation.service';
   viewProviders:[BS_VIEW_PROVIDERS]
 })
 export class NewEventComponent implements OnInit {
-  @ViewChild('lgModal') public lgModal;
-  @ViewChild('form1') public form1;
-  @ViewChild('form2') public form2;
-  @ViewChild('form3') public form3;
+  @ViewChild('lgModal') lgModal;
+  @ViewChild('form1') form1;
+  @ViewChild('form2') form2;
+  @ViewChild('form3') form3;
   public reset:boolean = true;
   public modalOpen = false;
   public currentSlide:number;
@@ -75,7 +76,8 @@ export class NewEventComponent implements OnInit {
         },
         {
           name: 'Location',
-          type: 'text',
+          type: 'input',
+          inputType: 'text',
           addListener: 'location'
         },
         {
@@ -153,7 +155,7 @@ export class NewEventComponent implements OnInit {
     }
   };
 
-  constructor(private globalEventsService: GlobalEventsService) {}
+  constructor(private globalEventsService: GlobalEventsService, private element: ElementRef) {}
 
   public tabIndex(slideNumber): number {
     if (slideNumber !== this.currentSlide) {
@@ -193,6 +195,8 @@ export class NewEventComponent implements OnInit {
       this.items.push(i+1);
     }
   }
+
+  
 
   private onSlideChange(delay?: number):void {
     if (delay === undefined) { delay = 1000 }

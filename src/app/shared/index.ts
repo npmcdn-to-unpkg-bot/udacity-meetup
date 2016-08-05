@@ -1,5 +1,4 @@
 export * from './components/form';
-export * from './components/form-element';
 export * from './components/new-event';
 export * from './directives/autofocus.directive';
 export * from './pipes/clean-dates.pipe';
