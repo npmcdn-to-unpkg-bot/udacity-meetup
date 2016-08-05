@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
-import { MapsAPILoader } from 'angular2-google-maps/core';
+import { MapsAPILoader } from 'angular2-google-maps/core'; 
 import { GlobalEventsService } from '../../services/global-events.service';
 declare var google: any;
 
