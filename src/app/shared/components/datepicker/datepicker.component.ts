@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { DATEPICKER_DIRECTIVES } from 'ng2-bootstrap';
 import {
   REACTIVE_FORM_DIRECTIVES,
@@ -22,6 +22,7 @@ export class DatepickerComponent implements OnInit {
   @Input() dateModel;
   @Output() closed = new EventEmitter();
   @Output() selectionDone = new EventEmitter();
+  @ViewChild('datepickerElement') datepickerElement;
   
   public firstName;
 
@@ -54,13 +55,12 @@ export class DatepickerComponent implements OnInit {
   private nullGrandparentBug(event):boolean {
     // Some datepicker elements have a null grandparent
     // where there should be the `app-datepicker` element
-    for (let i = 0; i < event.path.length; i++) {
-      if (event.path[i].localName === 'app-datepicker') {
-        // Event happend within the `app-datepicker` element
-        return true;
-      }
+    if (this.datepickerElement !== undefined) {
+      // I don't know why the datepicker element is only
+      // defined when I click certain parts of the datepicker,
+      // but it does solve the issue for now. Would love to know why!
+      return true;
     }
-    // Event happend outside `app-datepicker` element
     return false;
   }
 

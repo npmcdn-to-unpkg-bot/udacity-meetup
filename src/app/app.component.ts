@@ -22,5 +22,7 @@ import { APP_PROVIDERS } from './app.providers';
 export class AppComponent {
   constructor(private globalEventsService: GlobalEventsService, private viewContainerRef: ViewContainerRef) {
     globalEventsService.init();
+    // TODO: if Safari explain all of the missing .js.map files with this link
+    // https://github.com/angular/angular-cli/issues/706
   }
 }
