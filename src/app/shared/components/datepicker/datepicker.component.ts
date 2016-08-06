@@ -17,20 +17,18 @@ import {
 })
 export class DatepickerComponent implements OnInit {
   @Input() showDatepicker;
+  @Input() field;
   @Input() id;
   @Input() control;
   @Input() dateModel;
   @Output() closed = new EventEmitter();
   @Output() selectionDone = new EventEmitter();
   @ViewChild('datepickerElement') datepickerElement;
-  
-  public firstName;
 
   constructor(private element: ElementRef) {}
 
   ngOnInit() {
     document.addEventListener("click", event => this.checkOutsideClicked(event) );
-    this.firstName = this.control;
   }
 
   public hidePopup():void {
@@ -46,6 +44,7 @@ export class DatepickerComponent implements OnInit {
   private checkOutsideClicked(event):void {
     if (event.target !== this.element.nativeElement.parentElement
       && !this.element.nativeElement.parentElement.contains(event.target)) {
+      //console.log('doesnt look like an inside click... checking nullgbug');
       if (!this.nullGrandparentBug(event)) {
         this.hidePopup();
       }
@@ -56,10 +55,11 @@ export class DatepickerComponent implements OnInit {
     // Some datepicker elements have a null grandparent
     // where there should be the `app-datepicker` element
     if (this.datepickerElement !== undefined) {
-      // I don't know why the datepicker element is only
-      // defined when I click certain parts of the datepicker,
-      // but it does solve the issue for now. Would love to know why!
-      return true;
+      let datepickerElement:any = this.element.nativeElement;
+      let rec = datepickerElement.lastElementChild.getBoundingClientRect();
+      if ((event.pageX >= rec.left && event.pageX <= rec.right) || (event.pageY <= rec.top && event.pageY >= rec.bottom)) {
+        return true;
+      }
     }
     return false;
   }

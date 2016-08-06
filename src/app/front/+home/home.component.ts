@@ -85,6 +85,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy  {
       this.yPos = document.body.scrollTop;
       this.updateFixed();
     });
+    
   }
 
   ngAfterViewChecked() {

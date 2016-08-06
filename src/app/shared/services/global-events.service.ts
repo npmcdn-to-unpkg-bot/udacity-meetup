@@ -28,7 +28,7 @@ export class GlobalEventsService {
     // using this (Angular 2): http://stackoverflow.com/a/34703015/5357459
     if (element === undefined) { return; }
     let name = element.localName;
-    if (name === undefined) { name = ''; }
+    if (name === undefined || name === null) { name = ''; }
     let elementKey = name + event;
     // Only create Observable if one has not be created
     if (!(elementKey in this.elementsCollection)) {

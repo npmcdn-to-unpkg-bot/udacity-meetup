@@ -196,8 +196,6 @@ export class NewEventComponent implements OnInit {
     }
   }
 
-  
-
   private onSlideChange(delay?: number):void {
     if (delay === undefined) { delay = 1000 }
     this.slideTitle = this.itemsInfo[this.currentSlide-1].title;

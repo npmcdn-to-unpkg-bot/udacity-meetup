@@ -44,9 +44,11 @@
       <!-- Datepicker -->
       <app-datepicker
         *ngIf="field.type === 'datepicker'"
+        [field]="field"
+        [control]="registerForm.controls[field.id]"
+
         [id]="field.id"
         [showDatepicker]="field.showDatepicker"
-        [control]="registerForm.controls[field.id]"
         [dateModel]="field.dateModel"
         (closed)="field.showDatepicker = false"
         (selectionDone)="field.showDatepicker = false; field.length = onDatepickerSelection($event, field.id)"></app-datepicker>
