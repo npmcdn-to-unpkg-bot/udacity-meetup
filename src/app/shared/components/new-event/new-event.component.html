@@ -17,8 +17,8 @@
             #form1
             [ngClass]="{complete: currentSlide > 1}"
             [tabIndex]="tabIndex(1)"
-            class="slide current"            
-            (submit)="next()"></app-sign-in-up>
+            class="slide current"       
+            (authComplete)="next()"></app-sign-in-up>
           <app-form
             #form2
             [allFormInfo]="form2Info"
@@ -26,7 +26,7 @@
             [tabIndex]="tabIndex(2)"
             [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}"
             class="slide"
-            (submit)="next()"></app-form>
+            (formComplete)="saveForm2($event)"></app-form>
           <app-form
             #form3
             [allFormInfo]="form3Info"
@@ -34,7 +34,7 @@
             [tabIndex]="tabIndex(3)"
             [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}"
             class="slide"
-            (submit)="formComplete($event)"></app-form>
+            (formComplete)="allFormComplete($event)"></app-form>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">
             Confirmation
           </div>

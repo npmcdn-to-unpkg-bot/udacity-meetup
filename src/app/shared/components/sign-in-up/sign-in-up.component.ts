@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { FormComponent } from '../form';
 import { ValidationService } from '../../services/validation.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   moduleId: module.id,
@@ -17,6 +18,7 @@ import { ValidationService } from '../../services/validation.service';
 })
 export class SignInUpComponent implements OnInit {
   @Input() tabIndex;
+  @Output() authComplete = new EventEmitter();
   @ViewChild('signForm') appForm;
   public formInfo:any = {
     signup: {
@@ -126,16 +128,21 @@ export class SignInUpComponent implements OnInit {
       ]
     }
   };
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  public ngOnInit(): void {}
+  public ngOnInit():void {}
 
-  public setFocus(delay: number): void {
+  public setFocus(delay: number):void {
     this.appForm.setFocus(delay);
   }
 
-  public reset(): void {
+  public reset():void {
     this.appForm.reset();
   }
 
+  public onSubmit(event) {
+    if (this.authService.signInUp(event)) {
+      this.authComplete.emit(true);
+    }
+  }
 }

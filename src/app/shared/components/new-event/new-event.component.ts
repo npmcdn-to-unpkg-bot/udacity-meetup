@@ -168,6 +168,11 @@ export class NewEventComponent implements OnInit {
     this.onSlideChange();
   }
 
+  public saveForm2(formInfo) {
+    console.log(formInfo);
+    this.next();
+  }
+
   public onShown():void {
     this.onSlideChange(0);
   }
@@ -221,7 +226,7 @@ export class NewEventComponent implements OnInit {
     this.form3.reset();
   }
 
-  private formComplete(event):void {
+  private allFormComplete(event):void {
     this.next();
     this.reset = true;
   }

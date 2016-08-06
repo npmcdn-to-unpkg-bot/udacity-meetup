@@ -23,7 +23,7 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
 import { ValidationService } from '../../services/validation.service';
 import { SELECT_DIRECTIVES } from '../../forks/ng2-select/select';
 import { TextboxComponent } from '../textbox';
-import * as moment from 'moment';
+
 declare var google: any;
 
 @Component({
@@ -45,12 +45,12 @@ export class FormComponent implements OnInit {
   @Input() tabIndex;
   @Input() formComponentId:string;
   @Output() special = new EventEmitter();
+  @Output() formComplete = new EventEmitter();
   public mode;
   public formInfo;
   public active:boolean = true;
   public registerForm:FormGroup;
   public focusTimeout;
-  public dateModel;
   public addListenerQueue = {};
   public selectData = {
     time: [
@@ -64,6 +64,8 @@ export class FormComponent implements OnInit {
       '9:00pm', '9:30pm', '10:00pm', '10:30pm', '11:00pm', '11:30pm'
     ]
   };
+  public inputTypes = ['input', 'datepicker', 'select', 'textarea'];
+  public otherTypes = ['option', 'submit', 'special', 'instructions'];
   
   constructor(private renderer: Renderer, private formBuilder: FormBuilder, private _loader: MapsAPILoader) {}
   
@@ -149,11 +151,7 @@ export class FormComponent implements OnInit {
     let inputId = 0;
     let fbGroup = {}; // Form builder group object
     let passwordId, confirmPasswordId;
-    let allowedTypes = [
-      'input', 'datepicker', 'select', 
-      'textarea', 'instructions',
-      'option', 'submit', 'special'
-    ];
+    let allowedTypes = [...this.inputTypes, ...this.otherTypes];
     for (let i = 0; i < this.formInfo.fields.length; i++) {
       // Check type
       if (allowedTypes.indexOf(this.formInfo.fields[i].type) !== -1) {
@@ -200,13 +198,7 @@ export class FormComponent implements OnInit {
     } 
   }
 
-  // Datepicker => Sets the input value related to the datepicker
-  public onDatepickerSelection(newDate, id):number {
-    console.log(newDate);
-    let input:any = document.getElementById(id);
-    input.value = moment( new Date(newDate) ).format('MMMM D, YYYY');
-    return input.value.length;
-  }
+  
 
   getSelectData(selectType):Array<string> { // ng-select
     if (selectType in this.selectData) {
@@ -227,6 +219,40 @@ export class FormComponent implements OnInit {
       }
       fileReader.readAsDataURL(fileToLoad);
     }
+  }
+
+  public isAnInputType(type):boolean {
+    return this.inputTypes.indexOf(type) !== -1;
+  }
+
+  public formSubmit() {
+    if (this.registerForm.valid || true)  {
+      let formValue = this.registerForm.value;
+      let formOutput = {
+        action: this.mode
+      };
+      let uniqueId = 0;
+      let i = -1;
+      for (let key in formValue) {
+        i++;
+        if (this.isAnInputType(this.formInfo.fields[i].type) ) {
+          let label = this.formInfo.fields[i].name;
+          if (label in formOutput) {
+            uniqueId++;
+            label += uniqueId; // make one liner? # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+          }
+          label = this.camelize(label);
+          formOutput[label] = formValue[key];
+        }
+      }
+      this.formComplete.emit( formOutput );
+    }
+  }
+
+  private camelize(str) { // http://stackoverflow.com/a/2970667/5357459
+    return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+      return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+    }).replace(/\s+/g, '');
   }
 
 }
