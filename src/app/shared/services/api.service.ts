@@ -85,25 +85,29 @@ export class ApiService {
         'location.longitude': '-119.0752',
         'page': i
       };
-      this.observe(testParams, 'events/search')
-        .subscribe(
-          data => {
-            this.events.push(...data.events);
-            this.updateEvents();
-          },
-          error => {
-            let errorObj = JSON.parse( error._body );
-            let message = errorObj.error_description;
-            console.log( message );
-          }
-        );
+      this.observe(testParams, 'events/search').subscribe(
+        data => {
+          this.events.push(...data.events);
+          this.updateEvents();
+        },
+        error => {
+          let errorObj = JSON.parse( error._body );
+          let message = errorObj.error_description;
+          console.log( message );
+        }
+      );
     }
-    
   }
 
   updateEvents() {
     let filtered = new EventsPipe().transform(this.events);
+    //console.log(filtered);
     this.preEvents$.next( filtered );
+  }
+
+  public addEvent(data):void {
+    this.events.push(data);
+    this.updateEvents();
   }
 
   get events$() {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
+import { ApiService } from '../../services/api.service';
 import { SignInUpComponent } from '../sign-in-up';
 import { FormComponent } from '../form';
 import {
@@ -11,6 +12,7 @@ import {
 } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
 import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
 
 @Component({
   moduleId: module.id,
@@ -29,6 +31,7 @@ export class NewEventComponent implements OnInit {
   public modalOpen = false;
   public currentSlide:number;
   public slideTitle:string;
+  public form2Data = {};
   public items = [];
   public itemsInfo = [
     {
@@ -125,7 +128,7 @@ export class NewEventComponent implements OnInit {
       instructions: 'Fill out your event details here.',
       fields: [
         {
-          name: 'Event Host',
+          name: 'Event host',
           type: 'input',
           inputType: 'text',
           control: ['', Validators.required]
@@ -155,7 +158,10 @@ export class NewEventComponent implements OnInit {
     }
   };
 
-  constructor(private globalEventsService: GlobalEventsService, private element: ElementRef) {}
+  constructor(
+    private globalEventsService: GlobalEventsService,
+    private element: ElementRef,
+    private apiService: ApiService) {}
 
   public tabIndex(slideNumber): number {
     if (slideNumber !== this.currentSlide) {
@@ -170,6 +176,7 @@ export class NewEventComponent implements OnInit {
 
   public saveForm2(formInfo) {
     console.log(formInfo);
+    this.form2Data = formInfo;
     this.next();
   }
 
@@ -183,7 +190,6 @@ export class NewEventComponent implements OnInit {
   }
 
   public ngOnInit():void {
-
     this.globalEventsService.modalState$.subscribe(newState => {
       if (newState.modal === 'new-event' && newState.open === true) {
         this.open();
@@ -199,6 +205,10 @@ export class NewEventComponent implements OnInit {
     for (let i = 0; i < formPages; i++) {
       this.items.push(i+1);
     }
+  }
+
+  private parseFormatDate(dateInput, timeInput):string {
+    return moment( dateInput +  ' ' + timeInput, 'MMMM D, YYYY h:mma' ).format('YYYY-MM-DDTHH:mm:ss');
   }
 
   private onSlideChange(delay?: number):void {
@@ -227,7 +237,29 @@ export class NewEventComponent implements OnInit {
   }
 
   private allFormsComplete(formInfo):void {
-    console.log(formInfo);
+    let rawEventData = Object.assign(this.form2Data, formInfo);
+    let eventData = {
+      description: {
+        html: rawEventData.eventDescription
+      },
+      end: {
+        local: this.parseFormatDate(rawEventData.date1, rawEventData.time2)
+      },
+      id: 'local-1',
+      logo: {
+        url: rawEventData.eventImage
+      },
+      name: {
+        text: rawEventData.eventName
+      },
+      start: {
+        local: this.parseFormatDate(rawEventData.date, rawEventData.time)
+      }
+    };
+
+    console.log(eventData);
+
+    this.apiService.addEvent(eventData);
     this.next();
     this.reset = true;
   }

@@ -211,18 +211,18 @@ export class FormComponent implements OnInit {
   public formSubmit() {
     if (this.registerForm.valid || true)  {
       let formValue = this.registerForm.value;
+      console.log( formValue );
       let formOutput = {
         action: this.mode
       };
-      let uniqueId = 0;
+      let uniqueId = 1;
       let i = -1;
       for (let key in formValue) {
         i++;
         if (this.isAnInputType(this.formInfo.fields[i].type) ) {
           let label = this.formInfo.fields[i].name;
           if (label in formOutput) {
-            uniqueId++;
-            label += uniqueId; // make one liner? # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+            label += uniqueId++; 
           }
           label = this.camelize(label);
           formOutput[label] = formValue[key];

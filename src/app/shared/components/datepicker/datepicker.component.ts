@@ -40,15 +40,18 @@ export class DatepickerComponent implements OnInit {
     let newValue = event.target.value;
     if (moment( new Date(newValue) ).isValid() ) {
       this.dateModel = newValue;
-      this.updateValue(newValue);
+      this.updateField('length', newValue.length);
+      this.updateNextBlur = true;
     }
   }
 
   // Sets the input value related to the datepicker
   public onDatepickerSelection(newDate, id):void {
-    let newValue = moment( new Date(newDate) ).format('MMMM D, YYYY');
-    this.element.nativeElement.firstElementChild.value = newValue;//????
-    this.updateValue(newValue);
+    let newValue:string = moment( new Date(newDate) ).format('MMMM D, YYYY');
+    this.element.nativeElement.firstElementChild.value = newValue;
+    console.log( newValue );
+    this.updateField('length', newValue.length);
+    this.updateControl(newValue);
     this.hidePopup();
   }
 
@@ -57,20 +60,20 @@ export class DatepickerComponent implements OnInit {
     this.fieldChange.emit(this.field);
   }
 
-  private updateValue(newValue):void {
-    this.updateField('length', newValue.length);
-    this.updateNextBlur = true;
-  }
-
   public onBlur():void {
     this.updateField('focused', false);
     if (this.updateNextBlur === true) {
       // Update control
       let newValue = this.element.nativeElement.firstElementChild.value;
-      this.control.updateValue(newValue);
-      this.controlChange.emit(this.control);
-      this.updateNextBlur = false;
+      this.updateControl(newValue);
     }
+  }
+
+  private updateControl(newValue) {
+    console.log( 'updating control...', newValue );
+    this.control.updateValue(newValue);
+    this.controlChange.emit(this.control);
+    this.updateNextBlur = false;
   }
 
   private checkOutsideClicked(event):void {

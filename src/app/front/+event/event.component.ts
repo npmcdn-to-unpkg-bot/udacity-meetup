@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
 import { SanitizeHtmlPipe } from '../../shared/pipes/sanitize-html.pipe';
 import { DateFormatPipe } from 'angular2-moment';
+import * as moment from 'moment';
 
 @Component({
   moduleId: module.id,
@@ -24,6 +25,7 @@ export class EventComponent implements OnInit {
   };
   public image: string;
   public eventId: string;
+  public date:string;
   public eventData$;
   
   constructor(public apiService: ApiService, private activatedRoute: ActivatedRoute) {}
@@ -64,6 +66,18 @@ export class EventComponent implements OnInit {
           this.address['base'] = base;
           this.address['full'] = full;
           this.mapUrl = 'https://www.google.com/maps/?q=' + full;
+        }
+        if ('start' in data) {
+          let startMoment = moment( data.start.local, 'YYYY-MM-DDThh:mm:ss' );
+          let endMoment = moment( data.end.local, 'YYYY-MM-DDThh:mm:ss' );
+          let startString = startMoment.format('dddd, MMMM D, YYYY h:mm A');
+          let endString;
+          if (startMoment.format('YYYY-MM-DD') === endMoment.format('YYYY-MM-DD')) {
+            endString = endMoment.format('h:mm A');
+          } else {
+            endString = endMoment.format('dddd, MMMM D, YYYY h:mm A');
+          }
+          this.date = startString + ' - ' + endString;
         }
       }
     });
