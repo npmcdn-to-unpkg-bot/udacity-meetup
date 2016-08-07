@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 import { SignInUpComponent } from '../sign-in-up';
 import { FormComponent } from '../form';
 import {
@@ -184,7 +185,8 @@ export class NewEventComponent implements OnInit {
   constructor(
     private globalEventsService: GlobalEventsService,
     private element: ElementRef,
-    private apiService: ApiService) {}
+    private apiService: ApiService,
+    private authService: AuthService) {}
 
   public tabIndex(slideNumber): number {
     if (slideNumber !== this.currentSlide) {
@@ -284,9 +286,9 @@ export class NewEventComponent implements OnInit {
 
   private allFormsComplete(formInfo):void {
     let rawEventData = Object.assign(this.form2Data, formInfo);
-    
 
     let eventData = {
+      createdLocally: true,
       description: {
         html: rawEventData.eventDescription
       },
@@ -308,7 +310,8 @@ export class NewEventComponent implements OnInit {
       },
       start: {
         local: this.parseFormatDate(rawEventData.date, rawEventData.time)
-      }
+      },
+      url : 'mailto:' + this.authService.getUserEmail() + '?Subject=Sign%20me%20up!'
     };
     console.log(eventData);
     this.apiService.addEvent(eventData);

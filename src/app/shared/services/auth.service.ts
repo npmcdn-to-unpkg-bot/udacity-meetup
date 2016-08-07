@@ -38,6 +38,10 @@ export class AuthService {
     return this.authenticated;
   }
 
+  public getUserEmail() {
+    return this.credentials.email;
+  }
+
   private signIn(credentialsEntered):void {
     if (this.credentials.password !== null // Only authenticate if user was created
         && this.credentials.email === credentialsEntered.email

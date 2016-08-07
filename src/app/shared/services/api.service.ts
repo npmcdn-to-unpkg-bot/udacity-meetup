@@ -29,8 +29,7 @@ export class ApiService {
         search: searchParams
     })
     .map( (responseData) => {
-      let response = responseData.json();
-      return response
+      return responseData.json();
     });
   }
 
@@ -41,8 +40,7 @@ export class ApiService {
         search: searchParams
     })
     .map( (responseData) => {
-      let response = responseData.json();
-      return response
+      return responseData.json();
     });
   }
 
@@ -53,8 +51,7 @@ export class ApiService {
         search: searchParams
     })
     .map( (responseData) => {
-      let response = responseData.json();
-      return response
+      return responseData.json();
     });
   }
 
@@ -88,27 +85,31 @@ export class ApiService {
   }
 
   loadEvents() {
-    // Testing using Camarillo cordinates
-    // TODO: base off of IP using http://freegeoip.net/json/[ip-address-here]
-    for (let i = 1; i <= 4; i++) {
-      let testParams = {
-        'location.within': '10mi',
-        'location.latitude': '34.2321',
-        'location.longitude': '-119.0752',
-        'page': i
-      };
-      this.observe(testParams, 'events/search').subscribe(
-        data => {
-          this.events.push(...data.events);
-          this.updateEvents();
-        },
-        error => {
-          let errorObj = JSON.parse( error._body );
-          let message = errorObj.error_description;
-          console.log( message );
-        }
-      );
-    }
+    // Based off of IP
+    this.http.get('http://ip-api.com/json')
+    .map(responseData => {
+      return responseData.json();
+    }).subscribe(data => { 
+      for (let i = 1; i <= 4; i++) {
+        let testParams = {
+          'location.within': '10mi',
+          'location.latitude': data.lat,
+          'location.longitude': data.lon,
+          'page': i
+        };
+        this.observe(testParams, 'events/search').subscribe(
+          data => {
+            this.events.push(...data.events);
+            this.updateEvents();
+          },
+          error => {
+            let errorObj = JSON.parse( error._body );
+            let message = errorObj.error_description;
+            console.log( message );
+          }
+        );
+      }
+    });
   }
 
   updateEvents() {

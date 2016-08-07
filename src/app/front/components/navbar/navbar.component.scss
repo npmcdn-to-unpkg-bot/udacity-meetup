@@ -11,9 +11,6 @@
 		.navbar-brand, .navbar-nav > li > a {
 			color: white;
 			margin: 5px 0;
-			&.sign-in {
-				margin: 0;
-			}
 		}
 		.navbar-brand {
 			padding: 12px 15px;
@@ -22,9 +19,6 @@
 	}
 	.navbar-pull-right {
 		float: right;
-	}
-	.sign-in {
-		font-size: 30px;
 	}
 }
 @media (max-width: 768px) {
