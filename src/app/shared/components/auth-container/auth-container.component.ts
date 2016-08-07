@@ -26,6 +26,11 @@ export class AuthContainerComponent implements OnInit {
 
   ngOnInit() {}
 
+  public done():void {
+    console.log('done done done');
+    this.lgModal.hide();
+  }
+
   private open(): void {
     this.lgModal.show();
   }

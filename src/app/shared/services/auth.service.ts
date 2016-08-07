@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
   // Credentials are not stored in local storage.
   // They are only saved in memory, and only support one user.
+  public preAuthlState$
   public credentials = {
     email: null,
     password: null
@@ -16,7 +19,9 @@ export class AuthService {
   };
   // Auth state
   public authenticated:boolean = false;
-  constructor() {}
+  constructor() {
+    this.preAuthlState$ = new BehaviorSubject( this.authenticated );
+  }
 
   public signInUp(event):boolean {
     if (event.action === 'signup') {
@@ -27,14 +32,15 @@ export class AuthService {
     return this.checkAuth();
   }
 
-  public signOut():void {
+  public signOut():boolean {
     this.credentials.email = null;
     this.credentials.password = null;
-    console.log('sign out successful');
+    this.authenticated = false;
+    return this.checkAuth();
   }
 
   public checkAuth():boolean {
-    console.log('Auth state: ' + this.authenticated);
+    this.preAuthlState$.next( this.authenticated );
     return this.authenticated;
   }
 
@@ -46,12 +52,11 @@ export class AuthService {
     if (this.credentials.password !== null // Only authenticate if user was created
         && this.credentials.email === credentialsEntered.email
         && this.credentials.password === credentialsEntered.password) {
-        console.log('sign in successful');
         this.authenticated = true;
     }
   }
 
-  private signUp(formData):void {
+  private signUp(formData):boolean {
     // Save credentials
     this.credentials.email = formData.email;
     this.credentials.password = formData.password;
@@ -62,9 +67,11 @@ export class AuthService {
     this.profile.birthday = formData.birthday;
     // Authenticate
     this.authenticated = true;
-    console.log('sign up successful');
+    return this.checkAuth();
   }
 
-  
+  get authState$() {
+    return this.preAuthlState$.asObservable();
+  }
 
 }

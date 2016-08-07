@@ -3,6 +3,7 @@ import { DROPDOWN_DIRECTIVES, CollapseDirective } from 'ng2-bootstrap';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { PageScroll } from 'ng2-page-scroll';
 import { GlobalEventsService } from '../../../shared/services/global-events.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   moduleId: module.id,
@@ -13,5 +14,5 @@ import { GlobalEventsService } from '../../../shared/services/global-events.serv
 })
 export class NavbarComponent {
   public isCollapsed: boolean = true;
-  constructor(public globalEventsService: GlobalEventsService) {}
+  constructor(public globalEventsService: GlobalEventsService, public authService: AuthService) {}
 }

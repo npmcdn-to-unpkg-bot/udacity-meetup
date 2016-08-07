@@ -1,0 +1,54 @@
+@import '../../styles/variables';
+.modal-content {
+  .modal-header {
+    background-color: $primaryColor;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    .back-button {
+      background: transparent;
+      color: white;
+      font-size: 18px;
+      outline: none;
+      position: absolute;
+      transition: 0.2s all;
+      opacity: 0;
+      &:active {
+        box-shadow: none;
+      }
+      &.reveal {
+        opacity: 1;
+        transition: 0.5s all;
+      }
+    }
+    .title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 150px;
+      text-align: center;
+      height: 20px;
+      font-size: 20px;
+      line-height: 1;
+      color: white;
+    }
+    .close {
+      float: right;
+      margin-top: 4px;
+      color: $blue;
+      opacity: 1;
+      font-weight: normal;
+      color: white;
+      text-shadow: none;
+      i {
+        font-size: 30px;
+      }
+    }
+  }
+  .modal-body {
+    padding: 0;
+    
+  }
+}

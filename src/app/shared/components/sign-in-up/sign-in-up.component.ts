@@ -20,6 +20,7 @@ export class SignInUpComponent implements OnInit {
   @Input() tabIndex;
   @Output() authComplete = new EventEmitter();
   @ViewChild('signForm') appForm;
+  public formErrorMessage:string = null;
   public formInfo:any = {
     signup: {
       description: 'Sign up - primary',
@@ -99,7 +100,7 @@ export class SignInUpComponent implements OnInit {
     },
     signin: {
       description: 'Sign in',
-      instructions: 'To sign in.',
+      instructions: 'To sign in, enter your info',
       fields: [
         {
           name: 'Email',
@@ -118,7 +119,7 @@ export class SignInUpComponent implements OnInit {
           text: 'Next'
         },
         {
-          name: 'Already have an account? Sign in',
+          name: 'Need an account? Sign up',
           type: 'special',
           value: {
             action: 'switch',
@@ -137,12 +138,17 @@ export class SignInUpComponent implements OnInit {
   }
 
   public reset():void {
+    this.formErrorMessage = null;
     this.appForm.reset();
   }
 
   public onSubmit(event) {
     if (this.authService.signInUp(event)) {
+      console.log('worked');
       this.authComplete.emit(true);
+    } else {
+      console.log('did not work');
+      this.formErrorMessage = 'Unable to sign in';
     }
   }
 }

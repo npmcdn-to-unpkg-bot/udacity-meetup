@@ -44,6 +44,7 @@ export class FormComponent implements OnInit {
   @Input() modeInit;
   @Input() allFormInfo;
   @Input() tabIndex;
+  @Input() formErrorMessage:string;
   @Input() formComponentId:string;
   @Output() special = new EventEmitter();
   @Output() formComplete = new EventEmitter();

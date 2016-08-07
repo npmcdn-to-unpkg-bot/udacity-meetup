@@ -1,6 +1,9 @@
 <form *ngIf="active" [formGroup]="registerForm" (submit)="formSubmit()">
   <!-- Form Instructions -->
   <div class="instructions">{{formInfo.instructions}}</div>
+  <div *ngIf="formErrorMessage" class="instructions error">
+    {{formErrorMessage}}
+  </div>
   <div *ngFor="let field of formInfo.fields; let i = index" #fieldContainer>
     <!-- Field Instructions -->
     <div *ngIf="field.type === 'instructions' && field.show === true" class="instructions {{field.classes}}">
