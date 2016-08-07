@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef, Renderer } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { MapsAPILoader } from 'angular2-google-maps/core'; 
 import { GlobalEventsService } from '../../services/global-events.service';
+import { Observable } from 'rxjs/Rx';
 declare var google: any;
 
 @Component({
@@ -15,7 +16,9 @@ export class TextboxComponent implements OnInit {
   @Input() field;
   @Input() tabindex;
   @Input() control;
+  @Output() controlChange = new EventEmitter();
   public timeout;
+  public type;
   constructor(
     private mapsApiLoader: MapsAPILoader,
     private globalEventsService: GlobalEventsService,
@@ -24,6 +27,11 @@ export class TextboxComponent implements OnInit {
 
   ngOnInit() {
     this.checkListeners();
+    if (this.field.inputType === 'file') {
+      this.type = 'text'
+    } else {
+      this.type = this.field.inputType;
+    }
   }
 
   public onInput(event, type):number {
@@ -37,6 +45,12 @@ export class TextboxComponent implements OnInit {
       if (this.field.addListener === 'location') {
         this.autocomplete();
       }
+    }
+    if (this.field.inputType === 'file') {
+      Observable.fromEvent(this.element.nativeElement, 'change').subscribe(event => {
+        console.log('just selected the file!');
+        this.getBase64(this.field.id);
+      });
     }
   }
 
@@ -92,6 +106,21 @@ export class TextboxComponent implements OnInit {
           console.log(place);
       });
     });
+  }
+
+  private getBase64(id):void { // File input
+    let filesSelected = this.element.nativeElement.lastElementChild.files;
+    if (filesSelected.length > 0) {
+      let fileToLoad = filesSelected[0];
+      let fileReader = new FileReader();
+      fileReader.onload = (fileLoadedEvent) => {
+          let item:any = fileLoadedEvent.target;
+          console.log(item);
+          this.control.updateValue(item.result);
+          this.controlChange.emit(this.control);
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
   }
 
 }

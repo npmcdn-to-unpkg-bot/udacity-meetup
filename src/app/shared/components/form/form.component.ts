@@ -191,33 +191,16 @@ export class FormComponent implements OnInit {
   }
 
   private onInput(event, type):number {
-    if (type === 'select') {
+    if (type === 'select') { 
       return event.length;
     } else {
       return event.target.value.length;
     } 
   }
 
-  
-
   getSelectData(selectType):Array<string> { // ng-select
     if (selectType in this.selectData) {
       return this.selectData[selectType];
-    }
-  }
-
-  private getBase64(id):void { // File input
-    let inputElement:any = document.getElementById(id);
-    let filesSelected = inputElement.files;
-    if (filesSelected.length > 0) {
-      let fileToLoad = filesSelected[0];
-      let fileReader = new FileReader();
-      fileReader.onload = (fileLoadedEvent) => {
-          let item = fileLoadedEvent.target;
-          let base64 = item['result'];
-          console.log(item);
-      }
-      fileReader.readAsDataURL(fileToLoad);
     }
   }
 

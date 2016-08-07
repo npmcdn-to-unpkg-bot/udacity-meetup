@@ -226,7 +226,8 @@ export class NewEventComponent implements OnInit {
     this.form3.reset();
   }
 
-  private allFormComplete(event):void {
+  private allFormsComplete(formInfo):void {
+    console.log(formInfo);
     this.next();
     this.reset = true;
   }

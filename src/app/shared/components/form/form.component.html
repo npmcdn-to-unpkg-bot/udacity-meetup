@@ -16,7 +16,7 @@
       <!-- Input -->
       <app-textbox
         *ngIf="field.type === 'input'"
-        [control]="registerForm.controls[field.id]"
+        [(control)]="registerForm.controls[field.id]"
         [field]="field"
         [tabindex]="tabindex"></app-textbox>
       <!-- Textarea -->
@@ -35,7 +35,7 @@
         *ngIf="field.type === 'select'"
         [allowClear]="true"
         [items]="field.selectType === 'default' ? field.selectData : getSelectData(field.selectType)"
-        (selected)="field.length = onInput($event.id, field.type)"
+        (selected)="field.length = onInput($event.id, field.type); registerForm.controls[field.id].updateValue($event.id)"
         (removed)="field.length = 0"
         (focus)="field.focused = true"
         (blur)="field.focused = false"
