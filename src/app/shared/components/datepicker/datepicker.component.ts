@@ -49,7 +49,6 @@ export class DatepickerComponent implements OnInit {
   public onDatepickerSelection(newDate, id):void {
     let newValue:string = moment( new Date(newDate) ).format('MMMM D, YYYY');
     this.element.nativeElement.firstElementChild.value = newValue;
-    console.log( newValue );
     this.updateField('length', newValue.length);
     this.updateControl(newValue);
     this.hidePopup();
@@ -70,7 +69,6 @@ export class DatepickerComponent implements OnInit {
   }
 
   private updateControl(newValue) {
-    console.log( 'updating control...', newValue );
     this.control.updateValue(newValue);
     this.controlChange.emit(this.control);
     this.updateNextBlur = false;

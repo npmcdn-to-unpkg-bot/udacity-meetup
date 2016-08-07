@@ -77,11 +77,34 @@ export class NewEventComponent implements OnInit {
           selectType: 'default',
           selectData: this.eventTypes
         },
+         {
+          type: 'instructions',
+          message: 'Location',
+          classes: 'group-label'
+        },
         {
-          name: 'Location',
+          name: 'Street',
           type: 'input',
           inputType: 'text',
           addListener: 'location'
+        },
+        {
+          name: 'City',
+          type: 'input',
+          inputType: 'text',
+          control: ['', Validators.required]
+        },
+        {
+          name: 'Zip',
+          type: 'input',
+          inputType: 'text',
+          control: ['']
+        },
+        {
+          name: 'Country',
+          type: 'input',
+          inputType: 'text',
+          control: ['', Validators.required]
         },
         {
           type: 'instructions',
@@ -175,9 +198,32 @@ export class NewEventComponent implements OnInit {
   }
 
   public saveForm2(formInfo) {
-    console.log(formInfo);
+    // Save initial data
     this.form2Data = formInfo;
+    this.form2Data['venue'] = {
+      latitude: '',
+      longitude: '',
+      address: {
+        city: formInfo.city,
+        region: '',
+        country: formInfo.country,
+        address_1: formInfo.street
+      }
+    };
+    // Move to next form page
     this.next();
+    // Address string
+    let address = formInfo.street + ', ' + formInfo.city + ' ' + formInfo.zip;
+    // Get cordinates
+    this.apiService.getCordinates(address).subscribe(data => {
+      this.form2Data['venue']['latitude'] = data.results[0].geometry.location.lat;
+      this.form2Data['venue']['longitude'] = data.results[0].geometry.location.lng;
+      for (let i = 0; i < data.results[0].address_components.length; i++) {
+        if (data.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
+          this.form2Data['venue']['address']['region'] = data.results[0].address_components[i].long_name;
+        }
+      }
+    });
   }
 
   public onShown():void {
@@ -238,9 +284,17 @@ export class NewEventComponent implements OnInit {
 
   private allFormsComplete(formInfo):void {
     let rawEventData = Object.assign(this.form2Data, formInfo);
+    
+
     let eventData = {
       description: {
         html: rawEventData.eventDescription
+      },
+      details: {
+        media: {
+          url: rawEventData.eventImage
+        },
+        venue: rawEventData.venue
       },
       end: {
         local: this.parseFormatDate(rawEventData.date1, rawEventData.time2)
@@ -256,9 +310,7 @@ export class NewEventComponent implements OnInit {
         local: this.parseFormatDate(rawEventData.date, rawEventData.time)
       }
     };
-
     console.log(eventData);
-
     this.apiService.addEvent(eventData);
     this.next();
     this.reset = true;

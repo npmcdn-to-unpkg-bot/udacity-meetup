@@ -17,6 +17,7 @@ export class TextboxComponent implements OnInit {
   @Input() tabindex;
   @Input() control;
   @Output() controlChange = new EventEmitter();
+  @Output() placeAutocomplete = new EventEmitter();
   public timeout;
   public type;
   constructor(
@@ -103,7 +104,7 @@ export class TextboxComponent implements OnInit {
       let autocomplete = new google.maps.places.Autocomplete( this.element.nativeElement.firstElementChild, {});
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
           let place = autocomplete.getPlace();
-          console.log(place);
+          this.placeAutocomplete.emit(place);
       });
     });
   }

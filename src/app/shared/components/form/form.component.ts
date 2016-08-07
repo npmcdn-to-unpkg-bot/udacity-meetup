@@ -10,7 +10,8 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  Renderer
+  Renderer,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   REACTIVE_FORM_DIRECTIVES,
@@ -49,7 +50,7 @@ export class FormComponent implements OnInit {
   public mode;
   public formInfo;
   public active:boolean = true;
-  public registerForm:FormGroup;
+  public registerForm:any;
   public focusTimeout;
   public addListenerQueue = {};
   public selectData = {
@@ -67,7 +68,11 @@ export class FormComponent implements OnInit {
   public inputTypes = ['input', 'datepicker', 'select', 'textarea'];
   public otherTypes = ['option', 'submit', 'special', 'instructions'];
   
-  constructor(private renderer: Renderer, private formBuilder: FormBuilder, private _loader: MapsAPILoader) {}
+  constructor(
+    private renderer: Renderer,
+    private formBuilder: FormBuilder,
+    private _loader: MapsAPILoader,
+    private ref: ChangeDetectorRef) {}
   
   public ngOnInit():void {
     this.setFormComponenetId();
@@ -183,11 +188,79 @@ export class FormComponent implements OnInit {
     // Add confirm password validation
     if (confirmPasswordId !== undefined) {
       // Form builder
-      this.registerForm = this.formBuilder.group(fbGroup, {validator: ValidationService.matchingPasswords(passwordId, confirmPasswordId)});
+      this.registerForm = this.formBuilder.group(fbGroup,
+        {validator: ValidationService.matchingPasswords(passwordId, confirmPasswordId)});
     } else {
       // Form builder
       this.registerForm = this.formBuilder.group(fbGroup);
     }
+  }
+
+  public onPlaceAutocomplete(event, id:string, index:number) {
+    let preInputId:string = this.formComponentId + '-id-';
+    let preInputIdLength:number = preInputId.length;
+    let inputId:number = Number( id.substr(preInputIdLength) );
+    // Reference object - for improved readability
+    let ref = {
+      street: {
+        id: id,
+        index: index
+      },
+      city: {
+        id: preInputId + (inputId + 1),
+        index: index + 1
+      },
+      zip: {
+        id: preInputId + (inputId + 2),
+        index: index + 2
+      },
+      country: {
+        id: preInputId + (inputId + 3),
+        index: index + 3
+      },
+    };
+    // Default address object
+    let address = {
+      street: '',
+      streetNumber: '',
+      streetName: '',
+      city: '',
+      zip: '',
+      country: ''
+    };
+    for (let i = 0; i < event.address_components.length; i++) {
+      let type = event.address_components[i].types[0];
+      if (type === 'street_number') { // Street number
+        address.streetNumber = event.address_components[i].short_name;
+      } else if (type === 'route') { // Street name
+        address.streetName = event.address_components[i].short_name;
+      } else if (type === 'locality') { // City
+        address.city = event.address_components[i].short_name;
+        this.formInfo.fields[ ref.city.index ].length = address.city.length;
+        this.registerForm.controls[ ref.city.id ].updateValue( address.city );
+      } else if (type === 'postal_code') { // Zip
+        address.zip = event.address_components[i].short_name;
+        this.formInfo.fields[ ref.zip.index ].length = address.zip.length;
+        this.registerForm.controls[ ref.zip.id ].updateValue( address.zip );
+      } else if (type === 'country') { // Country
+        address.country = event.address_components[i].short_name;
+        this.formInfo.fields[ ref.country.index ].length = address.country.length;
+        this.registerForm.controls[ ref.country.id ].updateValue( address.country );
+      }
+    }
+    // Format street
+    if (address.streetNumber.length > 0 && address.streetName.length > 0) {
+      address.street = address.streetNumber + ' ' + address.streetName;
+    } else if (address.streetNumber.length > 0 ) {
+      address.street = address.streetNumber;
+    } else if (address.streetName.length > 0 ) {
+      address.street = address.streetName;
+    }
+    // Set street
+    this.formInfo.fields[ ref.street.index ].length = address.street.length;
+    this.registerForm.controls[ ref.street.id ].updateValue( address.street );
+    // Update DOM - http://stackoverflow.com/a/34829089/5357459
+    this.ref.detectChanges();
   }
 
   private onInput(event, type):number {
@@ -211,7 +284,6 @@ export class FormComponent implements OnInit {
   public formSubmit() {
     if (this.registerForm.valid || true)  {
       let formValue = this.registerForm.value;
-      console.log( formValue );
       let formOutput = {
         action: this.mode
       };

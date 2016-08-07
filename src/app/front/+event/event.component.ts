@@ -48,19 +48,19 @@ export class EventComponent implements OnInit {
           this.lng = Number(venue.longitude);
           
           let base = '';
-          if (venue.address.city !== null) {
+          if (venue.address.city.length > 0) {
             base = venue.address.city;
           }
-          if (venue.address.region !== null) {
+          if (venue.address.region.length > 0) {
             if (base.length > 0) { base += ', '; }
             base += venue.address.region;
           }
-          if (venue.address.country !== null) {
+          if (venue.address.country.length > 0) {
             if (base.length > 0) { base += ', '; }
             base += venue.address.country;
           }
           let full = base;
-          if (venue.address.address_1 !== null) {
+          if (venue.address.address_1.length > 0) {
             full = venue.address.address_1 + ', ' + base;
           }
           this.address['base'] = base;

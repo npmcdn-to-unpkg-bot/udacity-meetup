@@ -46,6 +46,18 @@ export class ApiService {
     });
   }
 
+  getCordinates(address) {
+    let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI';
+    let searchParams = this.searchParamsService.transform({address:address});
+    return this.http.get(url, {
+        search: searchParams
+    })
+    .map( (responseData) => {
+      let response = responseData.json();
+      return response
+    });
+  }
+
   getEventDetails(eventId) {
     let index;
     for (let i = 0; i < this.events.length; i++) {

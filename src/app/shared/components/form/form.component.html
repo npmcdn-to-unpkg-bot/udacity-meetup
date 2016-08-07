@@ -18,7 +18,8 @@
         *ngIf="field.type === 'input'"
         [(control)]="registerForm.controls[field.id]"
         [field]="field"
-        [tabindex]="tabindex"></app-textbox>
+        [tabindex]="tabindex"
+        (placeAutocomplete)="onPlaceAutocomplete($event, field.id, i)"></app-textbox>
       <!-- Textarea -->
       <textarea
         *ngIf="field.type === 'textarea'"
