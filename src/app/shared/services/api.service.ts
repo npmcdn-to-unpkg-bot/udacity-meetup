@@ -86,15 +86,15 @@ export class ApiService {
 
   loadEvents() {
     // Based off of IP
-    this.http.get('http://ip-api.com/json')
+    this.http.get('https://geoip.nekudo.com/api')
     .map(responseData => {
       return responseData.json();
     }).subscribe(data => { 
       for (let i = 1; i <= 4; i++) {
         let testParams = {
           'location.within': '10mi',
-          'location.latitude': data.lat,
-          'location.longitude': data.lon,
+          'location.latitude': data.location.latitude,
+          'location.longitude': data.location.longitude,
           'page': i
         };
         this.observe(testParams, 'events/search').subscribe(
