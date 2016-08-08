@@ -144,10 +144,8 @@ export class SignInUpComponent implements OnInit {
 
   public onSubmit(event) {
     if (this.authService.signInUp(event)) {
-      console.log('worked');
       this.authComplete.emit(true);
     } else {
-      console.log('did not work');
       this.formErrorMessage = 'Unable to sign in';
     }
   }

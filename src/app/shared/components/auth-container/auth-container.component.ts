@@ -13,11 +13,17 @@ import { SignInUpComponent } from '../sign-in-up/index';
 })
 export class AuthContainerComponent implements OnInit {
   @ViewChild('lgModal') public lgModal;
+  @ViewChild('form') form;
   public modalOpen = false;
+  public reset:boolean = true;
   constructor(private globalEventsService: GlobalEventsService) {
     globalEventsService.modalState$.subscribe(newState => {
       if (newState.modal === 'auth' && newState.open === true) {
         this.open();
+        if (this.reset) {
+          this.reset = false;
+          this.formInit();
+        }
       } else {
         this.close();
       }
@@ -27,8 +33,12 @@ export class AuthContainerComponent implements OnInit {
   ngOnInit() {}
 
   public done():void {
-    console.log('done done done');
+    this.reset = true;
     this.lgModal.hide();
+  }
+
+  private formInit():void {
+    this.form.reset();
   }
 
   private open(): void {

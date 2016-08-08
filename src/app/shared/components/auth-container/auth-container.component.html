@@ -9,6 +9,7 @@
       </div>
       <div class="modal-body">
         <app-sign-in-up
+          #form
           [signupMode]="false"
           [action]="'Sign Up'"
           (authComplete)="done()"></app-sign-in-up>

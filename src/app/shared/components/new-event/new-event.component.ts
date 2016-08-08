@@ -32,8 +32,11 @@ export class NewEventComponent implements OnInit {
   public modalOpen = false;
   public currentSlide:number;
   public slideTitle:string;
+  public updateSlideNumberOnOpen:boolean = false;
   public form2Data = {};
   public items = [];
+  public showSignup:boolean;
+  public offset:number = 1;
   public itemsInfo = [
     {
       title: 'Account'
@@ -188,6 +191,51 @@ export class NewEventComponent implements OnInit {
     private apiService: ApiService,
     private authService: AuthService) {}
 
+  public ngOnInit():void {
+    this.authService.authState$.subscribe(authenticated => {
+      if (authenticated === true) {
+        this.updateSlideNumberOnOpen = true;
+      } else {
+        this.updateSlideNumberOnOpen = true;
+      }
+    });
+    this.globalEventsService.modalState$.subscribe(newState => {
+      if (newState.modal === 'new-event' && newState.open === true) {
+        this.open();
+        if (this.reset) {
+          this.reset = false;
+          this.formInit();
+        }
+        if (this.updateSlideNumberOnOpen) {
+          // Update number of slides
+          this.updateNumberOfSlides();
+        }
+      } else {
+        this.close();
+      }
+    });
+    this.updateNumberOfSlides();
+  }
+
+  public updateNumberOfSlides() {
+    let formPages:number = this.itemsInfo.length - 1;
+    if (this.authService.checkAuth() === true) {
+      formPages -= 1;
+      this.showSignup = false;
+      this.currentSlide = 2;
+      this.offset = 2;
+    } else {
+      this.showSignup = true;
+      this.currentSlide = 1;
+      this.offset = 1;
+    }
+    this.items = [];
+    for (let i = 0; i < formPages; i++) {
+      this.items.push(i+1);
+    }
+    this.updateSlideNumberOnOpen = false;
+  }
+
   public tabIndex(slideNumber): number {
     if (slideNumber !== this.currentSlide) {
       return -1;
@@ -237,23 +285,6 @@ export class NewEventComponent implements OnInit {
     this.onSlideChange();
   }
 
-  public ngOnInit():void {
-    this.globalEventsService.modalState$.subscribe(newState => {
-      if (newState.modal === 'new-event' && newState.open === true) {
-        this.open();
-        if (this.reset) {
-          this.reset = false;
-          this.formInit();
-        }
-      } else {
-        this.close();
-      }
-    });
-    let formPages:number = this.itemsInfo.length - 1;
-    for (let i = 0; i < formPages; i++) {
-      this.items.push(i+1);
-    }
-  }
 
   private parseFormatDate(dateInput, timeInput):string {
     return moment( dateInput +  ' ' + timeInput, 'MMMM D, YYYY h:mma' ).format('YYYY-MM-DDTHH:mm:ss');
@@ -278,8 +309,10 @@ export class NewEventComponent implements OnInit {
   }
 
   private formInit():void {
-    this.currentSlide = 1;
-    this.form1.reset();
+    this.updateNumberOfSlides();
+    if (this.showSignup) {
+      this.form1.reset();
+    }
     this.form2.reset();
     this.form3.reset();
   }

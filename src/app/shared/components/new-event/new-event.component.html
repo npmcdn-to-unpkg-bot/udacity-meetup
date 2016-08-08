@@ -10,11 +10,12 @@
       </div>
       <div class="modal-body">
         <div class="form-progress" [ngClass]="{'slide-out': currentSlide > 3}">
-          <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+1}">{{i+1}}</div>
+          <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+offset}">{{i+1}}</div>
         </div>
         <div class="slides">
           <app-sign-in-up
             #form1
+            *ngIf="showSignup"
             [ngClass]="{complete: currentSlide > 1}"
             [tabIndex]="tabIndex(1)"
             class="slide current"       
