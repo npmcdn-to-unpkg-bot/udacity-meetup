@@ -46,6 +46,7 @@ export class FormComponent implements OnInit {
   @Input() tabIndex;
   @Input() formErrorMessage:string;
   @Input() formComponentId:string;
+  @Output() currentFocus = new EventEmitter();
   @Output() special = new EventEmitter();
   @Output() formComplete = new EventEmitter();
   public mode;
@@ -79,6 +80,7 @@ export class FormComponent implements OnInit {
     this.setFormComponenetId();
     this.mode = this.modeInit;
     this.formInfo = this.allFormInfo[this.mode];
+    //this.currentFocus.emit('meow bob');
     this.sortInput();
   }
 
@@ -107,6 +109,7 @@ export class FormComponent implements OnInit {
   private switchModes(newForm) {
     this.mode = newForm;
     this.formInfo = this.allFormInfo[this.mode];
+    this.currentFocus.emit(this.formInfo.title);
     this.reset().then(() => this.setFocus(0));
   }
 

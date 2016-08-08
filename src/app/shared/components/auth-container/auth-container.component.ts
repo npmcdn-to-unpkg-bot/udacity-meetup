@@ -14,7 +14,8 @@ import { SignInUpComponent } from '../sign-in-up/index';
 export class AuthContainerComponent implements OnInit {
   @ViewChild('lgModal') public lgModal;
   @ViewChild('form') form;
-  public modalOpen = false;
+  public slideTitle:string = 'Sign in';
+  public modalOpen:boolean = false;
   public reset:boolean = true;
   constructor(private globalEventsService: GlobalEventsService) {
     globalEventsService.modalState$.subscribe(newState => {
@@ -31,7 +32,6 @@ export class AuthContainerComponent implements OnInit {
   }
 
   ngOnInit() {}
-
   public done():void {
     this.reset = true;
     this.lgModal.hide();

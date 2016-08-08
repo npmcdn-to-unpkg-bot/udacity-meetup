@@ -18,12 +18,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignInUpComponent implements OnInit {
   @Input() tabIndex;
+  @Input() modeInit;
   @Output() authComplete = new EventEmitter();
+  @Output() modeUpdate = new EventEmitter();
   @ViewChild('signForm') appForm;
   public formErrorMessage:string = null;
   public formInfo:any = {
     signup: {
-      description: 'Sign up - primary',
+      title: 'Sign up',
       instructions: 'To create an event create an account.',
       fields: [
         {
@@ -99,7 +101,7 @@ export class SignInUpComponent implements OnInit {
       ]
     },
     signin: {
-      description: 'Sign in',
+      title: 'Sign in',
       instructions: 'To sign in, enter your info',
       fields: [
         {

@@ -39,7 +39,7 @@ export class NewEventComponent implements OnInit {
   public offset:number = 1;
   public itemsInfo = [
     {
-      title: 'Account'
+      title: 'Sign up'
     },
     {
       title: 'Event info'
@@ -61,7 +61,7 @@ export class NewEventComponent implements OnInit {
   ];
   public form2Info:any = {
     form2: {
-      description: 'Event info',
+      title: 'Event info',
       instructions: 'Fill out your event info here.',
       fields: [
         {
@@ -151,7 +151,7 @@ export class NewEventComponent implements OnInit {
   };
   public form3Info:any = {
     form3: {
-      description: 'Event details',
+      title: 'Event details',
       instructions: 'Fill out your event details here.',
       fields: [
         {
@@ -219,13 +219,15 @@ export class NewEventComponent implements OnInit {
 
   public updateNumberOfSlides() {
     let formPages:number = this.itemsInfo.length - 1;
-    if (this.authService.checkAuth() === true) {
+    if (this.authService.checkAuth() === true) { // If signed in
       formPages -= 1;
       this.showSignup = false;
       this.currentSlide = 2;
+      this.slideTitle = this.itemsInfo[1].title;
       this.offset = 2;
-    } else {
+    } else { // If signed out
       this.showSignup = true;
+      this.slideTitle = this.itemsInfo[0].title;
       this.currentSlide = 1;
       this.offset = 1;
     }
@@ -292,7 +294,9 @@ export class NewEventComponent implements OnInit {
 
   private onSlideChange(delay?: number):void {
     if (delay === undefined) { delay = 1000 }
-    this.slideTitle = this.itemsInfo[this.currentSlide-1].title;
+    if (this.currentSlide !== 1) { // Let sign-in-up control title
+      this.slideTitle = this.itemsInfo[this.currentSlide-1].title;
+    }
     if (this.currentSlide < 4) {
       this['form' + this.currentSlide].setFocus(delay);
     }

@@ -18,7 +18,9 @@
             *ngIf="showSignup"
             [ngClass]="{complete: currentSlide > 1}"
             [tabIndex]="tabIndex(1)"
-            class="slide current"       
+            [modeInit]="'signup'"
+            class="slide current"   
+            (modeUpdate)="slideTitle = $event"    
             (authComplete)="next()"></app-sign-in-up>
           <app-form
             #form2

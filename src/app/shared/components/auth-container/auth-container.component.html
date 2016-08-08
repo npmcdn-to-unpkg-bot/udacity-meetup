@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="title">Account</div>
+        <div class="title">{{slideTitle}}</div>
         <button  tabindex="-1" type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
           <i class="ion-ios-close-empty"></i>
         </button>
@@ -11,7 +11,8 @@
         <app-sign-in-up
           #form
           [signupMode]="false"
-          [action]="'Sign Up'"
+          [modeInit]="'signin'"
+          (modeUpdate)="slideTitle = $event" 
           (authComplete)="done()"></app-sign-in-up>
       </div>
     </div>
