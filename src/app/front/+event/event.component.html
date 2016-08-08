@@ -17,6 +17,17 @@
     <h2>Details</h2>
     <div><i class="ion-calendar"></i> {{date}}</div>
     <div><i class="ion-location"></i> {{address.full}} - <a href="{{mapUrl}}" target="_blank">Map</a></div>
+    <div *ngIf="(eventData$ | async)?.local?.event?.type"><b>Type</b> {{(eventData$ | async)?.local?.event?.type}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.event?.host"><b>Host</b> {{(eventData$ | async)?.local?.event?.host}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.event?.guestList"><b>Guest list</b> {{(eventData$ | async)?.local?.event?.guestList}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.event?.guestMessage"><b>Message to guests</b> {{(eventData$ | async)?.local?.event?.guestMessage}}</div>
+  </div>
+  <div class="details" *ngIf="(eventData$ | async)?.createdLocally">
+    <h2>Event creator</h2>
+    <div *ngIf="(eventData$ | async)?.createdLocally"><b>Name</b> {{(eventData$ | async)?.local?.profile?.name}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.profile?.employer"><b>Employer</b> {{(eventData$ | async)?.local?.profile?.employer}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.profile?.job"><b>Job title</b> {{(eventData$ | async)?.local?.profile?.job}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.profile?.birthday"><b>Birthday</b> {{(eventData$ | async)?.local?.profile?.birthday | amDateFormat:'ddd, MMM D h:mm A'}}</div>
   </div>
 </div>
 

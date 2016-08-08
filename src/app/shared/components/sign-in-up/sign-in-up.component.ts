@@ -26,7 +26,7 @@ export class SignInUpComponent implements OnInit {
   public formInfo:any = {
     signup: {
       title: 'Sign up',
-      instructions: 'To create an event create an account.',
+      instructions: 'Creating an account will allow you to create events.',
       fields: [
         {
           name: 'Name',
@@ -58,7 +58,7 @@ export class SignInUpComponent implements OnInit {
         },
         {
           type: 'instructions',
-          message: 'Optional Profile Info',
+          message: 'Optional Profile Info - Shown With Your Events',
           group: 'optional'
         },
         {

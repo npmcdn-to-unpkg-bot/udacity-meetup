@@ -179,7 +179,7 @@ export class NewEventComponent implements OnInit {
         },
         {
           type: 'submit',
-          text: 'Send'
+          text: 'Create Event!'
         }
       ]
     }
@@ -325,7 +325,16 @@ export class NewEventComponent implements OnInit {
     let rawEventData = Object.assign(this.form2Data, formInfo);
 
     let eventData = {
-      createdLocally: true,
+      createdLocally: true, // created in the browser and not through an api
+      local: {
+        event: {
+          type: rawEventData.eventType,
+          host: rawEventData.eventHost,
+          guestList: rawEventData.guestList,
+          guestMessage: rawEventData.optionalMessageToGuests
+        },
+        profile: this.authService.getProfileInfo()
+      },
       description: {
         html: rawEventData.eventDescription
       },

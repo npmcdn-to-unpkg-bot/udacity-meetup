@@ -46,6 +46,11 @@ export class AuthService {
     return this.credentials.email;
   }
 
+  public getProfileInfo() {
+    console.log(this.profile);
+    return this.profile;
+  }
+
   private signIn(credentialsEntered):void {
     if (this.credentials.password !== null // Only authenticate if user was created
         && this.credentials.email === credentialsEntered.email
@@ -61,7 +66,7 @@ export class AuthService {
     // Save profile info
     this.profile.name = formData.name;
     this.profile.employer = formData.employer;
-    this.profile.job = formData.job;
+    this.profile.job = formData.jobTitle;
     this.profile.birthday = formData.birthday;
     // Authenticate
     this.authenticated = true;
