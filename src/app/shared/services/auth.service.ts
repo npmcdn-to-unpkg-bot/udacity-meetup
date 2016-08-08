@@ -33,8 +33,6 @@ export class AuthService {
   }
 
   public signOut():boolean {
-    this.credentials.email = null;
-    this.credentials.password = null;
     this.authenticated = false;
     return this.checkAuth();
   }
