@@ -1,9 +1,11 @@
 <input
   id="{{field.id}}"
-  type="{{field.inputType}}"
+  type="{{type}}"
   [formControl]="control"
+  [ngClass]="{'hidden-input':field.inputType === 'file'}"
   (input)="field.length = onInput($event, field.type);"
   (focus)="field.focused = true;"
   (blur)="field.focused = false"
   tabindex="{{tabIndex}}"
   placeholder="">
+<input *ngIf="field.inputType === 'file'" type="file">

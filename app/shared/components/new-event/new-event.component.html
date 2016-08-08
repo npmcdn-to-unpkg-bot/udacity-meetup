@@ -10,15 +10,16 @@
       </div>
       <div class="modal-body">
         <div class="form-progress" [ngClass]="{'slide-out': currentSlide > 3}">
-          <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+1}">{{i+1}}</div>
+          <div *ngFor="let item of items; let i = index" class="form-progress-item" [ngClass]="{current: currentSlide === i+offset}">{{i+1}}</div>
         </div>
         <div class="slides">
           <app-sign-in-up
             #form1
+            *ngIf="showSignup"
             [ngClass]="{complete: currentSlide > 1}"
             [tabIndex]="tabIndex(1)"
-            class="slide current"            
-            (submit)="next()"></app-sign-in-up>
+            class="slide current"       
+            (authComplete)="next()"></app-sign-in-up>
           <app-form
             #form2
             [allFormInfo]="form2Info"
@@ -26,7 +27,7 @@
             [tabIndex]="tabIndex(2)"
             [ngClass]="{current: currentSlide >= 2, complete: currentSlide > 2}"
             class="slide"
-            (submit)="next()"></app-form>
+            (formComplete)="saveForm2($event)"></app-form>
           <app-form
             #form3
             [allFormInfo]="form3Info"
@@ -34,7 +35,7 @@
             [tabIndex]="tabIndex(3)"
             [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}"
             class="slide"
-            (submit)="formComplete($event)"></app-form>
+            (formComplete)="allFormsComplete($event)"></app-form>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">
             Confirmation
           </div>

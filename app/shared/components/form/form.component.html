@@ -1,14 +1,17 @@
-<form *ngIf="active" [formGroup]="registerForm">
+<form *ngIf="active" [formGroup]="registerForm" (submit)="formSubmit()">
   <!-- Form Instructions -->
   <div class="instructions">{{formInfo.instructions}}</div>
-  <div *ngFor="let field of formInfo.fields" #fieldContainer>
+  <div *ngIf="formErrorMessage" class="instructions error">
+    {{formErrorMessage}}
+  </div>
+  <div *ngFor="let field of formInfo.fields; let i = index" #fieldContainer>
     <!-- Field Instructions -->
     <div *ngIf="field.type === 'instructions' && field.show === true" class="instructions {{field.classes}}">
       {{field.message}}
     </div>
     <!-- Input Items -->
     <div
-      *ngIf="(field.type === 'input' || field.type === 'datepicker' || field.type === 'select' || field.type === 'textarea') && field.show === true"
+      *ngIf="isAnInputType(field.type) && field.show === true"
       [ngClass]="{'active-item': field.length > 0 || field.focused === true || field.inputType === 'file'}"
       class="input-item {{field.classes}}">
       <label
@@ -16,9 +19,10 @@
       <!-- Input -->
       <app-textbox
         *ngIf="field.type === 'input'"
-        [control]="registerForm.controls[field.id]"
+        [(control)]="registerForm.controls[field.id]"
         [field]="field"
-        [tabindex]="tabindex"></app-textbox>
+        [tabindex]="tabindex"
+        (placeAutocomplete)="onPlaceAutocomplete($event, field.id, i)"></app-textbox>
       <!-- Textarea -->
       <textarea
         *ngIf="field.type === 'textarea'"
@@ -35,7 +39,7 @@
         *ngIf="field.type === 'select'"
         [allowClear]="true"
         [items]="field.selectType === 'default' ? field.selectData : getSelectData(field.selectType)"
-        (selected)="field.length = onInput($event.id, field.type)"
+        (selected)="field.length = onInput($event.id, field.type); registerForm.controls[field.id].updateValue($event.id)"
         (removed)="field.length = 0"
         (focus)="field.focused = true"
         (blur)="field.focused = false"
@@ -44,12 +48,8 @@
       <!-- Datepicker -->
       <app-datepicker
         *ngIf="field.type === 'datepicker'"
-        [id]="field.id"
-        [showDatepicker]="field.showDatepicker"
-        [control]="registerForm.controls[field.id]"
-        [dateModel]="field.dateModel"
-        (closed)="field.showDatepicker = false"
-        (selectionDone)="field.showDatepicker = false; field.length = onDatepickerSelection($event, field.id)"></app-datepicker>
+        [(field)]="formInfo.fields[i]"
+        [(control)]="registerForm.controls[field.id]"></app-datepicker>
       <!-- Validation errors -->
       <p
         *ngIf="

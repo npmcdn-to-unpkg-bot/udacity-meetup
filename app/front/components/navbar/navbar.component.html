@@ -17,12 +17,19 @@
 					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-events">Events</a>
         </li>
 				<li>
-					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-home">Add Event</a>
+					<a (click)="globalEventsService.newModalState({open:true,modal:'new-event'})">Add Event</a>
         </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-pull-right">
 				<li>
-					<a (click)="globalEventsService.newModalState({open:true,modal:'auth'})" class="ion-log-in sign-in"></a>
+					<a
+						*ngIf="!(authService.authState$ | async)"
+						(click)="globalEventsService.newModalState({open:true,modal:'auth'})"
+						class="sign-in">Sign in</a>
+					<a
+						*ngIf="(authService.authState$ | async)"
+						(click)="authService.signOut()"
+						class="sign-in">Sign out</a>
         </li>
 			</ul>
 		</div>

@@ -1,0 +1,43 @@
+.modal-content .modal-header {
+  background-color: hotpink;
+  border-radius: 5px 5px 0 0;
+  position: relative; }
+  .modal-content .modal-header .back-button {
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    outline: none;
+    position: absolute;
+    transition: 0.2s all;
+    opacity: 0; }
+    .modal-content .modal-header .back-button:active {
+      box-shadow: none; }
+    .modal-content .modal-header .back-button.reveal {
+      opacity: 1;
+      transition: 0.5s all; }
+  .modal-content .modal-header .title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 150px;
+    text-align: center;
+    height: 20px;
+    font-size: 20px;
+    line-height: 1;
+    color: white; }
+  .modal-content .modal-header .close {
+    float: right;
+    margin-top: 4px;
+    color: #69b4ff;
+    opacity: 1;
+    font-weight: normal;
+    color: white;
+    text-shadow: none; }
+    .modal-content .modal-header .close i {
+      font-size: 30px; }
+
+.modal-content .modal-body {
+  padding: 0; }

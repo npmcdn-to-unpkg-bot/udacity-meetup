@@ -2,4 +2,6 @@
   #signForm
   [allFormInfo]="formInfo"
   [modeInit]="'signup'"
-  [tabIndex]="tabIndex"></app-form>
+  [tabIndex]="tabIndex"
+  (formComplete)="onSubmit($event)"
+  [formErrorMessage]="formErrorMessage"></app-form>

@@ -15,7 +15,7 @@
   </div>
   <div class="details">
     <h2>Details</h2>
-    <div *ngIf="(eventData$ | async)"><i class="ion-calendar"></i> {{(eventData$ | async)?.start?.local | amDateFormat:'dddd, MMMM D, YYYY h:mm A'}} - {{(eventData$ | async)?.end?.local | amDateFormat:'h:mm A'}}</div>
+    <div><i class="ion-calendar"></i> {{date}}</div>
     <div><i class="ion-location"></i> {{address.full}} - <a href="{{mapUrl}}" target="_blank">Map</a></div>
   </div>
 </div>
