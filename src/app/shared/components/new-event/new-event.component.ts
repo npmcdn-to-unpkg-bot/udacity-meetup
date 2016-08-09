@@ -3,6 +3,7 @@ import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { SignInUpComponent } from '../sign-in-up';
 import { FormComponent } from '../form';
 import {
@@ -20,7 +21,12 @@ import * as moment from 'moment';
   selector: 'app-new-event',
   templateUrl: 'new-event.component.html',
   styleUrls: ['new-event.component.css'],
-  directives: [MODAL_DIRECTIVES, SignInUpComponent, FormComponent],
+  directives: [
+    MODAL_DIRECTIVES,
+    SignInUpComponent,
+    FormComponent,
+    ROUTER_DIRECTIVES
+  ],
   viewProviders:[BS_VIEW_PROVIDERS]
 })
 export class NewEventComponent implements OnInit {
@@ -35,6 +41,8 @@ export class NewEventComponent implements OnInit {
   public updateSlideNumberOnOpen:boolean = false;
   public form2Data = {};
   public items = [];
+  public domain:string;
+  public generatedId:string;
   public showSignup:boolean;
   public offset:number = 1;
   public itemsInfo = [
@@ -118,13 +126,15 @@ export class NewEventComponent implements OnInit {
         {
           name: 'date',
           type: 'datepicker',
-          classes: 'left-input'
+          classes: 'left-input',
+          control: ['', Validators.required]
         },
         {
           name: 'time',
           type: 'select',
           selectType: 'time',
-          classes: 'right-input'
+          classes: 'right-input',
+          control: ['', Validators.required]
         },
         {
           type: 'instructions',
@@ -134,13 +144,15 @@ export class NewEventComponent implements OnInit {
         {
           name: 'date',
           type: 'datepicker',
-          classes: 'left-input'
+          classes: 'left-input',
+          control: ['', Validators.required]
         },
         {
           name: 'time',
           type: 'select',
           selectType: 'time',
-          classes: 'right-input'
+          classes: 'right-input',
+          control: ['', Validators.required]
         },
         {
           type: 'submit',
@@ -170,12 +182,12 @@ export class NewEventComponent implements OnInit {
           name: 'Guest list',
           type: 'input',
           inputType: 'text',
-          control: ['', Validators.required]
+          control: ['']
         },
         {
           name: 'Optional message to guests',
           type: 'textarea',
-          control: ['', Validators.required]
+          control: ['']
         },
         {
           type: 'submit',
@@ -192,6 +204,7 @@ export class NewEventComponent implements OnInit {
     private authService: AuthService) {}
 
   public ngOnInit():void {
+    this.domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
     this.authService.authState$.subscribe(authenticated => {
       if (authenticated === true) {
         this.updateSlideNumberOnOpen = true;
@@ -323,11 +336,12 @@ export class NewEventComponent implements OnInit {
     }
     this.form2.reset();
     this.form3.reset();
+    this.generatedId = undefined;
   }
 
   private allFormsComplete(formInfo):void {
     let rawEventData = Object.assign(this.form2Data, formInfo);
-
+    this.generatedId = this.apiService.getlocalEventId();
     let eventData = {
       createdLocally: true, // created in the browser and not through an api
       local: {
@@ -349,17 +363,17 @@ export class NewEventComponent implements OnInit {
         venue: rawEventData.venue
       },
       end: this.parseFormatDate(rawEventData.date1, rawEventData.time2),
-      id: this.apiService.getlocalEventId(),
+      id: this.generatedId,
       logo: {
         url: rawEventData.eventImage
       },
       name: {
         text: rawEventData.eventName
       },
+      organizer_id: this.generatedId,
       start: this.parseFormatDate(rawEventData.date1, rawEventData.time2),
       url : 'mailto:' + this.authService.getUserEmail() + '?Subject=Sign%20me%20up!'
     };
-    console.log(eventData);
     this.apiService.addEvent(eventData);
     this.next();
     this.reset = true;

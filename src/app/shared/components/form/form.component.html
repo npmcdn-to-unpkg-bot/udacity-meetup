@@ -57,7 +57,12 @@
           && (registerForm.controls[field.id].touched 
             || (field.inputType === 'file' && !registerForm.controls[field.id].pristine))
           && registerForm.controls[field.id].errors"
-        class="error-message">This field is required!</p>
+        class="error-message">
+        <li *ngFor="let error of registerForm.controls[field.id].errors | appValues">
+          <span *ngIf="itemInObject(error.key, errorMessages)">{{ errorMessages[error.key] }}</span>
+          <span *ngIf="!itemInObject(error.key, errorMessages)">{{ error.key }}</span>
+        </li>
+      </p>
     </div>
     <!-- Special buttons -->
     <div *ngIf="field.type === 'option'" class="form-options {{field.classes}}">
@@ -66,6 +71,7 @@
     <button
       *ngIf="field.type === 'submit'"
       type="submit"
+      [disabled]="!registerForm.valid"
       class="submit btn {{field.classes}}"
       tabindex="{{tabIndex}}">{{field.text}} <i class="ion-chevron-right"></i></button>
     <div *ngIf="field.type === 'special'" class="extra-info {{field.classes}}">

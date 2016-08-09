@@ -5,6 +5,7 @@ export * from './pipes/clean-dates.pipe';
 export * from './pipes/event-search.pipe';
 export * from './pipes/events.pipe';
 export * from './pipes/sanitize-html.pipe';
+export * from './pipes/values.pipe';
 export * from './services/api.service';
 export * from './services/auth.service';
 export * from './services/easter-egg.service';

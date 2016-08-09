@@ -121,7 +121,6 @@ export class ApiService {
 
   updateEvents() {
     let filtered = new EventsPipe().transform(this.events);
-    //console.log(filtered);
     this.preEvents$.next( filtered );
   }
 

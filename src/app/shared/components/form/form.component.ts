@@ -22,6 +22,7 @@ import {
 import { DatepickerComponent } from '../datepicker';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { ValidationService } from '../../services/validation.service';
+import { ValuesPipe } from '../../pipes/values.pipe';
 import { SELECT_DIRECTIVES } from '../../forks/ng2-select/select';
 import { TextboxComponent } from '../textbox';
 
@@ -38,7 +39,8 @@ declare var google: any;
     DatepickerComponent,
     SELECT_DIRECTIVES,
     TextboxComponent
-  ]
+  ],
+  pipes: [ValuesPipe]
 })
 export class FormComponent implements OnInit {
   @Input() modeInit;
@@ -55,6 +57,7 @@ export class FormComponent implements OnInit {
   public registerForm:any;
   public focusTimeout;
   public addListenerQueue = {};
+  public errorMessages = {};
   public selectData = {
     time: [
       '12:00am', '12:30am', '1:00am', '1:30am', '2:00am', '2:30am',
@@ -82,6 +85,7 @@ export class FormComponent implements OnInit {
     this.formInfo = this.allFormInfo[this.mode];
     //this.currentFocus.emit('meow bob');
     this.sortInput();
+    this.errorMessages = ValidationService.errorMessages;
   }
 
   public reset():Promise<string> {
@@ -96,6 +100,10 @@ export class FormComponent implements OnInit {
         setTimeout(resolve, 0);
       }, 0);
     });
+  }
+
+  public itemInObject(item, object):boolean {
+    return item in object;
   }
 
   public onSpecial(event) {

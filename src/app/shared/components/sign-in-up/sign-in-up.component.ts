@@ -32,7 +32,7 @@ export class SignInUpComponent implements OnInit {
           name: 'Name',
           type: 'input',
           inputType: 'text',
-          control: ['', [Validators.required, ValidationService.passwordValidator]],
+          control: ['', Validators.required],
           mode: 'signup'
         },
         {
@@ -46,7 +46,14 @@ export class SignInUpComponent implements OnInit {
           type: 'input',
           inputType: 'password',
           passwordType: 'password',
-          control: ['', Validators.required]
+          control: ['', [
+            Validators.required,
+            Validators.minLength(10),
+            ValidationService.oneLowercase,
+            ValidationService.oneUppercase,
+            ValidationService.oneNumber,
+            ValidationService.oneSpecial,
+          ]]
         },
         {
           name: 'Confirm password',
@@ -65,20 +72,20 @@ export class SignInUpComponent implements OnInit {
           name: 'Employer',
           type: 'input',
           inputType: 'text',
-          control: ['', Validators.required],
+          control: [''],
           group: 'optional'
         },
         {
           name: 'Job title',
           type: 'input',
           inputType: 'text',
-          control: ['', Validators.required],
+          control: [''],
           group: 'optional'
         },
         {
           name: 'Birthday',
           type: 'datepicker',
-          control: ['', Validators.required],
+          control: [''],
           group: 'optional'
         },
         {

@@ -18,6 +18,7 @@ export class EasterEggService {
 
   private getInfo() {
     let date = this.getDate();
+    let generatedId = this.apiService.getlocalEventId();
     // Event data
     return {
       createdLocally: true,
@@ -54,13 +55,14 @@ export class EasterEggService {
         }
       },
       end: date.end,
-      id: this.apiService.getlocalEventId(),
+      id: generatedId,
       logo: {
         url: 'app/assets/sebastian.jpg'
       },
       name: {
         text: 'Good bye Li\'l Sebastian'
       },
+      organizer_id: generatedId,
       start: date.start,
       url : 'http://parksandrecreation.wikia.com/wiki/Li\'l_Sebastian'
     };
