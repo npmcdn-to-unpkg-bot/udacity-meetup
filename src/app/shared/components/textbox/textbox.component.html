@@ -8,4 +8,7 @@
   (blur)="field.focused = false"
   tabindex="{{tabIndex}}"
   placeholder="">
-<input *ngIf="field.inputType === 'file'" type="file">
+<input
+  *ngIf="field.inputType === 'file'"
+  type="file"
+  tabindex="{{tabIndex}}">

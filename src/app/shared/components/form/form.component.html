@@ -21,7 +21,7 @@
         *ngIf="field.type === 'input'"
         [(control)]="registerForm.controls[field.id]"
         [field]="field"
-        [tabindex]="tabindex"
+        [tabIndex]="tabIndex"
         (placeAutocomplete)="onPlaceAutocomplete($event, field.id, i)"></app-textbox>
       <!-- Textarea -->
       <textarea

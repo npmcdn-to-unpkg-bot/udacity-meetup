@@ -230,7 +230,7 @@ export class NewEventComponent implements OnInit {
     this.updateNumberOfSlides();
   }
 
-  public updateNumberOfSlides() {
+  public updateNumberOfSlides():void {
     let formPages:number = this.itemsInfo.length - 1;
     if (this.authService.checkAuth() === true) { // If signed in
       formPages -= 1;
@@ -251,9 +251,11 @@ export class NewEventComponent implements OnInit {
     this.updateSlideNumberOnOpen = false;
   }
 
-  public tabIndex(slideNumber): number {
+  public tabIndex(slideNumber):number {
     if (slideNumber !== this.currentSlide) {
       return -1;
+    } else {
+      return 1;
     }
   }
 
@@ -262,7 +264,7 @@ export class NewEventComponent implements OnInit {
     this.onSlideChange();
   }
 
-  public saveForm2(formInfo) {
+  public saveForm2(formInfo):void {
     // Save initial data
     this.form2Data = formInfo;
     this.form2Data['venue'] = {

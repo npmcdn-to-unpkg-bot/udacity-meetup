@@ -14,7 +14,7 @@ declare var google: any;
 })
 export class TextboxComponent implements OnInit {
   @Input() field;
-  @Input() tabindex;
+  @Input() tabIndex;
   @Input() control;
   @Output() controlChange = new EventEmitter();
   @Output() placeAutocomplete = new EventEmitter();
