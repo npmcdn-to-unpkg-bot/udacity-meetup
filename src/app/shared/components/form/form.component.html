@@ -53,9 +53,10 @@
       <!-- Validation errors -->
       <p
         *ngIf="
-          !registerForm.pristine &&
-          registerForm.controls[field.id].touched &&
-          registerForm.controls[field.id].errors"
+          !registerForm.pristine
+          && (registerForm.controls[field.id].touched 
+            || (field.inputType === 'file' && !registerForm.controls[field.id].pristine))
+          && registerForm.controls[field.id].errors"
         class="error-message">This field is required!</p>
     </div>
     <!-- Special buttons -->

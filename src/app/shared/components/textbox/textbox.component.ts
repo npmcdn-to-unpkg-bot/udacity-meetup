@@ -112,15 +112,25 @@ export class TextboxComponent implements OnInit {
   private getBase64(id):void { // File input
     let filesSelected = this.element.nativeElement.lastElementChild.files;
     if (filesSelected.length > 0) {
+      console.log(this.control);
+      // Mark input as not pristine
+      this.element.nativeElement.firstElementChild.value = " ";
+      this.element.nativeElement.firstElementChild.value = "";
+      //
       let fileToLoad = filesSelected[0];
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent) => {
           let item:any = fileLoadedEvent.target;
           console.log(item);
+          this.control.markAsDirty();
           this.control.updateValue(item.result);
           this.controlChange.emit(this.control);
+          console.log(this.control);
       }
       fileReader.readAsDataURL(fileToLoad);
+    } else {
+      this.control.updateValue("");
+      this.controlChange.emit(this.control);
     }
   }
 
