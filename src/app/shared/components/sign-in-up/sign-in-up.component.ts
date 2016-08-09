@@ -49,6 +49,7 @@ export class SignInUpComponent implements OnInit {
           control: ['', [
             Validators.required,
             Validators.minLength(10),
+            Validators.maxLength(120),
             ValidationService.oneLowercase,
             ValidationService.oneUppercase,
             ValidationService.oneNumber,

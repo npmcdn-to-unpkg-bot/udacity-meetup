@@ -17,11 +17,12 @@ export class ValidationService {
     required: 'This field is required',
     invalidEmailAddress: 'It doesn\'t look like that\'s a valid email',
     notEquivalent: 'Passwords should match',
-    minlength: 'This should be longer',
+    minlength: 'Should have at least 10 characters',
+    maxlength: 'Shouldn\'t have more than 120 characters',
     needsLowercase: 'Should have a lower case letter',
     needsUppercase: 'Should have a upper case letter',
     needsNumber: 'Should have a number',
-    needsSpecial: 'Should have one of these special characters: ! % $ & ^ * ( )'
+    needsSpecial: 'Should have one of these special characters: - ! @ ^ " § $ % & / ( ) = ? + * ~ # \' _ : . , ;'
   };
 
   // Thanks!: http://mlitzinger.com/articles/password-validator-js/ 
@@ -54,7 +55,7 @@ export class ValidationService {
   }
 
   static oneSpecial(control) {
-    let regex = /[`!%$&^*()]+/;
+    let regex = /[-!@^"§$%&/()=?+*~#'_:.,;]/;
     if ( regex.test(control.value) ) {
       return null;
     } else {

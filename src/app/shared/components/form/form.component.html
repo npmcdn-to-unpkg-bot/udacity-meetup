@@ -56,13 +56,28 @@
           !registerForm.pristine
           && (registerForm.controls[field.id].touched 
             || (field.inputType === 'file' && !registerForm.controls[field.id].pristine))
-          && registerForm.controls[field.id].errors"
+          && registerForm.controls[field.id].errors
+          && (field.passwordType !== 'password' || field.focused === false)"
         class="error-message">
         <li *ngFor="let error of registerForm.controls[field.id].errors | appValues">
           <span *ngIf="itemInObject(error.key, errorMessages)">{{ errorMessages[error.key] }}</span>
           <span *ngIf="!itemInObject(error.key, errorMessages)">{{ error.key }}</span>
         </li>
       </p>
+      <!-- Password help -->
+      <div *ngIf="
+        field.passwordType === 'password'
+        && field.focused
+        && registerForm.controls[field.id].errors"
+        class="help-message">
+        <div *ngFor="let error of registerForm.controls[field.id].errors | appValues">
+          <li *ngIf="error.key === 'required'">Should have at least 10 characters</li>
+          <li *ngIf="
+            error.key !== 'required'
+            && error.key !== 'maxlength'
+            && itemInObject(error.key, errorMessages)">{{ errorMessages[error.key] }}</li>
+        </div>
+      </div>
     </div>
     <!-- Special buttons -->
     <div *ngIf="field.type === 'option'" class="form-options {{field.classes}}">
