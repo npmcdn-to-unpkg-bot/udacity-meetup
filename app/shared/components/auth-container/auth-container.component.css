@@ -40,4 +40,5 @@
       font-size: 30px; }
 
 .modal-content .modal-body {
-  padding: 0; }
+  padding: 0;
+  min-height: 500px; }

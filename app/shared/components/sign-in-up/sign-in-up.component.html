@@ -1,7 +1,8 @@
 <app-form
   #signForm
   [allFormInfo]="formInfo"
-  [modeInit]="'signup'"
+  [modeInit]="modeInit"
   [tabIndex]="tabIndex"
+  (currentFocus)="modeUpdate.emit($event)"
   (formComplete)="onSubmit($event)"
   [formErrorMessage]="formErrorMessage"></app-form>
