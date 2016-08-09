@@ -288,8 +288,12 @@ export class NewEventComponent implements OnInit {
   }
 
 
-  private parseFormatDate(dateInput, timeInput):string {
-    return moment( dateInput +  ' ' + timeInput, 'MMMM D, YYYY h:mma' ).format('YYYY-MM-DDTHH:mm:ss');
+  private parseFormatDate(dateInput, timeInput) {
+    let thisMoment = moment( dateInput +  ' ' + timeInput, 'MMMM D, YYYY h:mma' );
+    return {
+      local: thisMoment.format('YYYY-MM-DDTHH:mm:ss'),
+      utc: thisMoment.valueOf()
+    };
   }
 
   private onSlideChange(delay?: number):void {
@@ -344,19 +348,15 @@ export class NewEventComponent implements OnInit {
         },
         venue: rawEventData.venue
       },
-      end: {
-        local: this.parseFormatDate(rawEventData.date1, rawEventData.time2)
-      },
-      id: 'local-1',
+      end: this.parseFormatDate(rawEventData.date1, rawEventData.time2),
+      id: this.apiService.getlocalEventId(),
       logo: {
         url: rawEventData.eventImage
       },
       name: {
         text: rawEventData.eventName
       },
-      start: {
-        local: this.parseFormatDate(rawEventData.date, rawEventData.time)
-      },
+      start: this.parseFormatDate(rawEventData.date1, rawEventData.time2),
       url : 'mailto:' + this.authService.getUserEmail() + '?Subject=Sign%20me%20up!'
     };
     console.log(eventData);

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ViewContainerRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { GlobalEventsService } from './shared/services/global-events.service';
+import { EasterEggService } from './shared/services/easter-egg.service';
 import { NewEventComponent } from './shared/components/new-event/index';
 import { AuthContainerComponent } from './shared/components/auth-container/index';
 
@@ -20,8 +21,12 @@ import { APP_PROVIDERS } from './app.providers';
   providers: [APP_PROVIDERS]
 })
 export class AppComponent {
-  constructor(private globalEventsService: GlobalEventsService, private viewContainerRef: ViewContainerRef) {
+  constructor(
+    private globalEventsService: GlobalEventsService,
+    private viewContainerRef: ViewContainerRef,
+    private easterEggService: EasterEggService) {
     globalEventsService.init();
+    easterEggService.init()
     // TODO: if Safari explain all of the missing .js.map files with this link
     // https://github.com/angular/angular-cli/issues/706
   }

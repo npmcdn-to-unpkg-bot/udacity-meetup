@@ -10,6 +10,7 @@ export class ApiService {
   public preEvents$;
   public preVenues$;
   public preMedia$;
+  public localEventId:number = 0;
   public events = [];
   public venues = {};
   public media = {};
@@ -82,6 +83,12 @@ export class ApiService {
          ("media" in this.events[index].details) ) {
       this.updateEvents();
     }
+  }
+
+  public getlocalEventId():string {
+    this.localEventId++;
+    let id = 'lc-' + Math.floor( Math.random() * 10000) + this.localEventId;
+    return id;
   }
 
   loadEvents() {

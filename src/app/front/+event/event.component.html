@@ -1,5 +1,5 @@
 <div class="container-image">
-  <img *ngIf="image" src="{{image}}" alt="" />
+  <img *ngIf="image" [src]="image" alt="" />
   <div class="overlay"></div>
   <div class="basic-info" *ngIf="(eventData$ | async)">
     <h1>{{(eventData$ | async)?.name?.text}}</h1>
