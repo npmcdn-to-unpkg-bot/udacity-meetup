@@ -40,7 +40,9 @@
             (formComplete)="allFormsComplete($event)"></app-form>
           <div [ngClass]="{current: currentSlide >= 4}" class="slide">
             Confirmation
-            <div>You just created an event!</div>
+            <div *ngIf="generatedId">Your event is live at
+              <p><a [routerLink]="['/event', generatedId]">{{domain}}/event/{{generatedId}}</a></p>
+            </div>
           </div>
         </div>
       </div>
