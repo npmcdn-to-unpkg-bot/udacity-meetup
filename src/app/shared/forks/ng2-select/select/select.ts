@@ -118,7 +118,7 @@ let optionsTemplate = `
   styles: [styles],
   host: { '(document:click)': 'checkOutsideClicked($event)'},
   template: `
-  <div tabindex="0"
+  <div tabindex="{{tabIndex}}"
      *ngIf="multiple === false"
      (keyup)="mainClick($event)"
      class="ui-select-container dropdown open">
@@ -140,19 +140,20 @@ let optionsTemplate = `
         </a>
       </span>
     </div>
-    <input type="text" autocomplete="false" tabindex="-1"
+    <input type="text" autocomplete="false" tabindex="{{tabIndex}}"
            #inputElement
            (keydown)="inputEvent($event)"
            (keyup)="inputEvent($event, true)"
            (focus)="focus.emit( true )"
            (blur)="onBlur()"
            [disabled]="disabled"
+           tabindex="{{tabIndex}}"
            class="form-control ui-select-search"
            *ngIf="inputMode">
       ${optionsTemplate}
   </div>
 
-  <div tabindex="0"
+  <div tabindex="{{tabIndex}}"
      *ngIf="multiple === true"
      (keyup)="mainClick($event)"
      (focus)="focusToInput('')"
@@ -172,6 +173,7 @@ let optionsTemplate = `
         </span>
     </span>
     <input type="text"
+           tabindex="-1"
            (keydown)="inputEvent($event)"
            (keyup)="inputEvent($event, true)"
            (click)="matchClick($event)"
@@ -193,6 +195,7 @@ export class SelectComponent implements OnInit {
   @Input() public idField:string = 'id';
   @Input() public textField:string = 'text';
   @Input() public multiple:boolean = false;
+  @Input() tabIndex:number;
 
   @Input()
   public set items(value:Array<any>) {

@@ -19,6 +19,7 @@ import * as moment from 'moment';
 export class DatepickerComponent implements OnInit {
   @Input() field;
   @Input() control;
+  @Input() tabIndex;
   @Output() fieldChange = new EventEmitter();
   @Output() controlChange = new EventEmitter();
   @ViewChild('datepickerElement') datepickerElement;
@@ -30,10 +31,18 @@ export class DatepickerComponent implements OnInit {
 
   public ngOnInit():void {
     document.addEventListener('click', event => this.checkOutsideClicked(event) );
+    this.element.nativeElement.firstElementChild
+      .addEventListener('keydown', event => this.onkeydown(event) );
   }
 
   public hidePopup():void {
     this.showDatepicker = false;
+  }
+
+  public onkeydown(event) {
+    if (event.keyCode === 9) { // onTab
+      setTimeout( () => this.hidePopup(), 0);
+    }
   }
 
   public onInput(event):void {

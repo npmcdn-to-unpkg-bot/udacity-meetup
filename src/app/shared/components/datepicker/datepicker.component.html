@@ -5,6 +5,7 @@
   (focus)="showDatepicker = true; updateField('focused', true)"
   (blur)="showDatepicker = true; onBlur()"
   (input)="onInput($event)"
+  tabindex="{{tabIndex}}"
   placeholder="">
 <datepicker
   #datepickerElement
