@@ -88,7 +88,7 @@
     <button
       *ngIf="field.type === 'submit'"
       type="submit"
-      [disabled]="!registerForm.valid && false"
+      [disabled]="!registerForm.valid"
       class="submit btn {{field.classes}}"
       tabindex="{{tabIndex}}">{{field.text}} <i class="ion-chevron-right"></i></button>
     <div *ngIf="field.type === 'special'" class="extra-info {{field.classes}}">

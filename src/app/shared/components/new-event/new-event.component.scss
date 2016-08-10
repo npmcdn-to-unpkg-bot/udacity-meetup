@@ -4,6 +4,9 @@
     background-color: $primaryColor;
     border-radius: 5px 5px 0 0;
     position: relative;
+    button {
+      outline: none;
+    }
     .back-button {
       background: transparent;
       color: white;

@@ -20,6 +20,15 @@
 	.navbar-pull-right {
 		float: right;
 	}
+	// Nav collapse button
+	.navbar-toggle {
+		.icon-bar {
+			background-color: white;
+		}
+		&:hover {
+			background-color: initial;
+		}
+	}
 }
 @media (max-width: 768px) {
   .navbar-collapse {
@@ -29,6 +38,11 @@
 		//    It started after upgrading the @angular/...2.0.0-rc.3 ** //
 		&.navbar-closed {
 			display: none;
+		}
+		background-color: $primaryColor;
+		text-align: center;
+		.navbar-pull-right {
+			float: initial;
 		}
   }
 }
