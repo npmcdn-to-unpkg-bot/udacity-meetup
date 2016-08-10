@@ -38,10 +38,10 @@
             [ngClass]="{current: currentSlide >= 3, complete: currentSlide > 3}"
             class="slide"
             (formComplete)="allFormsComplete($event)"></app-form>
-          <div [ngClass]="{current: currentSlide >= 4}" class="slide">
+          <div [ngClass]="{current: currentSlide >= 4}" class="slide confirmation-page">
             Confirmation
-            <div *ngIf="generatedId">Your event is live at
-              <p><a [routerLink]="['/event', generatedId]">{{domain}}/event/{{generatedId}}</a></p>
+            <div *ngIf="generatedId">Your event "{{form2Data.eventName}}" is now live at
+              <p><a (click)="goToEvent(generatedId)">{{domain}}/event/{{generatedId}}</a></p>
             </div>
           </div>
         </div>

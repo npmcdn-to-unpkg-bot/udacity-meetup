@@ -27,7 +27,7 @@
     <div *ngIf="(eventData$ | async)?.createdLocally"><b>Name</b> {{(eventData$ | async)?.local?.profile?.name}}</div>
     <div *ngIf="(eventData$ | async)?.local?.profile?.employer"><b>Employer</b> {{(eventData$ | async)?.local?.profile?.employer}}</div>
     <div *ngIf="(eventData$ | async)?.local?.profile?.job"><b>Job title</b> {{(eventData$ | async)?.local?.profile?.job}}</div>
-    <div *ngIf="(eventData$ | async)?.local?.profile?.birthday"><b>Birthday</b> {{(eventData$ | async)?.local?.profile?.birthday | amDateFormat:'ddd, MMM D h:mm A'}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.profile?.birthday"><b>Birthday</b> {{(eventData$ | async)?.local?.profile?.birthday | amDateFormat:'MM/DD/YYYY'}}</div>
   </div>
 </div>
 

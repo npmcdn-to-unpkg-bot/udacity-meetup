@@ -7,10 +7,16 @@
     box-sizing: border-box;
     flex-flow: row wrap; }
     .events-container .cards .card {
-      width: 33%;
       padding: 2%;
+      width: 33%;
       position: relative;
       cursor: pointer; }
+      @media (min-width: 471px) and (max-width: 700px) {
+        .events-container .cards .card {
+          width: 50%; } }
+      @media (max-width: 470px) {
+        .events-container .cards .card {
+          width: 100%; } }
       .events-container .cards .card .content {
         border: solid 1px lightgray;
         height: 300px;

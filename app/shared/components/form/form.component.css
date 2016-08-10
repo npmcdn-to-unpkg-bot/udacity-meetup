@@ -53,6 +53,14 @@ form .input-item {
     color: #b15655;
     font-size: 18px;
     padding: 12px 20px; }
+  form .input-item .help-message {
+    background-color: #def2de;
+    color: #55b156;
+    font-size: 18px;
+    padding: 12px 20px; }
+  @media (max-width: 500px) {
+    form .input-item .error-message, form .input-item .help-message span {
+      margin-left: -15px; } }
   form .input-item .ui-select-container input {
     border-radius: 0;
     height: initial; }
@@ -121,7 +129,8 @@ form .input-item {
 form .group-label {
   text-align: left;
   padding: 10px 0;
-  padding-left: 2%; }
+  padding-left: 2%;
+  clear: both; }
 
 form .left-input {
   float: left;
@@ -147,6 +156,16 @@ form .submit.btn {
     margin-bottom: 10px; }
   form .submit.btn[disabled] {
     opacity: 0.6; }
+
+@media (max-width: 500px) {
+  form .left-input, form .right-input {
+    width: 90%;
+    float: initial;
+    margin-left: initial;
+    margin: 0px auto;
+    margin-bottom: 20px; }
+  form .submit.btn {
+    font-size: 20px; } }
 
 form .form-options {
   width: 90%;

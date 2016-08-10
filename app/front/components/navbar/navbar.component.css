@@ -13,10 +13,26 @@
     font-size: 25px; }
   .navbar .navbar-pull-right {
     float: right; }
+  .navbar .navbar-toggle {
+    border-color: white; }
+    .navbar .navbar-toggle .icon-bar {
+      background-color: white; }
+    .navbar .navbar-toggle:hover {
+      background-color: initial; }
+    .navbar .navbar-toggle:focus {
+      background-color: initial; }
+    @media (max-width: 768px) {
+      .navbar .navbar-toggle {
+        margin-top: 14px; } }
 
 @media (max-width: 768px) {
-  .navbar-collapse.navbar-closed {
-    display: none; } }
+  .navbar-collapse {
+    background-color: hotpink;
+    text-align: center; }
+    .navbar-collapse.navbar-closed {
+      display: none; }
+    .navbar-collapse .navbar-pull-right {
+      float: initial; } }
 
 .extra-nav {
   position: fixed;

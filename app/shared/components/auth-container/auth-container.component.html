@@ -12,6 +12,7 @@
           #form
           [signupMode]="false"
           [modeInit]="'signin'"
+          [tabIndex]="1"
           (modeUpdate)="slideTitle = $event" 
           (authComplete)="done()"></app-sign-in-up>
       </div>

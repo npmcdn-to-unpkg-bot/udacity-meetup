@@ -8,3 +8,9 @@
       margin: 20px; }
       .footer .links li a, .footer .links li a:hover {
         color: white; }
+    @media (max-width: 500px) {
+      .footer .links {
+        padding: 20px;
+        padding-bottom: 70px; }
+        .footer .links li {
+          display: block; } }
