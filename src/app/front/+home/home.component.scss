@@ -25,13 +25,31 @@
         color: gray;
         font-size: 23px;
       }
-      @media (max-width: 768px) {
+      @media (min-width: 601px) and (max-width: 768px) {
         top: 60px;
         h1 {
           font-size: 40px;
         }
         h2 {
           font-size: 18px;
+        }
+      }
+      @media (min-width: 421px) and (max-width: 600px) {
+        top: 20px;
+        h1 {
+          font-size: 30px;
+        }
+        h2 {
+          font-size: 16px;
+        }
+      }
+      @media (max-width: 420px) {
+        top: 10px;
+        h1 {
+          font-size: 20px;
+        }
+        h2 {
+          font-size: 16px;
         }
       }
     }
@@ -45,9 +63,6 @@
       max-width: 500px;
       margin-right: auto;
       margin-left: auto;
-      @media (max-width: 768px) {
-        top: 170px;
-      }
       &.search-fixed {
         z-index: 3;
         .search-box {
@@ -106,6 +121,9 @@
           color: white;
           transition: all 0.5s ease;
           border: solid 1px $primaryColor;
+          @media (max-width: 530px) {
+            display: none;
+          }
         }
         .button-left {
           border-radius: 25px 0 0 25px;
@@ -122,6 +140,27 @@
           border-radius: 0 25px 25px 0;
           background-color: $primaryColor;
           color: white;
+        }
+      }
+      @media (min-width: 601px) and (max-width: 768px) {
+        top: 170px;
+      }
+      @media (min-width: 361px) and (max-width: 600px) {
+        top: 110px;
+      }
+      @media (min-width: 301px) and (max-width: 360px) {
+        top: 95px;
+      }
+      @media (max-width: 300px) {
+        // Keep the search bar fixed at all scroll positions
+        z-index: 3;
+        .search-box {
+          position: fixed;
+          top: 1.7%;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 55%;
         }
       }
     }

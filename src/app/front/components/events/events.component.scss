@@ -8,8 +8,17 @@
     box-sizing: border-box;
     flex-flow: row wrap;
     .card {
-      width: 33%;
       padding: 2%;
+      // 3 Columns
+      width: 33%;
+      // 2 Columns
+      @media (min-width: 471px) and (max-width: 700px) {
+        width: 50%;
+      }
+      // 1 Column
+      @media (max-width: 470px) {
+        width: 100%;
+      }
       position: relative;
       cursor: pointer;
       .content {
@@ -23,7 +32,6 @@
             width: 100%;
           }
         }
-        
         .card-block {
           padding: 7%;
           h1 {

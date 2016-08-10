@@ -3,7 +3,6 @@
   $image_large: 400px;
   $image_medium: 350px;
   $image_small: 300px;
-  //max-height: $image_large;
   height: $image_large;
   overflow: hidden;
   position: relative;
@@ -26,6 +25,7 @@
     h1 {
       font-size: 35px;
       font-family: BebasNeue;
+      
     }
     .register {
       width: 100%;
@@ -39,9 +39,17 @@
         font-size: 20px;
       }
     }
+    @media (max-width: 400px) {
+      width: 90%;
+      h1 {
+        font-size: 28px;
+      }
+      .register .btn {
+        font-size: 16px;
+        width: 80%; 
+      }
+    }
   }
-  
-  
   .overlay {
     background-color: black;
     opacity: 0.4;
@@ -74,6 +82,9 @@
   font-size: 16px;
   p {
     margin: 0 0 20px;
+  }
+  @media (max-width: 600px) {
+    width: 90%;
   }
 }
 .google-map {
