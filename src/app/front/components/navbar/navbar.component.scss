@@ -22,11 +22,18 @@
 	}
 	// Nav collapse button
 	.navbar-toggle {
+		border-color: white;
 		.icon-bar {
 			background-color: white;
 		}
 		&:hover {
 			background-color: initial;
+		}
+		&:focus {
+			background-color: initial;
+		}
+		@media (max-width: 768px) {
+			margin-top: 14px;
 		}
 	}
 }

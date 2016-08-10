@@ -2,9 +2,6 @@
 .video-section {
   overflow: hidden;
   max-height: 600px;
-  @media (max-width: 800px) {
-    //height: 500px;
-  }
   .video-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
@@ -28,6 +25,15 @@
         color: gray;
         font-size: 23px;
       }
+      @media (max-width: 768px) {
+        top: 60px;
+        h1 {
+          font-size: 40px;
+        }
+        h2 {
+          font-size: 18px;
+        }
+      }
     }
     .search-container {
       position: absolute;
@@ -35,9 +41,13 @@
       left: 0;
       right: 0;
       z-index: 2;
-      width: 50%;
+      width: 80%;
+      max-width: 500px;
       margin-right: auto;
       margin-left: auto;
+      @media (max-width: 768px) {
+        top: 170px;
+      }
       &.search-fixed {
         z-index: 3;
         .search-box {
@@ -47,6 +57,12 @@
           margin: 0px;
           left: initial;
           width: 37%;
+          @media (max-width: 768px) {
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 55%;
+          }
         }
         .button-pair {
           display: none;
@@ -55,7 +71,6 @@
       .search-box {
         width: 100%;
         position: relative;
-        max-width: 500px;
         margin: 25px auto;
         .glyphicon-search {
           position: absolute;
@@ -73,21 +88,21 @@
           color: $fadedBlack;
           line-height: 1;
           font-size: 18px;
-          
           margin: 0 auto;
           display: block;
         }
       }
       .button-pair {
         margin-top: 10px;
-        width: 400px;
+        width: 90%;
+        max-width: 400px;
         margin-left: auto;
         margin-right: auto;
         overflow: hidden;
         .btn, .btn:focus {
           display: block;
           float: left;
-          width: 200px;
+          width: 50%;
           color: white;
           transition: all 0.5s ease;
           border: solid 1px $primaryColor;
@@ -95,7 +110,6 @@
         .button-left {
           border-radius: 25px 0 0 25px;
           background-color: transparent;
-          
           &:hover {
             color: white;
             background-color: $primaryColor;
@@ -117,7 +131,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      //background-color: rgba(0, 0, 0, 0.73);
       background-color: rgba(45, 45, 45, 0.86);
       z-index: 1;
     }
@@ -137,8 +150,3 @@
   box-shadow: none !important;
   outline: none !important; 
 }
-
-
-
-
-
