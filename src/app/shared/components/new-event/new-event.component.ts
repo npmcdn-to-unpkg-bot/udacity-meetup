@@ -3,7 +3,7 @@ import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { SignInUpComponent } from '../sign-in-up';
 import { FormComponent } from '../form';
 import {
@@ -201,7 +201,8 @@ export class NewEventComponent implements OnInit {
     private globalEventsService: GlobalEventsService,
     private element: ElementRef,
     private apiService: ApiService,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private router: Router) {}
 
   public ngOnInit():void {
     this.domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
@@ -283,12 +284,17 @@ export class NewEventComponent implements OnInit {
     let address = formInfo.street + ', ' + formInfo.city + ' ' + formInfo.zip;
     // Get cordinates
     this.apiService.getCordinates(address).subscribe(data => {
-      this.form2Data['venue']['latitude'] = data.results[0].geometry.location.lat;
-      this.form2Data['venue']['longitude'] = data.results[0].geometry.location.lng;
-      for (let i = 0; i < data.results[0].address_components.length; i++) {
-        if (data.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
-          this.form2Data['venue']['address']['region'] = data.results[0].address_components[i].long_name;
+      
+      if (data.results[0] !== undefined) {
+        this.form2Data['venue']['latitude'] = data.results[0].geometry.location.lat;
+        this.form2Data['venue']['longitude'] = data.results[0].geometry.location.lng;
+        for (let i = 0; i < data.results[0].address_components.length; i++) {
+          if (data.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
+            this.form2Data['venue']['address']['region'] = data.results[0].address_components[i].long_name;
+          }
         }
+      } else {
+        console.warn('It looks like something is wrong with the Google Maps Api.', data);
       }
     });
   }
@@ -302,6 +308,10 @@ export class NewEventComponent implements OnInit {
     this.onSlideChange();
   }
 
+  public goToEvent(eventId) {
+    this.router.navigate(['/event', eventId]);
+    this.lgModal.hide();
+  }
 
   private parseFormatDate(dateInput, timeInput) {
     let thisMoment = moment( dateInput +  ' ' + timeInput, 'MMMM D, YYYY h:mma' );

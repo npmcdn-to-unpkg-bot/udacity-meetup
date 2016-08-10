@@ -47,7 +47,6 @@ export class AuthService {
   }
 
   public getProfileInfo() {
-    console.log(this.profile);
     return this.profile;
   }
 
