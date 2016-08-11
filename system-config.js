@@ -14,6 +14,7 @@ var map = {
     'ng2-select': 'vendor/ng2-select/ng2-select.js',
     'angular2-google-maps': 'vendor/angular2-google-maps',
     'ng2-pagination': 'vendor/ng2-pagination/index.js',
+    'ng2-slim-loading-bar': 'vendor/ng2-slim-loading-bar'
 };
 /** User packages configuration. */
 var packages = {
@@ -34,6 +35,10 @@ var packages = {
         defaultExtension: 'js'
     },
     'vendor/ng2-select': {
+        defaultExtension: 'js'
+    },
+    'ng2-slim-loading-bar': {
+        main: 'index.js',
         defaultExtension: 'js'
     }
 };
@@ -89,4 +94,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-gXsosTHR.tmp/0/src/system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-VgdUzOI9.tmp/0/src/system-config.js.map

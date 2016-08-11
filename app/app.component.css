@@ -13,3 +13,10 @@ img {
 
 .pac-container {
   z-index: 1050; }
+
+.slim-loading-bar-progress {
+  z-index: 2147483647;
+  position: fixed;
+  top: 60px;
+  color: #69b4ff !important;
+  background-color: #69b4ff !important; }
