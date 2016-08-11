@@ -6,6 +6,7 @@ import { SearchParamsService } from './shared/services/search-params.service';
 import { GlobalEventsService } from './shared/services/global-events.service';
 import { EasterEggService } from './shared/services/easter-egg.service';
 import { provideLazyMapsAPILoaderConfig, GOOGLE_MAPS_PROVIDERS } from 'angular2-google-maps/core';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 export const APP_PROVIDERS = [
     FORM_PROVIDERS,
@@ -16,6 +17,7 @@ export const APP_PROVIDERS = [
     GlobalEventsService,
     EasterEggService,
     GOOGLE_MAPS_PROVIDERS,
+    SlimLoadingBarService,
     provideLazyMapsAPILoaderConfig({
         apiKey: 'AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI',
         libraries: ['places']
