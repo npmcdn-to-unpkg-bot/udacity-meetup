@@ -10,7 +10,8 @@ img {
 }
 .circle-button {
    &:focus, &:active, &:focus:active {
-    box-shadow: 0 0 3pt 2pt #83bffc;
+    // http://stackoverflow.com/a/6810937/5357459
+    box-shadow: 0 0 11pt 4pt #83bffc;
     outline: none;
   }
 }

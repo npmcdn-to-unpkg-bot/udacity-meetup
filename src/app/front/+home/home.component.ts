@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   public vcHeight:number;
   public lastManuelFocus:number;
   public loaded:boolean = false;
+  public searchBarTabIndex:number = 12;
   private intervalReference:number;
   private yPos:number = 0;
   private minScroll:number = 999999;
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   constructor(
     public globalEventsService: GlobalEventsService,
     private apiService: ApiService) {}
-  
+
   public onInput():void {
     // Moves scroll position on next digest cycle
     this.scrollUpdateNeeded = true;
@@ -97,9 +98,11 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
    */
   private updateFixed():void {
     if (this.yPos >= this.minScroll) {
+      this.searchBarTabIndex = 7;
       this.searchFixed = true;
     } else {
       this.searchFixed = false;
+      this.searchBarTabIndex = 12;
     }
   }
 

@@ -1,4 +1,12 @@
-import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnChanges,
+  Renderer,
+  ViewChild
+} from '@angular/core';
 import { CleanDatesPipe } from '../../../shared/pipes/clean-dates.pipe';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ApiService } from '../../../shared/services/api.service';
@@ -20,23 +28,35 @@ import { DateFormatPipe } from 'angular2-moment';
   ],
   directives: [ROUTER_DIRECTIVES, PaginationComponent]
 })
-export class EventsComponent implements OnChanges {
+export class EventsComponent implements OnInit, OnChanges {
   @Input() search;
   public events = [];
   public filteredCount = {count: 0};
-  public term = '';
+  public term:string = '';
+  public ariaLabelDefault:string = 'List of events';
+  public ariaLabel:string;
   public config: IPaginationInstance = {
       id: 'custom',
       itemsPerPage: 9,
       currentPage: 1
   };
-  constructor(public apiService: ApiService) {
-    this.events = apiService.events$;
+  constructor(
+    public apiService: ApiService,
+    private renderer: Renderer) {}
+
+  public ngOnInit():void {
+    this.events = this.apiService.events$;
+    this.ariaLabel = this.ariaLabelDefault;
   }
 
-  ngOnChanges(change) {
+  public ngOnChanges(change):void {
     if ('search' in change) {
       this.config.currentPage = 1;
+      if (this.search.length > 0) {
+        this.ariaLabel = 'Search results for ' + this.search;
+      } else {
+        this.ariaLabel = this.ariaLabelDefault;
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
 import { SanitizeHtmlPipe } from '../../shared/pipes/sanitize-html.pipe';
+import { AddTabIndexPipe } from '../../shared/pipes/add-tab-index.pipe';
 import { DateFormatPipe } from 'angular2-moment';
 import * as moment from 'moment';
 
@@ -12,7 +13,11 @@ import * as moment from 'moment';
   templateUrl: 'event.component.html',
   styleUrls: ['event.component.css'],
   directives: [GOOGLE_MAPS_DIRECTIVES],
-  pipes: [SanitizeHtmlPipe, DateFormatPipe]
+  pipes: [
+    SanitizeHtmlPipe,
+    DateFormatPipe,
+    AddTabIndexPipe
+  ]
 })
 export class EventComponent implements OnInit {
   public zoom: number = 15;

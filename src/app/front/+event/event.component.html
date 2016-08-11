@@ -6,17 +6,28 @@
     <div>{{(eventData$ | async)?.start?.local | amDateFormat:'ddd, MMM D h:mm A'}}</div>
     <div>{{address.base}}</div>
     <div class="register">
-      <a href="{{(eventData$ | async)?.url}}" target="_blank" class="btn">Register <i class="ion-android-open"></i></a>
+      <a
+        href="{{(eventData$ | async)?.url}}"
+        target="_blank"
+        tabindex="12"
+        [attr.title]="'Register for this event - external website'"
+        [attr.aria-label]="'Register for this event - external website'"
+        class="btn">Register <i class="ion-android-open"></i></a>
     </div>
   </div>
 </div>
 <div class="container">
-  <div class="description" [innerHTML]="(eventData$ | async)?.description?.html | appSanitizeHtml">
+  <div class="description" [innerHTML]="(eventData$ | async)?.description?.html | appAddTabIndex | appSanitizeHtml">
   </div>
   <div class="details">
     <h2>Details</h2>
     <div><i class="ion-calendar"></i> {{date}}</div>
-    <div><i class="ion-location"></i> {{address.full}} - <a href="{{mapUrl}}" target="_blank">Map</a></div>
+    <div><i class="ion-location"></i> {{address.full}} - <a
+      href="{{mapUrl}}" 
+      tabindex="30"
+      [attr.title]="'Google Maps external website for ' + address.full"
+      [attr.aria-label]="'Google Maps external website for ' + address.full"
+      target="_blank">Map</a></div>
     <div *ngIf="(eventData$ | async)?.local?.event?.type"><b>Type</b> {{(eventData$ | async)?.local?.event?.type}}</div>
     <div *ngIf="(eventData$ | async)?.local?.event?.host"><b>Host</b> {{(eventData$ | async)?.local?.event?.host}}</div>
     <div *ngIf="(eventData$ | async)?.local?.event?.guestList"><b>Guest list</b> {{(eventData$ | async)?.local?.event?.guestList}}</div>
