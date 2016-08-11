@@ -97,7 +97,6 @@
           border-radius: 25px;
           padding: 6px 10px 6px 40px;
           border: none;
-          outline: none;
           width: 100%;
           background-color: white;
           color: $fadedBlack;
@@ -105,6 +104,10 @@
           font-size: 18px;
           margin: 0 auto;
           display: block;
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 3pt 2pt #83bffc;
+          }
         }
       }
       .button-pair {
