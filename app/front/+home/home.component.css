@@ -83,7 +83,6 @@
           border-radius: 25px;
           padding: 6px 10px 6px 40px;
           border: none;
-          outline: none;
           width: 100%;
           background-color: white;
           color: #3c3c3c;
@@ -91,6 +90,9 @@
           font-size: 18px;
           margin: 0 auto;
           display: block; }
+          .video-section .video-container .search-container .search-box .search:focus {
+            outline: none;
+            box-shadow: 0 0 3pt 2pt #83bffc; }
       .video-section .video-container .search-container .button-pair {
         margin-top: 10px;
         width: 90%;

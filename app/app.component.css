@@ -7,5 +7,9 @@ h2 {
 img {
   max-width: 100%; }
 
+.circle-button:focus, .circle-button:active, .circle-button:focus:active {
+  box-shadow: 0 0 3pt 2pt #83bffc;
+  outline: none; }
+
 .pac-container {
   z-index: 1050; }
