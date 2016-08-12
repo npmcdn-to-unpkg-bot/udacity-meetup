@@ -16,9 +16,11 @@ export class TextboxComponent implements OnInit {
   @Input() field;
   @Input() tabIndex;
   @Input() control;
+  @Input() showFieldErrors;
   @Output() controlChange = new EventEmitter();
   @Output() placeAutocomplete = new EventEmitter();
   public timeout;
+  public ariaLabel:string = '';
   public type;
   constructor(
     private mapsApiLoader: MapsAPILoader,
@@ -35,7 +37,7 @@ export class TextboxComponent implements OnInit {
     }
   }
 
-  public onInput(event, type):number {
+  public onInput(event):number {
     return event.target.value.length;
   }
 

@@ -2,9 +2,9 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button [ngClass]="{reveal: currentSlide === 3}" tabindex="-1" (click)='previous()' class="back-button btn"><i class="ion-chevron-left"></i> Back</button>
+        <button [ngClass]="{reveal: currentSlide === 3}" tabindex="1" (click)='previous()' class="back-button btn"><i class="ion-chevron-left"></i> Back</button>
         <div class="title">{{slideTitle}}</div>
-        <button  tabindex="-1" type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+        <button  tabindex="1" type="button" class="close" (click)="lgModal.hide()" aria-label="Close modal">
           <i class="ion-ios-close-empty"></i>
         </button>
       </div>

@@ -125,8 +125,10 @@ export class NewEventComponent implements OnInit {
         },
         {
           name: 'date',
-          type: 'datepicker',
+          type: 'input',
+          inputType: 'date',
           classes: 'left-input',
+          ariaLabel: 'This is the start date input for your event.',
           control: ['', Validators.required]
         },
         {
@@ -134,6 +136,7 @@ export class NewEventComponent implements OnInit {
           type: 'select',
           selectType: 'time',
           classes: 'right-input',
+          ariaLabel: 'This is the start time input for your event.',
           control: ['', Validators.required]
         },
         {
@@ -143,8 +146,10 @@ export class NewEventComponent implements OnInit {
         },
         {
           name: 'date',
-          type: 'datepicker',
+          type: 'input',
+          inputType: 'date',
           classes: 'left-input',
+          ariaLabel: 'This is the end date input for your event.',
           control: ['', Validators.required]
         },
         {
@@ -152,6 +157,7 @@ export class NewEventComponent implements OnInit {
           type: 'select',
           selectType: 'time',
           classes: 'right-input',
+          ariaLabel: 'This is the end time input for your event.',
           control: ['', Validators.required]
         },
         {
@@ -314,7 +320,7 @@ export class NewEventComponent implements OnInit {
   }
 
   private parseFormatDate(dateInput, timeInput) {
-    let thisMoment = moment( dateInput +  ' ' + timeInput, 'MMMM D, YYYY h:mma' );
+    let thisMoment = moment( dateInput +  ' ' + timeInput, 'YYYY-MM-DD h:mma' );
     return {
       local: thisMoment.format('YYYY-MM-DDTHH:mm:ss'),
       utc: thisMoment.valueOf()

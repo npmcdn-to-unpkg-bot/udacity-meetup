@@ -81,8 +81,8 @@ const barrels: string[] = [
   'app/shared/components/input',
   'app/shared/components/form',
   'app/shared/components/form-element',
-  'app/shared/components/datepicker',
   'app/shared/components/textbox',
+  'app/shared/components/select',
   /** @cli-barrel */
 ];
 

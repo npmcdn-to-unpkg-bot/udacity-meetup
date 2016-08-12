@@ -19,12 +19,11 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { DatepickerComponent } from '../datepicker';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { ValidationService } from '../../services/validation.service';
 import { ValuesPipe } from '../../pipes/values.pipe';
-import { SELECT_DIRECTIVES } from '../../forks/ng2-select/select';
 import { TextboxComponent } from '../textbox';
+import { SelectComponent } from '../select';
 
 declare var google: any;
 
@@ -36,9 +35,8 @@ declare var google: any;
   styleUrls: ['form.component.css'],
   directives: [
     REACTIVE_FORM_DIRECTIVES,
-    DatepickerComponent,
-    SELECT_DIRECTIVES,
-    TextboxComponent
+    TextboxComponent,
+    SelectComponent
   ],
   pipes: [ValuesPipe]
 })
@@ -118,6 +116,7 @@ export class FormComponent implements OnInit {
     this.mode = newForm;
     this.formInfo = this.allFormInfo[this.mode];
     this.currentFocus.emit(this.formInfo.title);
+    this.formErrorMessage = null;
     this.reset().then(() => this.setFocus(0));
   }
 
@@ -126,6 +125,16 @@ export class FormComponent implements OnInit {
   private setFormComponenetId() {
     if (this.formComponentId === undefined) {
       this.formComponentId = 'form-' + Math.floor( Math.random() * 10000);
+    }
+  }
+
+  public showFieldErrors(field):boolean {
+    if (!this.registerForm.pristine
+      && (this.registerForm.controls[field.id].touched 
+        || (field.inputType === 'file' && !this.registerForm.controls[field.id].pristine))
+      && this.registerForm.controls[field.id].errors
+      && (field.passwordType !== 'password' || field.focused === false)) {
+      return true;
     }
   }
 
@@ -185,6 +194,14 @@ export class FormComponent implements OnInit {
         this.formInfo.fields[i]['id'] = idString;
         this.formInfo.fields[i]['show'] = show;
         this.formInfo.fields[i]['length'] = 0;
+        /**
+         * Aria label 
+         * (if not present this will add an empty string
+         *  so that it doesn't use 'undefined' or 'null')
+         */ 
+        if (!('ariaLabel' in this.formInfo.fields[i])) {
+          this.formInfo.fields[i]['ariaLabel'] = '';
+        }
         // Save password info
         if ('passwordType' in this.formInfo.fields[i]) {
           if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }

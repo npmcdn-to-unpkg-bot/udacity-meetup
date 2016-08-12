@@ -7,6 +7,11 @@
   (focus)="field.focused = true;"
   (blur)="field.focused = false"
   tabindex="{{tabIndex}}"
+  [attr.aria-label]="field.ariaLabel"
+  [attr.aria-invalid]="showFieldErrors"
+  [attr.aria-autocomplete]="field.addListener === 'location' ? 'both': ''"
+  [attr.role]="field.addListener === 'location' ? 'combobox': ''"
+  [attr.aria-describedby]="'error-description-' + field.id"
   placeholder="">
 <input
   *ngIf="field.inputType === 'file'"

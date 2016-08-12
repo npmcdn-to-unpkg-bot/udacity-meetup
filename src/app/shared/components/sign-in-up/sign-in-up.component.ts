@@ -85,7 +85,8 @@ export class SignInUpComponent implements OnInit {
         },
         {
           name: 'Birthday',
-          type: 'datepicker',
+          type: 'input',
+          inputType: 'date',
           control: [''],
           group: 'optional'
         },
@@ -116,7 +117,7 @@ export class SignInUpComponent implements OnInit {
           name: 'Email',
           type: 'input',
           inputType: 'email',
-          control: ['', Validators.required, ValidationService.emailValidator]
+          control: ['', Validators.required]
         },
         {
           name: 'Password',

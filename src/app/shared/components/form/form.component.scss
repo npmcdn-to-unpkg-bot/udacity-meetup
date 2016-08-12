@@ -48,7 +48,10 @@ form {
         }
       }
     }
-    input, textarea {
+    input {
+      color: white;
+    }
+    input, textarea, select {
       display: block;
       font-size: 18px;
       border-style: solid;
@@ -57,6 +60,24 @@ form {
       padding: 10.219px;
       width: 100% !important; // !important prevents textarea width resizing 
       box-shadow: none;
+    }
+    .select-container {
+      height: 47.44px;
+    }
+    select {
+      height: 47.44px;
+      background-color: white;
+      border-radius: 0px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-position: 98% 50%;
+      background-repeat: no-repeat;
+      background-image: url('app/assets/ios-down-arrow.svg');
+      background-size: 30px;
+      position: absolute;
+      z-index: 999;
+      background-color: transparent;
+      cursor: pointer;
     }
     .error-message {
       background-color: #f2dede;
@@ -75,95 +96,16 @@ form {
         margin-left: -15px;
       }
     }
-    // ng2-select
-    .ui-select-container {
-      //position: initial;
-      input {
-        border-radius: 0;
-        height: initial;
-        &::placeholder {
-          display: none;
-        }
-      }
-      .ui-select-match {
-        .ui-select-match-text {
-          font-size: 18px;
-          line-height: initial;
-        }
-      }
-      .ui-select-choices {
-        border-radius: 0;
-        .dropdown-item {
-          text-decoration: none;
-          color: gray;
-          font-size: 18px;
-          & > div {
-            padding: 1px 5px;
-          }
-        }
-      }
-      .form-control {
-        &:focus {
-          border-color: initial;
-          box-shadow: initial;
-          outline-color: rgb(59, 153, 252); // -webkit-focus-ring-color
-          outline-style: auto;
-          outline-width: 5px;
-        }
-        &.ui-select-toggle {
-          padding: 10.219px;
-          border-radius: 0;
-          box-shadow: none;
-          line-height: 1;
-          height: 47.44px;
-          width: 100%;
-          border-color: $lightGray;
-          &:hover {
-            color: inherit;
-            background-color: initial;
-            border-color: $lightGray;
-          }
-          .ui-select-placeholder {
-            font-size: 18px;
-            color: #adadad;
-            line-height: 1.42857143;
-            position: absolute;
-            transition: 1s all;
-          }
-          .close {
-            display: none;
-          }
-          .pull-right.caret {
-            border: none;
-            margin-right: 16px;
-            margin-top: 5px;
-            &:before {
-              content: "\f123";
-              display: inline-block;
-              font-family: "Ionicons";
-              font-style: normal;
-              font-weight: normal;
-              font-variant: normal;
-              text-transform: none;
-              text-rendering: auto;
-              line-height: 1;
-              -webkit-font-smoothing: antialiased;
-              -moz-osx-font-smoothing: grayscale;
-            } 
-          }
-        }
-      }
-    }
     &.active-item {
       label {
-        transition: all 0.2s;
+        transition: transform 0.2s;
         transform: translateY(-100%);
         cursor: default;
+        z-index: 1000;
       }
-      .ui-select-container {
-        .ui-select-placeholder {
-          transform: translateY(-100%);
-        }
+      input {
+        color: black;
+        transition: color 1s;
       }
     }
   }
