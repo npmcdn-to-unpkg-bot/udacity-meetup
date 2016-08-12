@@ -185,6 +185,17 @@ export class NewEventComponent implements OnInit {
           control: ['', Validators.required]
         },
         {
+          name: 'Event capacity',
+          type: 'select',
+          selectType: 'default',
+          selectData: [
+            '1-10 People', '11-30 People', '31-50 People', '51-100 People',
+            '100-150 People', '151-300 People', '301-500 People', '501-750 People',
+            '751-1000 People', 'More than 1000 People'
+          ],
+          control: ['', Validators.required]
+        },
+        {
           name: 'Guest list',
           type: 'input',
           inputType: 'text',
@@ -367,7 +378,8 @@ export class NewEventComponent implements OnInit {
           type: rawEventData.eventType,
           host: rawEventData.eventHost,
           guestList: rawEventData.guestList,
-          guestMessage: rawEventData.optionalMessageToGuests
+          guestMessage: rawEventData.optionalMessageToGuests,
+          capacity: rawEventData.eventCapacity
         },
         profile: this.authService.getProfileInfo()
       },

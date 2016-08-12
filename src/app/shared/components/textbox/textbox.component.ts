@@ -51,7 +51,6 @@ export class TextboxComponent implements OnInit {
     }
     if (this.field.inputType === 'file') {
       Observable.fromEvent(this.element.nativeElement, 'change').subscribe(event => {
-        console.log('just selected the file!');
         this.getBase64(this.field.id);
       });
     }
@@ -118,7 +117,6 @@ export class TextboxComponent implements OnInit {
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent) => {
           let item:any = fileLoadedEvent.target;
-          console.log(item);
           this.control.markAsDirty();
           this.control.updateValue(item.result);
           this.controlChange.emit(this.control);

@@ -26,6 +26,7 @@ export class EasterEggService {
         event: {
           type: 'Family Event',
           host: 'Andy Dwyer',
+          capacity: 'More than 1000 People',
           guestList: 'Leslie Knope, April Ludgate, Tom Haverford, Ron Swanson, Ben Wyatt, Jerry Gergich, Chris Traeger, Ann Perkins',
           guestMessage: " We'd like to encourage everyone to buy our merchandise. All the proceeds will go towards Li'l Sebastian's favorite charity, the Afghan Institute of Learning."
         },

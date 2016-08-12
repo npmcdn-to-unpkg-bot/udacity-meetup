@@ -30,6 +30,7 @@
       target="_blank">Map</a></div>
     <div *ngIf="(eventData$ | async)?.local?.event?.type"><b>Type</b> {{(eventData$ | async)?.local?.event?.type}}</div>
     <div *ngIf="(eventData$ | async)?.local?.event?.host"><b>Host</b> {{(eventData$ | async)?.local?.event?.host}}</div>
+    <div *ngIf="(eventData$ | async)?.local?.event?.capacity"><b>Event capacity</b> {{(eventData$ | async)?.local?.event?.capacity}}</div>
     <div *ngIf="(eventData$ | async)?.local?.event?.guestList"><b>Guest list</b> {{(eventData$ | async)?.local?.event?.guestList}}</div>
     <div *ngIf="(eventData$ | async)?.local?.event?.guestMessage"><b>Message to guests</b> {{(eventData$ | async)?.local?.event?.guestMessage}}</div>
   </div>
