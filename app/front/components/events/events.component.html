@@ -1,6 +1,6 @@
 <div class="events-container">
-  <div class="cards">
-    <div *ngFor="let event of events | async | appEventSearch:search:filteredCount | paginate: config;" class="card" [routerLink]="['/event', event.id]">
+  <ul [attr.aria-label]="ariaLabel" class="cards">
+    <li *ngFor="let event of events | async | appEventSearch:search:filteredCount | paginate: config;" class="card" [routerLink]="['/event', event.id]">
       <div class="content">
         <div class="card-img-container">
           <img class="card-img-top" [src]="event.logo?.url" alt=""  />
@@ -9,12 +9,18 @@
           <h4>{{ event.name.text | appCleanDates }}</h4>
           <div class="date"><i class="ion-calendar"></i> {{event.start.local | amDateFormat:'ddd, MMM D'}}</div>
           <div class="show-details-container">
-            <a class="show-details-link">Learn more</a>
+            <a
+              href="javascript:void(0);"
+              tabindex="30"
+              class="show-details-link"
+              [attr.title]="event.name.text + ' - learn more'"
+              [attr.aria-label]="event.name.text + ' - learn more'"
+              tabindex="20">Learn more</a>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </li>
+  </ul>
   <div *ngIf="filteredCount?.count === 0" class="no-results">
       No matches for "{{search}}"
   </div>

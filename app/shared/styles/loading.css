@@ -1,0 +1,58 @@
+.loading-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: hotpink !important;
+}
+
+.loading-area {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 100px;
+  text-align: center;
+  color: white;
+}
+
+.loading-area h1 {
+  font-size: 80px;
+}
+
+.loading-area p {
+  font-size: 18px;
+  padding: 20px 10px;
+}
+
+.loading-area .loading-svg {
+  width: 50%;
+  max-width: 300px;
+  padding: 10%;
+  margin: 0 auto;
+  background-image: url('/app/assets/loading.svg');
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .loading-area h1 {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 700px) {
+  .loading-area {
+    width: 90%;
+  }
+  .loading-area h1 {
+    font-size: 40px;
+  }
+  .loading-area .loading-svg {
+    width: 30%;
+  }
+}
+
+@media (max-width: 400px) {
+  .loading-area h1 {
+    font-size: 30px;
+  }
+}

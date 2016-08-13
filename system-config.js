@@ -76,8 +76,8 @@ var barrels = [
     'app/shared/components/input',
     'app/shared/components/form',
     'app/shared/components/form-element',
-    'app/shared/components/datepicker',
     'app/shared/components/textbox',
+    'app/shared/components/select',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
@@ -94,4 +94,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-VgdUzOI9.tmp/0/src/system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-dcqMqZ4y.tmp/0/src/system-config.js.map

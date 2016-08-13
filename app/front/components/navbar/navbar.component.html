@@ -1,7 +1,13 @@
 <nav id="navbar" class="navbar navbar-fixed-top navbar-default">
 	<div class="">
 		<div class="navbar-header">
-			<a aria-label="Home" pageScroll [routerLink]="['/']" href="#app-home" class="navbar-brand ion-icecream">
+			<a
+				aria-label="Home"
+				pageScroll
+				[routerLink]="['/']"
+				tabindex="5"
+				href="#app-home"
+				class="navbar-brand ion-icecream">
 			</a>
 			<button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
 				<span class="sr-only">Toggle navigation</span>
@@ -13,10 +19,18 @@
 		<div class="navbar-collapse fix-on-init" [ngClass]="{'navbar-closed': isCollapsed}">
 			<ul class="nav navbar-nav">
         <li role="menuitem">
-					<a pageScroll [pageScrollOffset]="51" [routerLink]="['/']" href="#app-events">Events</a>
+					<a
+						pageScroll
+						[pageScrollOffset]="51"
+						[routerLink]="['/']"
+						tabindex="5"
+						href="#app-events">Events</a>
         </li>
 				<li role="menuitem">
-					<a href="javascript:void(0);" (click)="globalEventsService.newModalState({open:true,modal:'new-event'})">Add Event</a>
+					<a
+						href="javascript:void(0);"
+						tabindex="5"
+						(click)="globalEventsService.newModalState({open:true,modal:'new-event'})">Add Event</a>
         </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-pull-right">
@@ -25,11 +39,13 @@
 						*ngIf="!(authService.authState$ | async)"
 						href="javascript:void(0);" 
 						(click)="globalEventsService.newModalState({open:true,modal:'auth'})"
+						tabindex="10"
 						class="sign-in">Sign in</a>
 					<a
 						*ngIf="(authService.authState$ | async)"
 						href="javascript:void(0);" 
 						(click)="authService.signOut()"
+						tabindex="10"
 						class="sign-in">Sign out</a>
         </li>
 			</ul>
@@ -39,11 +55,13 @@
 <div class="extra-nav">
 	<button
 		aria-label="Chat"
+		tabindex="999"
 		class="extra-item btn circle-button">
 		<i class="ion-chatbubbles"></i>
 	</button>
 	<button
 		aria-label="Add event"
+		tabindex="999"
 		(click)="globalEventsService.newModalState({open:true,modal:'new-event'})"
 		class="extra-item btn circle-button">
 		<i class="ion-plus-round"></i>

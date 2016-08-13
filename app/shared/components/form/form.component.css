@@ -39,7 +39,9 @@ form .input-item {
       cursor: pointer; }
       form .input-item label.select-box:after {
         cursor: pointer; }
-  form .input-item input, form .input-item textarea {
+  form .input-item input {
+    color: white; }
+  form .input-item input, form .input-item textarea, form .input-item select {
     display: block;
     font-size: 18px;
     border-style: solid;
@@ -48,6 +50,22 @@ form .input-item {
     padding: 10.219px;
     width: 100% !important;
     box-shadow: none; }
+  form .input-item .select-container {
+    height: 47.44px; }
+  form .input-item select {
+    height: 47.44px;
+    background-color: white;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+    background-image: url("app/assets/ios-down-arrow.svg");
+    background-size: 30px;
+    position: absolute;
+    z-index: 999;
+    background-color: transparent;
+    cursor: pointer; }
   form .input-item .error-message {
     background-color: #f2dede;
     color: #b15655;
@@ -61,70 +79,14 @@ form .input-item {
   @media (max-width: 500px) {
     form .input-item .error-message, form .input-item .help-message span {
       margin-left: -15px; } }
-  form .input-item .ui-select-container input {
-    border-radius: 0;
-    height: initial; }
-    form .input-item .ui-select-container input::placeholder {
-      display: none; }
-  form .input-item .ui-select-container .ui-select-match .ui-select-match-text {
-    font-size: 18px;
-    line-height: initial; }
-  form .input-item .ui-select-container .ui-select-choices {
-    border-radius: 0; }
-    form .input-item .ui-select-container .ui-select-choices .dropdown-item {
-      text-decoration: none;
-      color: gray;
-      font-size: 18px; }
-      form .input-item .ui-select-container .ui-select-choices .dropdown-item > div {
-        padding: 1px 5px; }
-  form .input-item .ui-select-container .form-control:focus {
-    border-color: initial;
-    box-shadow: initial;
-    outline-color: #3b99fc;
-    outline-style: auto;
-    outline-width: 5px; }
-  form .input-item .ui-select-container .form-control.ui-select-toggle {
-    padding: 10.219px;
-    border-radius: 0;
-    box-shadow: none;
-    line-height: 1;
-    height: 47.44px;
-    width: 100%;
-    border-color: #b9b9b9; }
-    form .input-item .ui-select-container .form-control.ui-select-toggle:hover {
-      color: inherit;
-      background-color: initial;
-      border-color: #b9b9b9; }
-    form .input-item .ui-select-container .form-control.ui-select-toggle .ui-select-placeholder {
-      font-size: 18px;
-      color: #adadad;
-      line-height: 1.42857143;
-      position: absolute;
-      transition: 1s all; }
-    form .input-item .ui-select-container .form-control.ui-select-toggle .close {
-      display: none; }
-    form .input-item .ui-select-container .form-control.ui-select-toggle .pull-right.caret {
-      border: none;
-      margin-right: 16px;
-      margin-top: 5px; }
-      form .input-item .ui-select-container .form-control.ui-select-toggle .pull-right.caret:before {
-        content: "\f123";
-        display: inline-block;
-        font-family: "Ionicons";
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        text-transform: none;
-        text-rendering: auto;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale; }
   form .input-item.active-item label {
-    transition: all 0.2s;
+    transition: transform 0.2s;
     transform: translateY(-100%);
-    cursor: default; }
-  form .input-item.active-item .ui-select-container .ui-select-placeholder {
-    transform: translateY(-100%); }
+    cursor: default;
+    z-index: 1000; }
+  form .input-item.active-item input {
+    color: black;
+    transition: color 1s; }
 
 form .group-label {
   text-align: left;

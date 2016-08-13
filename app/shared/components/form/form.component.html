@@ -1,4 +1,4 @@
-<form *ngIf="active" [formGroup]="registerForm" (submit)="formSubmit()">
+<form *ngIf="active" [formGroup]="registerForm" (submit)="formSubmit()" autocomplete="on">
   <!-- Form Instructions -->
   <div class="instructions">{{formInfo.instructions}}</div>
   <div *ngIf="formErrorMessage" class="instructions error">
@@ -21,7 +21,9 @@
         *ngIf="field.type === 'input'"
         [(control)]="registerForm.controls[field.id]"
         [field]="field"
+        [ariaLabelInput]="field.ariaLabel"
         [tabIndex]="tabIndex"
+        [showFieldErrors]="showFieldErrors(field)"
         (placeAutocomplete)="onPlaceAutocomplete($event, field.id, i)"></app-textbox>
       <!-- Textarea -->
       <textarea
@@ -29,38 +31,31 @@
         id="{{field.id}}"
         rows="4"
         formControlName="{{field.id}}"
+        [attr.aria-label]="field.ariaLabel"
+        [attr.aria-invalid]="showFieldErrors(field)"
+        [attr.aria-describedby]="'error-description-' + field.id"
         (input)="field.length = onInput($event, field.type);"
         (focus)="field.focused = true;"
         (blur)="field.focused = false"
         tabindex="{{tabIndex}}"
         placeholder=""></textarea>
       <!-- Select -->
-      <ng-select 
+      <app-select
         *ngIf="field.type === 'select'"
-        [allowClear]="true"
-        [tabIndex]="tabIndex"
         [items]="field.selectType === 'default' ? field.selectData : getSelectData(field.selectType)"
-        (selected)="field.length = onInput($event.id, field.type); registerForm.controls[field.id].updateValue($event.id)"
-        (removed)="field.length = 0"
-        (focus)="field.focused = true"
-        (blur)="field.focused = false"
-        placeholder="No city selected">
-      </ng-select>
-      <!-- Datepicker -->
-      <app-datepicker
-        *ngIf="field.type === 'datepicker'"
-        [(field)]="formInfo.fields[i]"
         [tabIndex]="tabIndex"
-        [(control)]="registerForm.controls[field.id]"></app-datepicker>
+        [field]="field"
+        [showFieldErrors]="showFieldErrors(field)"
+        [(control)]="registerForm.controls[field.id]"
+        (focus)="field.focused = true"
+        (blur)="field.focused = false">
+      </app-select>
       <!-- Validation errors -->
       <p
-        *ngIf="
-          !registerForm.pristine
-          && (registerForm.controls[field.id].touched 
-            || (field.inputType === 'file' && !registerForm.controls[field.id].pristine))
-          && registerForm.controls[field.id].errors
-          && (field.passwordType !== 'password' || field.focused === false)"
-        class="error-message">
+        *ngIf="showFieldErrors(field)"
+        class="error-message"
+        id="error-description-{{field.id}}"
+        role="alert">
         <li *ngFor="let error of registerForm.controls[field.id].errors | appValues">
           <span *ngIf="itemInObject(error.key, errorMessages)">{{ errorMessages[error.key] }}</span>
           <span *ngIf="!itemInObject(error.key, errorMessages)">{{ error.key }}</span>
@@ -71,7 +66,8 @@
         field.passwordType === 'password'
         && field.focused
         && registerForm.controls[field.id].errors"
-        class="help-message">
+        class="help-message"
+        role="alert">
         <div *ngFor="let error of registerForm.controls[field.id].errors | appValues">
           <li *ngIf="error.key === 'required'">Should have at least 10 characters</li>
           <li *ngIf="
@@ -83,7 +79,12 @@
     </div>
     <!-- Special buttons -->
     <div *ngIf="field.type === 'option'" class="form-options {{field.classes}}">
-      <a *ngIf="field.show === true" class="btn option" (click)="showGroup(field.group); field.show = false">{{field.name}}</a>
+      <a
+        *ngIf="field.show === true"
+        tabindex="{{tabIndex}}"
+        href="javascript:void(0);"
+        class="btn option"
+        (click)="showGroup(field.group); field.show = false">{{field.name}}</a>
     </div>
     <button
       *ngIf="field.type === 'submit'"
@@ -92,7 +93,11 @@
       class="submit btn {{field.classes}}"
       tabindex="{{tabIndex}}">{{field.text}} <i class="ion-chevron-right"></i></button>
     <div *ngIf="field.type === 'special'" class="extra-info {{field.classes}}">
-      <a (click)="onSpecial(field.value)" class="change-mode">{{field.name}}</a>
+      <a
+        href="javascript:void(0);"
+        tabindex="{{tabIndex}}"
+        (click)="onSpecial(field.value)"
+        class="change-mode">{{field.name}}</a>
     </div>
   </div>
 </form>

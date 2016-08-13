@@ -6,7 +6,15 @@
     </div>
     <div #searchContainer class="search-container" [ngClass]="{'search-fixed': searchFixed}">
       <div class="search-box">
-        <input #search class="search" aria-label="Event search bar" (input)="onInput()" [autofocus] autofocus="true" [manuelFocus]="lastManuelFocus">
+        <input
+          #search
+          class="search"
+          aria-label="Search bar for user created events"
+          (input)="onInput()"
+          [autofocus]
+          tabindex="{{searchBarTabIndex}}"
+          autofocus="true"
+          [manuelFocus]="lastManuelFocus">
         <i class="glyphicon glyphicon-search"></i>
       </div>
       <div class="button-pair">

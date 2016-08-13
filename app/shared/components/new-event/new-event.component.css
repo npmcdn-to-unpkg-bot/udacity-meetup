@@ -2,13 +2,10 @@
   background-color: hotpink;
   border-radius: 5px 5px 0 0;
   position: relative; }
-  .modal-content .modal-header button {
-    outline: none; }
   .modal-content .modal-header .back-button {
     background: transparent;
     color: white;
     font-size: 18px;
-    outline: none;
     position: absolute;
     transition: 0.2s all;
     opacity: 0; }
