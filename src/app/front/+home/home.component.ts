@@ -17,6 +17,7 @@ declare let Vimeo: any;
 export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild('videoContainer') videoContainer;
   @ViewChild('searchContainer') searchContainer;
+  @ViewChild('videoSection') videoSection;
   public video:any;
   public searchFixed:boolean = false;
   public events: Array<Object>;
@@ -87,7 +88,7 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
     let searchContainerTop = this.searchContainer.nativeElement.offsetTop;
     // Minimum scroll distance before switching to a fixed search bar
     this.minScroll = searchContainerTop + vcTop + 22 - (0.017 * winHeight);
-    this.vcHeight = this.videoContainer.nativeElement.offsetHeight;
+    this.vcHeight = this.videoSection.nativeElement.offsetHeight;
     this.updateFixed();
   }
 
