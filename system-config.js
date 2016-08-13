@@ -65,7 +65,6 @@ var barrels = [
     'app/navbar',
     'app/front/front',
     'app/front/home',
-    'app/front/contact',
     'app/front/components/footer',
     'app/front/components/events',
     'app/front/event',
@@ -78,6 +77,7 @@ var barrels = [
     'app/shared/components/form-element',
     'app/shared/components/textbox',
     'app/shared/components/select',
+    'app/front/default-page',
 ];
 var cliSystemConfigPackages = {};
 barrels.forEach(function (barrelName) {
@@ -94,4 +94,4 @@ System.config({
 });
 // Apply the user's configuration.
 System.config({ map: map, packages: packages });
-//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-qY4TsbHL.tmp/0/src/system-config.js.map
+//# sourceMappingURL=tmp/broccoli_type_script_compiler-input_base_path-46amFepV.tmp/0/src/system-config.js.map

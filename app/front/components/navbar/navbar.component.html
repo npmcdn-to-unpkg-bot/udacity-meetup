@@ -30,7 +30,7 @@
 					<a
 						href="javascript:void(0);"
 						tabindex="5"
-						(click)="globalEventsService.newModalState({open:true,modal:'new-event'})">Add Event</a>
+						(click)="globalEventsService.newModalState({open:true,modal:'new-event'}); isCollapsed = true">Add Event</a>
         </li>
 			</ul>
 			<ul class="nav navbar-nav navbar-pull-right">
@@ -38,13 +38,13 @@
 					<a
 						*ngIf="!(authService.authState$ | async)"
 						href="javascript:void(0);" 
-						(click)="globalEventsService.newModalState({open:true,modal:'auth'})"
+						(click)="globalEventsService.newModalState({open:true,modal:'auth'}); isCollapsed = true"
 						tabindex="10"
 						class="sign-in">Sign in</a>
 					<a
 						*ngIf="(authService.authState$ | async)"
 						href="javascript:void(0);" 
-						(click)="authService.signOut()"
+						(click)="authService.signOut(); isCollapsed = true"
 						tabindex="10"
 						class="sign-in">Sign out</a>
         </li>
@@ -53,12 +53,6 @@
 	</div>
 </nav>
 <div class="extra-nav">
-	<button
-		aria-label="Chat"
-		tabindex="999"
-		class="extra-item btn circle-button">
-		<i class="ion-chatbubbles"></i>
-	</button>
 	<button
 		aria-label="Add event"
 		tabindex="999"

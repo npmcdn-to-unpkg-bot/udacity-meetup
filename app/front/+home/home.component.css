@@ -54,14 +54,15 @@
       margin-right: auto;
       margin-left: auto; }
       .video-section .video-container .search-container.search-fixed {
-        z-index: 3; }
+        z-index: initial; }
         .video-section .video-container .search-container.search-fixed .search-box {
           position: fixed;
           top: 1.7%;
           right: 8%;
           margin: 0px;
           left: initial;
-          width: 37%; }
+          width: 37%;
+          z-index: 1030; }
           @media (max-width: 768px) {
             .video-section .video-container .search-container.search-fixed .search-box {
               left: 0;
