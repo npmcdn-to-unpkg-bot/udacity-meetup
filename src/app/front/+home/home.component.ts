@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
     let iframe = document.getElementById('hero-video');
     this.video = new Vimeo.Player(iframe);
     this.video.on('loaded', data => {
+        this.video.setVolume(0);
         setTimeout( () => {
           this.loaded = true;
         }, 2500);

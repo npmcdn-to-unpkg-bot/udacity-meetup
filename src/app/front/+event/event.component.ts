@@ -53,7 +53,7 @@ export class EventComponent implements OnInit {
           this.lng = Number(venue.longitude);
           
           let base = '';
-          if (venue.address.city.length > 0) {
+          if (this.ifExists(venue.address.city)) {
             base = venue.address.city;
           }
           if (venue.address.region.length > 0) {
@@ -86,6 +86,14 @@ export class EventComponent implements OnInit {
         }
       }
     });
+  }
+
+  private ifExists(item):boolean {
+    if (item !== undefined
+      && item !== null
+      && item.length > 0) {
+      return true
+    }
   }
 
   isNumeric(n) {
