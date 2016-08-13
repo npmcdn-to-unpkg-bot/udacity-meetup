@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewChecked, Renderer } from '@angular/core';
 import { EventsComponent } from '../components/events/index';
 import { AutofocusDirective } from '../../shared/directives/autofocus.directive';
 import { ApiService } from '../../shared/services/api.service';
 import { GlobalEventsService } from '../../shared/services/global-events.service';
 import { PaginatePipe, IPaginationInstance, PaginationService } from 'ng2-pagination';
+import { ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
 declare let Vimeo: any;
 
 @Component({
@@ -17,12 +18,12 @@ declare let Vimeo: any;
 export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild('videoContainer') videoContainer;
   @ViewChild('searchContainer') searchContainer;
+  @ViewChild('search') search;
   @ViewChild('videoSection') videoSection;
   public video:any;
   public searchFixed:boolean = false;
   public events: Array<Object>;
   public vcHeight:number;
-  public lastManuelFocus:number;
   public loaded:boolean = false;
   public searchBarTabIndex:number = 12;
   private intervalReference:number;
@@ -32,7 +33,9 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   
   constructor(
     public globalEventsService: GlobalEventsService,
-    private apiService: ApiService) {}
+    private apiService: ApiService,
+    private router: Router,
+    private renderer: Renderer) {}
 
   public onInput():void {
     // Moves scroll position on next digest cycle
@@ -40,8 +43,8 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   public manuelFocus():void {
-    let currentDate = new Date;
-    this.lastManuelFocus = currentDate.getTime();
+    this.renderer.invokeElementMethod(
+      this.search.nativeElement, 'focus', []);
   }
 
   public ngOnInit():void {
@@ -65,7 +68,14 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.globalEventsService.elementsCollection['scroll'].emitter$.subscribe( () => {
       this.yPos = document.body.scrollTop;
       this.updateFixed();
-    }); 
+    });
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.manuelFocus();
+      }
+    }, (error: any) => {
+      this.manuelFocus();
+    });
   }
 
   public ngAfterViewChecked():void {

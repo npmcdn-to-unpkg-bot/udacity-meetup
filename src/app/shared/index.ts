@@ -1,6 +1,5 @@
 export * from './components/form';
 export * from './components/new-event';
-export * from './directives/autofocus.directive';
 export * from './pipes/add-tab-index.pipe';
 export * from './pipes/clean-dates.pipe';
 export * from './pipes/event-search.pipe';
