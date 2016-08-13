@@ -10,10 +10,11 @@ export const frontRoutes: RouterConfig = [
     path: '',
     component: FrontComponent,
     children: [
-      { path: '',  component: HomeComponent },
-      { path: 'event/:id',  component: EventComponent },
-      { path: 'about',  component: HomeComponent },
-      { path: 'contact',  component: ContactComponent }
+      { path: '', component: HomeComponent },
+      { path: 'event/:id', component: EventComponent },
+      { path: 'about', component: HomeComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: '**', redirectTo: '' }
     ]
   }
 ];
