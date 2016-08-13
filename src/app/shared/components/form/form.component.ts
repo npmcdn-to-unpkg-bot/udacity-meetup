@@ -68,6 +68,19 @@ export class FormComponent implements OnInit {
       '9:00pm', '9:30pm', '10:00pm', '10:30pm', '11:00pm', '11:30pm'
     ]
   };
+  // Non-exhaustive autocomplete mapping (lowercase)
+  public autocompleteMap = {
+    'name': 'name',
+    'first name': 'given-name',
+    'last name': 'family-name',
+    'email': 'email',
+    'street': 'street-address',
+    'city': 'locality',
+    'state': 'region',
+    'postal code': 'postal-code',
+    'zip': 'postal-code',
+    'country': 'country'
+  };
   public inputTypes = ['input', 'datepicker', 'select', 'textarea'];
   public otherTypes = ['option', 'submit', 'special', 'instructions'];
   
@@ -202,6 +215,39 @@ export class FormComponent implements OnInit {
         if (!('ariaLabel' in this.formInfo.fields[i])) {
           this.formInfo.fields[i]['ariaLabel'] = '';
         }
+        // Autocomplete
+        if (!('autocomplete' in this.formInfo.fields[i])) {
+          this.formInfo.fields[i]['autocomplete'] = '';
+        }
+        if ('name' in this.formInfo.fields[i]) {
+          /**
+           * Autocomplete mappings
+           * If the name matches a name from the autocompleteMap
+           */
+          let lName:string = this.formInfo.fields[i].name.toLowerCase();
+          if (lName in this.autocompleteMap) {
+            this.formInfo.fields[i]['autocomplete']  = this.autocompleteMap[lName];
+          }
+          /**
+           * Patterns - override mappings with patterns
+           */
+          if (this.stringInField(i, 'email')
+            && this.stringInField(i+1, 'password')) {
+            if (!this.stringInField(i+2, 'confirm password')) {
+              // If sequence: email, password, and not confirm password,  
+              // then it's a login form
+              this.formInfo.fields[i]['autocomplete']  = 'username';
+              this.formInfo.fields[i+1]['autocomplete'] = 'current-password';
+            }
+          }
+          else if (this.stringInField(i, 'password')
+            && this.stringInField(i+1, 'confirm password')) {
+            // If sequence: password, confirm password,
+            // then it's a sign up form
+            this.formInfo.fields[i]['autocomplete']  = 'new-password';
+            this.formInfo.fields[i+1]['autocomplete'] = 'new-password';
+          }
+        }
         // Save password info
         if ('passwordType' in this.formInfo.fields[i]) {
           if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }
@@ -222,6 +268,14 @@ export class FormComponent implements OnInit {
     } else {
       // Form builder
       this.registerForm = this.formBuilder.group(fbGroup);
+    }
+  }
+
+  private stringInField(index:number, string:string):boolean {
+    if (index <= this.formInfo.fields.length
+      && ('name' in this.formInfo.fields[index])
+      && this.formInfo.fields[index].name.toLowerCase() === string) {
+      return true;
     }
   }
 

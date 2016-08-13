@@ -7,6 +7,7 @@
   (focus)="field.focused = true;"
   (blur)="field.focused = false"
   tabindex="{{tabIndex}}"
+  [attr.autocomplete]="field.autocomplete"
   [attr.aria-label]="field.ariaLabel"
   [attr.aria-invalid]="showFieldErrors"
   [attr.aria-autocomplete]="field.addListener === 'location' ? 'both': ''"
