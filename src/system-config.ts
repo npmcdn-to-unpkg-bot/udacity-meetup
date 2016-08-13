@@ -70,7 +70,6 @@ const barrels: string[] = [
   'app/navbar',
   'app/front/front',
   'app/front/home',
-  'app/front/contact',
   'app/front/components/footer',
   'app/front/components/events',
   'app/front/event',
@@ -83,6 +82,7 @@ const barrels: string[] = [
   'app/shared/components/form-element',
   'app/shared/components/textbox',
   'app/shared/components/select',
+  'app/front/default-page',
   /** @cli-barrel */
 ];
 
