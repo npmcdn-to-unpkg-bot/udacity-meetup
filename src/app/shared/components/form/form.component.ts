@@ -79,7 +79,8 @@ export class FormComponent implements OnInit {
     'state': 'region',
     'postal code': 'postal-code',
     'zip': 'postal-code',
-    'country': 'country'
+    'country': 'country',
+    'birthday': 'bday'
   };
   public inputTypes = ['input', 'datepicker', 'select', 'textarea'];
   public otherTypes = ['option', 'submit', 'special', 'instructions'];

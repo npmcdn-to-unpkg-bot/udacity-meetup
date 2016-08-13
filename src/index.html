@@ -9,13 +9,22 @@
   <script src="/ember-cli-live-reload.js" type="text/javascript"></script>
   {{/unless}}
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="app/shared/styles/loading.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://adriancarriger.github.io/udacity-meetup/vendor/ng2-select/components/css/ng2-select.css" rel="stylesheet">
   <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <div class="loading-container">
+      <div class="loading-area">
+        <h1>The event app is loading</h1>
+        <p>Hang tight while all we find some cool events in your area...</p>
+        <div class="loading-svg"></div>
+      </div>
+    </div>
+  </app-root>
 
   
 
