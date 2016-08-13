@@ -1,6 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewChecked, Renderer } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  AfterViewChecked,
+  Renderer
+} from '@angular/core';
 import { EventsComponent } from '../components/events/index';
-import { AutofocusDirective } from '../../shared/directives/autofocus.directive';
 import { ApiService } from '../../shared/services/api.service';
 import { GlobalEventsService } from '../../shared/services/global-events.service';
 import { PaginatePipe, IPaginationInstance, PaginationService } from 'ng2-pagination';
@@ -12,10 +19,10 @@ declare let Vimeo: any;
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
-  directives: [EventsComponent, AutofocusDirective],
+  directives: [EventsComponent],
   providers: [PaginationService]
 })
-export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
   @ViewChild('videoContainer') videoContainer;
   @ViewChild('searchContainer') searchContainer;
   @ViewChild('search') search;
@@ -78,8 +85,13 @@ export class HomeComponent implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
+  public ngAfterViewInit():void {
+    this.manuelFocus();
+  }
+
   public ngAfterViewChecked():void {
     this.updateScrollPosition();
+    
   }
 
   public ngOnDestroy():void {
