@@ -1,6 +1,6 @@
 <input
   id="{{field.id}}"
-  type="{{type}}"
+  [attr.type]="type"
   [formControl]="control"
   [ngClass]="{'hidden-input':field.inputType === 'file'}"
   (input)="field.length = onInput($event, field.type);"

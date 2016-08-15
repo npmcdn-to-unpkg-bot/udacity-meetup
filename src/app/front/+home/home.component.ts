@@ -55,19 +55,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
   }
 
   public ngOnInit():void {
-    // Background Video
-    let iframe = document.getElementById('hero-video');
-    this.video = new Vimeo.Player(iframe);
-    this.video.on('loaded', data => {
-        this.video.setVolume(0);
-        setTimeout( () => {
-          this.loaded = true;
-        }, 2500);
-    });
-    // Restart video periodically
-    this.intervalReference = setInterval( () => {
-      this.video.setCurrentTime(231);
-    }, 15000);
+    this.backgroundVideoInit();
     // Set listeners related to fixing the search bar
     this.getDimensions();
     this.globalEventsService.elementsCollection['resize'].emitter$.subscribe(data => {
@@ -92,11 +80,32 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
 
   public ngAfterViewChecked():void {
     this.updateScrollPosition();
-    
   }
 
   public ngOnDestroy():void {
     clearInterval(this.intervalReference);
+  }
+
+  /**
+   * Background Video
+   * docs: https://github.com/vimeo/player.js
+   */
+  private backgroundVideoInit() {
+    let iframe = document.getElementById('hero-video');
+    if (iframe !== undefined && iframe !== null) {
+      this.video = new Vimeo.Player(iframe);
+      this.video.on('loaded', data => {
+          // TODO: this is not working in all browsers
+          this.video.setVolume(0);
+          setTimeout( () => {
+            this.loaded = true;
+          }, 2500);
+      });
+      // Restart video periodically
+      this.intervalReference = setInterval( () => {
+        this.video.setCurrentTime(231);
+      }, 15000);
+    }
   }
 
   /**

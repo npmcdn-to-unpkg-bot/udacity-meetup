@@ -21,7 +21,7 @@ export class TextboxComponent implements OnInit {
   @Output() placeAutocomplete = new EventEmitter();
   public timeout;
   public ariaLabel:string = '';
-  public type;
+  public type:string;
   constructor(
     private mapsApiLoader: MapsAPILoader,
     private globalEventsService: GlobalEventsService,

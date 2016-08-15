@@ -82,7 +82,7 @@ export class FormComponent implements OnInit {
     'country': 'country',
     'birthday': 'bday'
   };
-  public inputTypes = ['input', 'datepicker', 'select', 'textarea'];
+  public inputTypes = ['input', 'select', 'textarea'];
   public otherTypes = ['option', 'submit', 'special', 'instructions'];
   
   constructor(

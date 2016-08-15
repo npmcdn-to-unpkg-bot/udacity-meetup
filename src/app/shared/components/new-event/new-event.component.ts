@@ -301,13 +301,14 @@ export class NewEventComponent implements OnInit {
     let address = formInfo.street + ', ' + formInfo.city + ' ' + formInfo.zip;
     // Get cordinates
     this.apiService.getCordinates(address).subscribe(data => {
-      
       if (data.results[0] !== undefined) {
         this.form2Data['venue']['latitude'] = data.results[0].geometry.location.lat;
         this.form2Data['venue']['longitude'] = data.results[0].geometry.location.lng;
-        for (let i = 0; i < data.results[0].address_components.length; i++) {
-          if (data.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
-            this.form2Data['venue']['address']['region'] = data.results[0].address_components[i].long_name;
+        if ('address_components' in data.results[0] && data.results[0].address_components !== undefined) {
+          for (let i = 0; i < data.results[0].address_components.length; i++) {
+            if (data.results[0].address_components[i].types[0] === 'administrative_area_level_1') {
+              this.form2Data['venue']['address']['region'] = data.results[0].address_components[i].long_name;
+            }
           }
         }
       } else {
