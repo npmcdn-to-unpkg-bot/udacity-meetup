@@ -87,7 +87,8 @@ export class NewEventComponent implements OnInit {
           name: 'Event type',
           type: 'select',
           selectType: 'default',
-          selectData: this.eventTypes
+          selectData: this.eventTypes,
+          control: ['', Validators.required]
         },
          {
           type: 'instructions',

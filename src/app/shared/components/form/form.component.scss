@@ -25,7 +25,7 @@ form {
       font-weight: normal;
       font-size: 18px;
       background: white;
-      z-index: 999;
+      z-index: 1000;
       transition: all 0.15s;
       margin: 0;
       padding: 0 5px;
@@ -47,9 +47,6 @@ form {
           cursor: pointer;
         }
       }
-    }
-    input {
-      color: white;
     }
     input, textarea, select {
       display: block;
@@ -78,6 +75,9 @@ form {
       z-index: 999;
       background-color: transparent;
       cursor: pointer;
+      &::-ms-expand{
+        display:none;
+      }
     }
     .error-message {
       background-color: #f2dede;
@@ -96,16 +96,17 @@ form {
         margin-left: -15px;
       }
     }
+    &:not(.active-item) {
+      input, select {
+        color: white;
+      }
+    }
     &.active-item {
       label {
         transition: transform 0.2s;
         transform: translateY(-100%);
         cursor: default;
         z-index: 1000;
-      }
-      input {
-        color: black;
-        transition: color 1s;
       }
     }
   }

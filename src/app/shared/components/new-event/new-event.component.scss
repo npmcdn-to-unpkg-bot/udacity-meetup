@@ -72,6 +72,7 @@
       transition: 1s all; 
       &.slide-out {
         transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
       }
       .form-progress-item {
         color: $lightGray;
@@ -103,11 +104,14 @@
         display: block;
         transition: all 1s;
         transform: translateX(100%);
+        -ms-transform: translateX(100%);
         &.current {
           transform: translateX(0);
+          -ms-transform: translateX(0);
         }
         &.complete {
           transform: translateX(-100%);
+          -ms-transform: translateX(-100%);
         }
         &.confirmation-page {
           text-align: center;
