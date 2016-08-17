@@ -4,6 +4,7 @@ import { ApiService } from './shared/services/api.service';
 import { AuthService } from './shared/services/auth.service';
 import { SearchParamsService } from './shared/services/search-params.service';
 import { GlobalEventsService } from './shared/services/global-events.service';
+import { BrowserSupportService } from './shared/services/browser-support.service';
 import { EasterEggService } from './shared/services/easter-egg.service';
 import { provideLazyMapsAPILoaderConfig, GOOGLE_MAPS_PROVIDERS } from 'angular2-google-maps/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
@@ -15,6 +16,7 @@ export const APP_PROVIDERS = [
     AuthService,
     SearchParamsService,
     GlobalEventsService,
+    BrowserSupportService,
     EasterEggService,
     GOOGLE_MAPS_PROVIDERS,
     SlimLoadingBarService,

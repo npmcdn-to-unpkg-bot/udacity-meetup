@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import * as moment from 'moment';
 
 @Injectable()
 export class ValidationService {
@@ -22,9 +23,38 @@ export class ValidationService {
     needsLowercase: 'Should have a lower case letter',
     needsUppercase: 'Should have a upper case letter',
     needsNumber: 'Should have a number',
-    needsSpecial: 'Should have one of these special characters: - ! @ ^ " § $ % & / ( ) = ? + * ~ # \' _ : . , ;'
+    needsSpecial: 'Should have one of these special characters: - ! @ ^ " § $ % & / ( ) = ? + * ~ # \' _ : . , ;',
+    invalidDate: 'Should have a valid date',
+    needsFutureDate: 'Should have a future date'
   };
 
+  static validDate(control) {
+    if (control.value.length === 0) { return null; }
+    if (moment( control.value, 'M/D/YYYY' ).isValid() || moment( control.value, 'YYYY-MM-DD' ).isValid() ) {
+      return null;
+    } else {
+      return { 'invalidDate': true };
+    }
+  }
+
+  static futureDate(control) {
+    if (control.value.length === 0) { return null; }
+    let after = moment().subtract(1, 'day');
+    let thisMoment;
+    if (moment( control.value, 'M/D/YYYY' ).isValid()) {
+      thisMoment = moment( control.value, 'M/D/YYYY' );
+    } else if (moment( control.value, 'YYYY-MM-DD' ).isValid()) {
+      thisMoment = moment( control.value, 'YYYY-MM-DD' );
+    } else {
+      return { 'needsFutureDate': true };
+    }
+    if ( thisMoment.isAfter(after) ) {
+      return null;
+    } else {
+      return { 'needsFutureDate': true };
+    }
+  }
+  
   // Thanks!: http://mlitzinger.com/articles/password-validator-js/ 
 
   static oneLowercase(control) {

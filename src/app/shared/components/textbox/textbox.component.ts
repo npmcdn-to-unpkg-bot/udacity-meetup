@@ -2,7 +2,9 @@ import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef, 
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { MapsAPILoader } from 'angular2-google-maps/core'; 
 import { GlobalEventsService } from '../../services/global-events.service';
+import { BrowserSupportService } from '../../services/browser-support.service';
 import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
 declare var google: any;
 
 @Component({
@@ -19,12 +21,14 @@ export class TextboxComponent implements OnInit {
   @Input() showFieldErrors;
   @Output() controlChange = new EventEmitter();
   @Output() placeAutocomplete = new EventEmitter();
+  @ViewChild('fileInput') fileInput;
   public timeout;
   public ariaLabel:string = '';
   public type:string;
   constructor(
     private mapsApiLoader: MapsAPILoader,
     private globalEventsService: GlobalEventsService,
+    private browserSupportService: BrowserSupportService,
     private element: ElementRef,
     private renderer: Renderer) {}
 
@@ -39,6 +43,24 @@ export class TextboxComponent implements OnInit {
 
   public onInput(event):number {
     return event.target.value.length;
+  }
+
+  public onBlur(event):void {
+    if (this.type === 'date') {
+      this.checkDate(event);
+    }
+  }
+
+  private checkDate(event):void {
+    if (this.browserSupportService.dateInput) { return; }
+    let value = event.target.value;
+    let defaultMoment = moment( value, 'M/D/YYYY' );
+    if (defaultMoment.isValid()) { // using text input
+      if (defaultMoment.format('M/D/YYYY') !== value) {
+        // Update if not exactly the same format/value
+        this.control.updateValue( defaultMoment.format('M/D/YYYY') );
+      }
+    }
   }
 
   private checkListeners() {
@@ -111,7 +133,7 @@ export class TextboxComponent implements OnInit {
   }
 
   private getBase64(id):void { // File input
-    let filesSelected = this.element.nativeElement.lastElementChild.files;
+    let filesSelected = this.fileInput.nativeElement.files;
     if (filesSelected.length > 0) {
       let fileToLoad = filesSelected[0];
       let fileReader = new FileReader();

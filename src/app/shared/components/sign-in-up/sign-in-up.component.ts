@@ -87,7 +87,7 @@ export class SignInUpComponent implements OnInit {
           name: 'Birthday',
           type: 'input',
           inputType: 'date',
-          control: [''],
+          control: ['', ValidationService.validDate],
           group: 'optional'
         },
         {

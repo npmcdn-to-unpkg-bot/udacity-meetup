@@ -129,7 +129,7 @@ export class NewEventComponent implements OnInit {
           inputType: 'date',
           classes: 'left-input',
           ariaLabel: 'This is the start date input for your event.',
-          control: ['', Validators.required]
+          control: ['', [Validators.required, ValidationService.validDate, ValidationService.futureDate] ]
         },
         {
           name: 'time',
@@ -150,7 +150,7 @@ export class NewEventComponent implements OnInit {
           inputType: 'date',
           classes: 'left-input',
           ariaLabel: 'This is the end date input for your event.',
-          control: ['', Validators.required]
+          control: ['', [Validators.required, ValidationService.validDate, ValidationService.futureDate]]
         },
         {
           name: 'time',
@@ -332,7 +332,12 @@ export class NewEventComponent implements OnInit {
   }
 
   private parseFormatDate(dateInput, timeInput) {
-    let thisMoment = moment( dateInput +  ' ' + timeInput, 'YYYY-MM-DD h:mma' );
+    let thisMoment;
+    if (moment( dateInput, 'M/D/YYYY' ).isValid()) {
+      thisMoment = moment( dateInput, 'M/D/YYYY' );
+    } else if (moment( dateInput, 'YYYY-MM-DD' ).isValid()) {
+      thisMoment = moment( dateInput, 'YYYY-MM-DD' );
+    }
     return {
       local: thisMoment.format('YYYY-MM-DDTHH:mm:ss'),
       utc: thisMoment.valueOf()
@@ -405,6 +410,7 @@ export class NewEventComponent implements OnInit {
       start: this.parseFormatDate(rawEventData.date1, rawEventData.time2),
       url : 'mailto:' + this.authService.getUserEmail() + '?Subject=Sign%20me%20up!'
     };
+    //console.log(eventData);
     this.apiService.addEvent(eventData);
     this.next();
     this.reset = true;

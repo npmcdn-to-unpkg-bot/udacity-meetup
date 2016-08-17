@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ViewContainerRef, OnInit } from '@angular/core';
 import {ROUTER_DIRECTIVES, ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { GlobalEventsService } from './shared/services/global-events.service';
+import { BrowserSupportService } from './shared/services/browser-support.service';
 import { EasterEggService } from './shared/services/easter-egg.service';
 import { NewEventComponent } from './shared/components/new-event/index';
 import { AuthContainerComponent } from './shared/components/auth-container/index';
@@ -25,6 +26,7 @@ import { APP_PROVIDERS } from './app.providers';
 export class AppComponent implements OnInit {
   constructor(
     private globalEventsService: GlobalEventsService,
+    private browserSupportService: BrowserSupportService,
     private viewContainerRef: ViewContainerRef,
     private easterEggService: EasterEggService,
     private slimLoader: SlimLoadingBarService,
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
 
   public ngOnInit():void {
     this.globalEventsService.init();
+    this.browserSupportService.detect();
     this.easterEggService.init();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

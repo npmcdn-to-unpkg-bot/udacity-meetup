@@ -8,6 +8,7 @@ export * from './pipes/sanitize-html.pipe';
 export * from './pipes/values.pipe';
 export * from './services/api.service';
 export * from './services/auth.service';
+export * from './services/browser-support.service';
 export * from './services/easter-egg.service';
 export * from './services/global-events.service';
 export * from './services/search-params.service';
