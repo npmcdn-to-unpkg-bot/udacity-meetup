@@ -1,11 +1,11 @@
 <input
   id="{{field.id}}"
-  type="{{type}}"
+  [attr.type]="type"
   [formControl]="control"
   [ngClass]="{'hidden-input':field.inputType === 'file'}"
   (input)="field.length = onInput($event, field.type);"
   (focus)="field.focused = true;"
-  (blur)="field.focused = false"
+  (blur)="field.focused = false; onBlur($event)"
   tabindex="{{tabIndex}}"
   [attr.autocomplete]="field.autocomplete"
   [attr.aria-label]="field.ariaLabel"
@@ -15,6 +15,16 @@
   [attr.aria-describedby]="'error-description-' + field.id"
   placeholder="">
 <input
+  #fileInput
   *ngIf="field.inputType === 'file'"
   type="file"
   tabindex="{{tabIndex}}">
+<!-- Date help -->
+<div *ngIf="
+  field.inputType === 'date'
+  && field.focused
+  && !browserSupportService.dateInput"
+  class="help-message"
+  role="alert">
+  <li>Date format should be 12/31/1999</li>
+</div>
