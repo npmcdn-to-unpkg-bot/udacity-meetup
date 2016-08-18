@@ -22,17 +22,19 @@ export class ApiService {
     this.preMedia$ = new BehaviorSubject(this.media);
   }
 
-  public observe(paramsObj, apiLocation) {
+  public observe(paramsObj, apiLocation) {    
     let url:string = 'https://www.eventbriteapi.com/v3/' + apiLocation + '/?token=S6S7G427VEDSLNEQRE6B';
     let searchParams = this.searchParamsService.transform(paramsObj);
     return this.http.get(url, {
         search: searchParams
     })
     .map( (responseData) => {
-      return responseData.json();
+      if (responseData.text().substring(0, 2) === '"{') {
+        return responseData.json();
+      }
     });
   }
-
+  
   public getCordinates(address) {
     let url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI';
     let searchParams = this.searchParamsService.transform({address:address});
@@ -84,7 +86,7 @@ export class ApiService {
     this.http.get('https://geoip.nekudo.com/api')
     .map(responseData => {
       return responseData.json();
-    }).subscribe(data => { 
+    }).subscribe(data => {
       for (let i = 1; i <= 4; i++) {
         let testParams = {
           'location.within': '10mi',
@@ -94,8 +96,10 @@ export class ApiService {
         };
         this.observe(testParams, 'events/search').subscribe(
           data => {
-            this.events.push(...data.events);
-            this.updateEvents();
+            if (data !== undefined) {
+              this.events.push(...data.events);
+              this.updateEvents();
+            }
           },
           error => {
             let errorObj = JSON.parse( error._body );
