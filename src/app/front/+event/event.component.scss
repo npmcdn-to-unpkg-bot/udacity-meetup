@@ -6,11 +6,6 @@
   height: $image_large;
   overflow: hidden;
   position: relative;
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: $image_large;
-  }
   .basic-info {
     position: absolute;
     top: 15%;

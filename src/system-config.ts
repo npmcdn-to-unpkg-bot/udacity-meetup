@@ -83,6 +83,7 @@ const barrels: string[] = [
   'app/shared/components/textbox',
   'app/shared/components/select',
   'app/front/default-page',
+  'app/shared/components/cropped-image',
   /** @cli-barrel */
 ];
 

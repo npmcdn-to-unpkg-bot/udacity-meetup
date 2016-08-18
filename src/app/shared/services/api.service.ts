@@ -29,7 +29,7 @@ export class ApiService {
         search: searchParams
     })
     .map( (responseData) => {
-      if (responseData.text().substring(0, 2) === '"{') {
+      if (responseData.text().substring(0, 2) === '{"') {
         return responseData.json();
       }
     });

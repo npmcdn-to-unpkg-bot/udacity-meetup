@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
 import { SanitizeHtmlPipe } from '../../shared/pipes/sanitize-html.pipe';
 import { AddTabIndexPipe } from '../../shared/pipes/add-tab-index.pipe';
+import { CroppedImageComponent } from '../../shared/components/cropped-image/cropped-image.component';
 import { DateFormatPipe } from 'angular2-moment';
 import * as moment from 'moment';
 
@@ -12,7 +13,7 @@ import * as moment from 'moment';
   selector: 'app-event',
   templateUrl: 'event.component.html',
   styleUrls: ['event.component.css'],
-  directives: [GOOGLE_MAPS_DIRECTIVES],
+  directives: [GOOGLE_MAPS_DIRECTIVES, CroppedImageComponent],
   pipes: [
     SanitizeHtmlPipe,
     DateFormatPipe,
