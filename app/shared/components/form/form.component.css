@@ -21,7 +21,7 @@ form .input-item {
     font-weight: normal;
     font-size: 18px;
     background: white;
-    z-index: 999;
+    z-index: 1000;
     transition: all 0.15s;
     margin: 0;
     padding: 0 5px;
@@ -39,8 +39,6 @@ form .input-item {
       cursor: pointer; }
       form .input-item label.select-box:after {
         cursor: pointer; }
-  form .input-item input {
-    color: white; }
   form .input-item input, form .input-item textarea, form .input-item select {
     display: block;
     font-size: 18px;
@@ -66,6 +64,8 @@ form .input-item {
     z-index: 999;
     background-color: transparent;
     cursor: pointer; }
+    form .input-item select::-ms-expand {
+      display: none; }
   form .input-item .error-message {
     background-color: #f2dede;
     color: #b15655;
@@ -79,14 +79,13 @@ form .input-item {
   @media (max-width: 500px) {
     form .input-item .error-message, form .input-item .help-message span {
       margin-left: -15px; } }
+  form .input-item:not(.active-item) input, form .input-item:not(.active-item) select {
+    color: white; }
   form .input-item.active-item label {
     transition: transform 0.2s;
     transform: translateY(-100%);
     cursor: default;
     z-index: 1000; }
-  form .input-item.active-item input {
-    color: black;
-    transition: color 1s; }
 
 form .group-label {
   text-align: left;
