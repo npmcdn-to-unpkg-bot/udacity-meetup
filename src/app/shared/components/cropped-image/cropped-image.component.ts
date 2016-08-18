@@ -12,15 +12,15 @@ export class CroppedImageComponent implements AfterViewInit, OnChanges {
     private renderer: Renderer,
     private element: ElementRef) {}
 
-  public ngAfterViewInit():void {
+  public ngAfterViewInit(): void {
     this.updateImage();
   }
 
-  public ngOnChanges(event):void {
+  public ngOnChanges(event): void {
     this.updateImage();
   }
 
-  private updateImage():void {
+  private updateImage(): void {
     // this helped!: http://stackoverflow.com/a/22374423/5357459
     if (this.src !== undefined) {
       this.renderer.setElementStyle(

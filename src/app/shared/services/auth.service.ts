@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
   // Credentials are not stored in local storage.
   // They are only saved in memory, and only support one user.
-  public preAuthlState$
+  public preAuthlState$;
   public credentials = {
     email: null,
     password: null
@@ -18,12 +17,12 @@ export class AuthService {
     birthday: null
   };
   // Auth state
-  public authenticated:boolean = false;
+  public authenticated: boolean = false;
   constructor() {
     this.preAuthlState$ = new BehaviorSubject( this.authenticated );
   }
 
-  public signInUp(event):boolean {
+  public signInUp(event): boolean {
     if (event.action === 'signup') {
       this.signUp(event);
     } else if (event.action === 'signin') {
@@ -32,12 +31,12 @@ export class AuthService {
     return this.checkAuth();
   }
 
-  public signOut():boolean {
+  public signOut(): boolean {
     this.authenticated = false;
     return this.checkAuth();
   }
 
-  public checkAuth():boolean {
+  public checkAuth(): boolean {
     this.preAuthlState$.next( this.authenticated );
     return this.authenticated;
   }
@@ -50,7 +49,7 @@ export class AuthService {
     return this.profile;
   }
 
-  private signIn(credentialsEntered):void {
+  private signIn(credentialsEntered): void {
     if (this.credentials.password !== null // Only authenticate if user was created
         && this.credentials.email === credentialsEntered.email
         && this.credentials.password === credentialsEntered.password) {
@@ -58,7 +57,7 @@ export class AuthService {
     }
   }
 
-  private signUp(formData):boolean {
+  private signUp(formData): boolean {
     // Save credentials
     this.credentials.email = formData.email;
     this.credentials.password = formData.password;

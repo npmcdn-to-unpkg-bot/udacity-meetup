@@ -9,22 +9,17 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild,
   Renderer,
   ChangeDetectorRef
 } from '@angular/core';
 import {
   REACTIVE_FORM_DIRECTIVES,
-  FormBuilder,
-  FormGroup,
-  Validators
+  FormBuilder
 } from '@angular/forms';
-import { MapsAPILoader } from 'angular2-google-maps/core';
 import { ValidationService } from '../../services/validation.service';
 import { ValuesPipe } from '../../pipes/values.pipe';
 import { TextboxComponent } from '../textbox';
 import { SelectComponent } from '../select';
-
 declare var google: any;
 
 @Component({
@@ -44,15 +39,15 @@ export class FormComponent implements OnInit {
   @Input() modeInit;
   @Input() allFormInfo;
   @Input() tabIndex;
-  @Input() formErrorMessage:string;
-  @Input() formComponentId:string;
+  @Input() formErrorMessage: string;
+  @Input() formComponentId: string;
   @Output() currentFocus = new EventEmitter();
   @Output() special = new EventEmitter();
   @Output() formComplete = new EventEmitter();
   public mode;
   public formInfo;
-  public active:boolean = true;
-  public registerForm:any;
+  public active: boolean = true;
+  public registerForm: any;
   public focusTimeout;
   public addListenerQueue = {};
   public errorMessages = {};
@@ -84,23 +79,21 @@ export class FormComponent implements OnInit {
   };
   public inputTypes = ['input', 'select', 'textarea'];
   public otherTypes = ['option', 'submit', 'special', 'instructions'];
-  
+
   constructor(
     private renderer: Renderer,
     private formBuilder: FormBuilder,
-    private _loader: MapsAPILoader,
     private ref: ChangeDetectorRef) {}
-  
-  public ngOnInit():void {
+
+  public ngOnInit(): void {
     this.setFormComponenetId();
     this.mode = this.modeInit;
     this.formInfo = this.allFormInfo[this.mode];
-    //this.currentFocus.emit('meow bob');
     this.sortInput();
     this.errorMessages = ValidationService.errorMessages;
   }
 
-  public reset():Promise<string> {
+  public reset(): Promise<string> {
     // Angular 2 workaround (as of 2.0.0-rc.4)
     // https://angular.io/docs/ts/latest/guide/forms.html
     this.active = false;
@@ -114,7 +107,7 @@ export class FormComponent implements OnInit {
     });
   }
 
-  public itemInObject(item, object):boolean {
+  public itemInObject(item, object): boolean {
     return item in object;
   }
 
@@ -126,25 +119,9 @@ export class FormComponent implements OnInit {
     }
   }
 
-  private switchModes(newForm) {
-    this.mode = newForm;
-    this.formInfo = this.allFormInfo[this.mode];
-    this.currentFocus.emit(this.formInfo.title);
-    this.formErrorMessage = null;
-    this.reset().then(() => this.setFocus(0));
-  }
-
-  // This helps insure that there are unique input Ids
-  // when there are multiple form components.
-  private setFormComponenetId() {
-    if (this.formComponentId === undefined) {
-      this.formComponentId = 'form-' + Math.floor( Math.random() * 10000);
-    }
-  }
-
-  public showFieldErrors(field):boolean {
+  public showFieldErrors(field): boolean {
     if (!this.registerForm.pristine
-      && (this.registerForm.controls[field.id].touched 
+      && (this.registerForm.controls[field.id].touched
         || (field.inputType === 'file' && !this.registerForm.controls[field.id].pristine))
       && this.registerForm.controls[field.id].errors
       && (field.passwordType !== 'password' || field.focused === false)) {
@@ -175,10 +152,10 @@ export class FormComponent implements OnInit {
           focused = true;
         }
       }
-    }, delay); 
+    }, delay);
   }
 
-  public showGroup(groupName):void {
+  public showGroup(groupName): void {
     for (let i = 0; i < this.formInfo.fields.length; i++) {
       if (this.formInfo.fields[i].group === groupName) {
         this.formInfo.fields[i].show = true;
@@ -187,103 +164,10 @@ export class FormComponent implements OnInit {
     this.setFocus(0);
   }
 
-  private sortInput():void {
-    let inputId = 0;
-    let fbGroup = {}; // Form builder group object
-    let passwordId, confirmPasswordId;
-    let allowedTypes = [...this.inputTypes, ...this.otherTypes];
-    for (let i = 0; i < this.formInfo.fields.length; i++) {
-      // Check type
-      if (allowedTypes.indexOf(this.formInfo.fields[i].type) !== -1) {
-        // Create unique id
-        inputId++;
-        let idString = this.formComponentId + '-id-' + inputId;
-        // Get group
-        let group = null;
-        if ('group' in this.formInfo.fields[i]) { group = this.formInfo.fields[i].group; }
-        // Get default show
-        let show = true;
-        if (group !== null &&  this.formInfo.fields[i].type !== 'option') { show = false; }
-        // Set field info
-        this.formInfo.fields[i]['id'] = idString;
-        this.formInfo.fields[i]['show'] = show;
-        this.formInfo.fields[i]['length'] = 0;
-        /**
-         * Aria label 
-         * (if not present this will add an empty string
-         *  so that it doesn't use 'undefined' or 'null')
-         */ 
-        if (!('ariaLabel' in this.formInfo.fields[i])) {
-          this.formInfo.fields[i]['ariaLabel'] = '';
-        }
-        // Autocomplete
-        if (!('autocomplete' in this.formInfo.fields[i])) {
-          this.formInfo.fields[i]['autocomplete'] = '';
-        }
-        if ('name' in this.formInfo.fields[i]) {
-          /**
-           * Autocomplete mappings
-           * If the name matches a name from the autocompleteMap
-           */
-          let lName:string = this.formInfo.fields[i].name.toLowerCase();
-          if (lName in this.autocompleteMap) {
-            this.formInfo.fields[i]['autocomplete']  = this.autocompleteMap[lName];
-          }
-          /**
-           * Patterns - override mappings with patterns
-           */
-          if (this.stringInField(i, 'email')
-            && this.stringInField(i+1, 'password')) {
-            if (!this.stringInField(i+2, 'confirm password')) {
-              // If sequence: email, password, and not confirm password,  
-              // then it's a login form
-              this.formInfo.fields[i]['autocomplete']  = 'username';
-              this.formInfo.fields[i+1]['autocomplete'] = 'current-password';
-            }
-          }
-          else if (this.stringInField(i, 'password')
-            && this.stringInField(i+1, 'confirm password')) {
-            // If sequence: password, confirm password,
-            // then it's a sign up form
-            this.formInfo.fields[i]['autocomplete']  = 'new-password';
-            this.formInfo.fields[i+1]['autocomplete'] = 'new-password';
-          }
-        }
-        // Save password info
-        if ('passwordType' in this.formInfo.fields[i]) {
-          if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }
-          if (this.formInfo.fields[i].passwordType === 'confirm') { confirmPasswordId = idString; }
-        }
-        // Add to form builder group object
-        fbGroup[idString] = this.formInfo.fields[i].control;
-      } else {
-        // Warn if invalid type
-        console.warn('Skipping invalid form field type "' + this.formInfo.fields[i].type + '"');
-      }
-    }
-    // Add confirm password validation
-    if (confirmPasswordId !== undefined) {
-      // Form builder
-      this.registerForm = this.formBuilder.group(fbGroup,
-        {validator: ValidationService.matchingPasswords(passwordId, confirmPasswordId)});
-    } else {
-      // Form builder
-      this.registerForm = this.formBuilder.group(fbGroup);
-    }
-  }
-
-  private stringInField(index:number, string:string):boolean {
-    if (index <= this.formInfo.fields.length
-      && ('name' in this.formInfo.fields[index])
-      && this.formInfo.fields[index].name.toLowerCase() === string) {
-      return true;
-    }
-  }
-
-  public onPlaceAutocomplete(event, id:string, index:number) {
-    let preInputId:string = this.formComponentId + '-id-';
-    let preInputIdLength:number = preInputId.length;
-    let inputId:number = Number( id.substr(preInputIdLength) );
+  public onPlaceAutocomplete(event, id: string, index: number) {
+    let preInputId: string = this.formComponentId + '-id-';
+    let preInputIdLength: number = preInputId.length;
+    let inputId: number = Number( id.substr(preInputIdLength) );
     // Reference object - for improved readability
     let ref = {
       street: {
@@ -347,21 +231,21 @@ export class FormComponent implements OnInit {
     this.ref.detectChanges();
   }
 
-  private onInput(event, type):number {
-    if (type === 'select') { 
+  public onInput(event, type): number {
+    if (type === 'select') {
       return event.length;
     } else {
       return event.target.value.length;
-    } 
+    }
   }
 
-  getSelectData(selectType):Array<string> { // ng-select
+  public getSelectData(selectType): Array<string> { // ng-select
     if (selectType in this.selectData) {
       return this.selectData[selectType];
     }
   }
 
-  public isAnInputType(type):boolean {
+  public isAnInputType(type): boolean {
     return this.inputTypes.indexOf(type) !== -1;
   }
 
@@ -374,23 +258,133 @@ export class FormComponent implements OnInit {
       let uniqueId = 1;
       let i = -1;
       for (let key in formValue) {
-        i++;
-        if (this.isAnInputType(this.formInfo.fields[i].type) ) {
-          let label = this.formInfo.fields[i].name;
-          if (label in formOutput) {
-            label += uniqueId++; 
+        if (formValue.hasOwnProperty(key)) {
+           i++;
+          if (this.isAnInputType(this.formInfo.fields[i].type) ) {
+            let label = this.formInfo.fields[i].name;
+            if (label in formOutput) {
+              label += uniqueId++;
+            }
+            label = this.camelize(label);
+            formOutput[label] = formValue[key];
           }
-          label = this.camelize(label);
-          formOutput[label] = formValue[key];
         }
       }
       this.formComplete.emit( formOutput );
     }
   }
 
+  private switchModes(newForm) {
+    this.mode = newForm;
+    this.formInfo = this.allFormInfo[this.mode];
+    this.currentFocus.emit(this.formInfo.title);
+    this.formErrorMessage = null;
+    this.reset().then(() => this.setFocus(0));
+  }
+
+  // This helps insure that there are unique input Ids
+  // when there are multiple form components.
+  private setFormComponenetId() {
+    if (this.formComponentId === undefined) {
+      this.formComponentId = 'form-' + Math.floor( Math.random() * 10000);
+    }
+  }
+
+  private sortInput(): void {
+    let inputId = 0;
+    let fbGroup = {}; // Form builder group object
+    let passwordId, confirmPasswordId;
+    let allowedTypes = [...this.inputTypes, ...this.otherTypes];
+    for (let i = 0; i < this.formInfo.fields.length; i++) {
+      // Check type
+      if (allowedTypes.indexOf(this.formInfo.fields[i].type) !== -1) {
+        // Create unique id
+        inputId++;
+        let idString = this.formComponentId + '-id-' + inputId;
+        // Get group
+        let group = null;
+        if ('group' in this.formInfo.fields[i]) { group = this.formInfo.fields[i].group; }
+        // Get default show
+        let show = true;
+        if (group !== null &&  this.formInfo.fields[i].type !== 'option') { show = false; }
+        // Set field info
+        this.formInfo.fields[i].id = idString;
+        this.formInfo.fields[i].show = show;
+        this.formInfo.fields[i].length = 0;
+        /**
+         * Aria label 
+         * (if not present this will add an empty string
+         *  so that it doesn't use 'undefined' or 'null')
+         */
+        if (!('ariaLabel' in this.formInfo.fields[i])) {
+          this.formInfo.fields[i].ariaLabel = '';
+        }
+        // Autocomplete
+        if (!('autocomplete' in this.formInfo.fields[i])) {
+          this.formInfo.fields[i].autocomplete = '';
+        }
+        if ('name' in this.formInfo.fields[i]) {
+          /**
+           * Autocomplete mappings
+           * If the name matches a name from the autocompleteMap
+           */
+          let lName: string = this.formInfo.fields[i].name.toLowerCase();
+          if (lName in this.autocompleteMap) {
+            this.formInfo.fields[i].autocomplete  = this.autocompleteMap[lName];
+          }
+          /**
+           * Patterns - override mappings with patterns
+           */
+          if (this.nameInField(i, 'email')
+            && this.nameInField(i + 1, 'password')) {
+            if (!this.nameInField(i + 2, 'confirm password')) {
+              // If sequence: email, password, and not confirm password,  
+              // then it's a login form
+              this.formInfo.fields[i].autocomplete  = 'username';
+              this.formInfo.fields[i + 1].autocomplete = 'current-password';
+            }
+          } else if (this.nameInField(i, 'password')
+            && this.nameInField(i + 1, 'confirm password')) {
+            // If sequence: password, confirm password,
+            // then it's a sign up form
+            this.formInfo.fields[i].autocomplete  = 'new-password';
+            this.formInfo.fields[i + 1].autocomplete = 'new-password';
+          }
+        }
+        // Save password info
+        if ('passwordType' in this.formInfo.fields[i]) {
+          if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }
+          if (this.formInfo.fields[i].passwordType === 'confirm') { confirmPasswordId = idString; }
+        }
+        // Add to form builder group object
+        fbGroup[idString] = this.formInfo.fields[i].control;
+      } else {
+        // Warn if invalid type
+        console.warn('Skipping invalid form field type "' + this.formInfo.fields[i].type + '"');
+      }
+    }
+    // Add confirm password validation
+    if (confirmPasswordId !== undefined) {
+      // Form builder
+      this.registerForm = this.formBuilder.group(fbGroup,
+        {validator: ValidationService.matchingPasswords(passwordId, confirmPasswordId)});
+    } else {
+      // Form builder
+      this.registerForm = this.formBuilder.group(fbGroup);
+    }
+  }
+
+  private nameInField(index: number, name: string): boolean {
+    if (index <= this.formInfo.fields.length
+      && ('name' in this.formInfo.fields[index])
+      && this.formInfo.fields[index].name.toLowerCase() === name) {
+      return true;
+    }
+  }
+
   private camelize(str) { // http://stackoverflow.com/a/2970667/5357459
     return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
-      return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+      return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
     }).replace(/\s+/g, '');
   }
 

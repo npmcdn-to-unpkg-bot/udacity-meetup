@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class GlobalEventsService {
   public preModalState$;
-  public elementsCollection = {};
+  public elementsCollection: any;
   private modalState: ModalState = {
     open: false,
     modal: undefined
@@ -19,6 +19,7 @@ export class GlobalEventsService {
   }
 
   public init() { // Called once from app.componenet
+    this.elementsCollection = {};
     this.observeElement(document, 'scroll');
     this.observeElement(window, 'resize');
   }
@@ -38,11 +39,11 @@ export class GlobalEventsService {
       };
       Observable.fromEvent(element, 'scroll')
         .throttleTime( this.throttleConfig.scroll )
-        .subscribe(event => {
-          this.elementsCollection[elementKey]['emitter$'].emit();
-          clearTimeout( this.elementsCollection[elementKey]['timeout'] );
-          this.elementsCollection[elementKey]['timeout'] = setTimeout( () => {
-            this.elementsCollection[elementKey]['emitter$'].emit();
+        .subscribe( () => {
+          this.elementsCollection[elementKey].emitter$.emit();
+          clearTimeout( this.elementsCollection[elementKey].timeout );
+          this.elementsCollection[elementKey].timeout = setTimeout( () => {
+            this.elementsCollection[elementKey].emitter$.emit();
           }, 250);
       });
     }
@@ -60,6 +61,6 @@ export class GlobalEventsService {
 }
 
 interface ModalState {
-  open: boolean,
-  modal: string
+  open: boolean;
+  modal: string;
 }

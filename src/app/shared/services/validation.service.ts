@@ -1,18 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  REACTIVE_FORM_DIRECTIVES,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
 import * as moment from 'moment';
 
 @Injectable()
 export class ValidationService {
-
-  public test;
-
-  constructor() {}
 
   static errorMessages = {
     required: 'This field is required',
@@ -23,14 +13,16 @@ export class ValidationService {
     needsLowercase: 'Should have a lower case letter',
     needsUppercase: 'Should have a upper case letter',
     needsNumber: 'Should have a number',
-    needsSpecial: 'Should have one of these special characters: - ! @ ^ " § $ % & / ( ) = ? + * ~ # \' _ : . , ;',
+    needsSpecial: 'Should have one of these special characters: '
+      + '- ! @ ^ " § $ % & / ( ) = ? + * ~ # \' _ : . , ;',
     invalidDate: 'Should have a valid date',
     needsFutureDate: 'Should have a future date'
   };
 
   static validDate(control) {
     if (control.value.length === 0) { return null; }
-    if (moment( control.value, 'M/D/YYYY' ).isValid() || moment( control.value, 'YYYY-MM-DD' ).isValid() ) {
+    if (moment( control.value, 'M/D/YYYY' ).isValid()
+      || moment( control.value, 'YYYY-MM-DD' ).isValid() ) {
       return null;
     } else {
       return { 'invalidDate': true };
@@ -54,7 +46,7 @@ export class ValidationService {
       return { 'needsFutureDate': true };
     }
   }
-  
+
   // Thanks!: http://mlitzinger.com/articles/password-validator-js/ 
 
   static oneLowercase(control) {
@@ -100,12 +92,12 @@ export class ValidationService {
       if (passwordInput.value !== passwordConfirmationInput.value) {
         return passwordConfirmationInput.setErrors({notEquivalent: true});
       }
-    }
+    };
   }
 
   static emailValidator(control) {
     // RFC 2822 compliant regex
-    if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
+    /* tslint:disable */ if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) { /* tslint:enable */
       return null;
     } else {
       return { 'invalidEmailAddress': true };

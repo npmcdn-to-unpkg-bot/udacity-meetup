@@ -1,11 +1,9 @@
 import {
   Component,
   Input,
-  ChangeDetectionStrategy,
   OnInit,
   OnChanges,
-  Renderer,
-  ViewChild
+  Renderer
 } from '@angular/core';
 import { CleanDatesPipe } from '../../../shared/pipes/clean-dates.pipe';
 import { ROUTER_DIRECTIVES } from '@angular/router';
@@ -32,9 +30,9 @@ export class EventsComponent implements OnInit, OnChanges {
   @Input() search;
   public events = [];
   public filteredCount = {count: 0};
-  public term:string = '';
-  public ariaLabelDefault:string = 'List of events';
-  public ariaLabel:string;
+  public term: string = '';
+  public ariaLabelDefault: string = 'List of events';
+  public ariaLabel: string;
   public config: IPaginationInstance = {
       id: 'custom',
       itemsPerPage: 9,
@@ -44,12 +42,12 @@ export class EventsComponent implements OnInit, OnChanges {
     public apiService: ApiService,
     private renderer: Renderer) {}
 
-  public ngOnInit():void {
+  public ngOnInit(): void {
     this.events = this.apiService.events$;
     this.ariaLabel = this.ariaLabelDefault;
   }
 
-  public ngOnChanges(change):void {
+  public ngOnChanges(change): void {
     if ('search' in change) {
       this.config.currentPage = 1;
       if (this.search.length > 0) {

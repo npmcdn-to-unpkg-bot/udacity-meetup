@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ViewContainerRef, OnInit } from '@angular/core';
-import {ROUTER_DIRECTIVES, ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import {ROUTER_DIRECTIVES, Router, NavigationEnd} from '@angular/router';
 import { GlobalEventsService } from './shared/services/global-events.service';
 import { BrowserSupportService } from './shared/services/browser-support.service';
 import { EasterEggService } from './shared/services/easter-egg.service';
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     // https://github.com/angular/angular-cli/issues/706
   }
 
-  public ngOnInit():void {
+  public ngOnInit(): void {
     this.globalEventsService.init();
     this.browserSupportService.detect();
     this.easterEggService.init();
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private runSlimLoader():void {
+  private runSlimLoader(): void {
       this.slimLoader.start();
       setTimeout(() => this.slimLoader.progress = 14, 200);
       setTimeout(() => this.slimLoader.progress = 17, 400);

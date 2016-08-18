@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { SanitizeHtmlPipe } from '../pipes/sanitize-html.pipe';
 import * as moment from 'moment';
-import { DomSanitizationService } from '@angular/platform-browser';
 
 @Injectable()
 export class EasterEggService {
 
-  constructor(private apiService: ApiService, private _sanitizer: DomSanitizationService) {}
+  constructor(private apiService: ApiService) {}
 
-  public init():void {
+  public init(): void {
     let eventInfo = this.getInfo();
     setTimeout( () => {
-      this.apiService.addEvent( eventInfo )
+      this.apiService.addEvent( eventInfo );
     }, 15000);
   }
 
@@ -27,8 +25,11 @@ export class EasterEggService {
           type: 'Family Event',
           host: 'Andy Dwyer',
           capacity: 'More than 1000 People',
-          guestList: 'Leslie Knope, April Ludgate, Tom Haverford, Ron Swanson, Ben Wyatt, Jerry Gergich, Chris Traeger, Ann Perkins',
-          guestMessage: " We'd like to encourage everyone to buy our merchandise. All the proceeds will go towards Li'l Sebastian's favorite charity, the Afghan Institute of Learning."
+          guestList: 'Leslie Knope, April Ludgate, Tom Haverford, Ron Swanson, Ben Wyatt,'
+            + ' Jerry Gergich, Chris Traeger, Ann Perkins',
+          guestMessage: " We'd like to encourage everyone to buy our merchandise. All the proceeds"
+            + ' will go towards Li\'l Sebastian\'s favorite charity, the Afghan Institute of'
+            + ' Learning.'
         },
         profile: {
           name: 'Leslie Knope',
@@ -38,7 +39,18 @@ export class EasterEggService {
         }
       },
       description: {
-        html: '<p>He was an animal, a legend, a friend. He was our beacon of light. He was Pawnee\'s horse. In what is surely the most monumental news to come out of Pawnee since the eradication of smallpox in 1993, it is with sorrow that we report Li\'l Sebastian is dead. But he will never leave our hearts and our memories.</p><p>Sebastian may have been li\'l, but his impact on this town, and the Parks Department, was anything but li\'l. When his owners, Michael and Elizabeth Stone, first discovered him, Elizabeth says it was "like seeing an angel and being punched in the gut at the same time - because as perfect as he was, we knew we\'d never see anything that perfect again." Michael goes on to say, "I love my wife, I do. But I LOVED Li\'l Sebastian."</p><br><br><iframe width="560" height="315" src="https://www.youtube.com/embed/h-PUW6y4F6c?list=RDh-PUW6y4F6c" frameborder="0" allowfullscreen></iframe>'
+        html: '<p>He was an animal, a legend, a friend. He was our beacon of light. He was '
+          + 'Pawnee\'s horse. In what is surely the most monumental news to come out of Pawnee '
+          + 'since the eradication of smallpox in 1993, it is with sorrow that we report Li\'l '
+          + 'Sebastian is dead. But he will never leave our hearts and our memories.</p>'
+          + '<p>Sebastian may have been li\'l, but his impact on this town, and the Parks '
+          + 'Department, was anything but li\'l. When his owners, Michael and Elizabeth Stone,'
+          + ' first discovered him, Elizabeth says it was "like seeing an angel and being punched'
+          + ' in the gut at the same time - because as perfect as he was, we knew we\'d never see'
+          + ' anything that perfect again." Michael goes on to say, "I love my wife, I do. But I '
+          + 'LOVED Li\'l Sebastian."</p><br><br><iframe width="560" height="315" '
+          + 'src="https://www.youtube.com/embed/h-PUW6y4F6c?list=RDh-PUW6y4F6c" frameborder="0" '
+          + 'allowfullscreen></iframe>'
       },
       details: {
         media: {
@@ -85,5 +97,5 @@ export class EasterEggService {
       }
     };
   }
-  
+
 }

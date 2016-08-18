@@ -7,10 +7,10 @@ import { DomSanitizationService } from '@angular/platform-browser';
 })
 export class SanitizeHtmlPipe implements PipeTransform {
 
-  constructor(private _sanitizer: DomSanitizationService){}  
+  constructor(private sanitizer: DomSanitizationService) {}
 
    transform(v: string) {
-      return this._sanitizer.bypassSecurityTrustHtml(v); 
-   } 
+      return this.sanitizer.bypassSecurityTrustHtml(v);
+   }
 
 }

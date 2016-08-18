@@ -10,8 +10,8 @@ import {
 import { EventsComponent } from '../components/events/index';
 import { ApiService } from '../../shared/services/api.service';
 import { GlobalEventsService } from '../../shared/services/global-events.service';
-import { PaginatePipe, IPaginationInstance, PaginationService } from 'ng2-pagination';
-import { ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
+import { PaginationService } from 'ng2-pagination';
+import { Router, NavigationEnd } from '@angular/router';
 declare let Vimeo: any;
 
 @Component({
@@ -27,41 +27,41 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
   @ViewChild('searchContainer') searchContainer;
   @ViewChild('search') search;
   @ViewChild('videoSection') videoSection;
-  public video:any;
-  public searchFixed:boolean = false;
+  public video: any;
+  public searchFixed: boolean = false;
   public events: Array<Object>;
-  public vcHeight:number;
-  public loaded:boolean = false;
-  public searchBarTabIndex:number = 12;
-  private intervalReference:number;
-  private yPos:number = 0;
-  private minScroll:number = 999999;
-  private scrollUpdateNeeded:boolean = false;
-  
+  public vcHeight: number;
+  public loaded: boolean = false;
+  public searchBarTabIndex: number = 12;
+  private intervalReference: number;
+  private yPos: number = 0;
+  private minScroll: number = 999999;
+  private scrollUpdateNeeded: boolean = false;
+
   constructor(
     public globalEventsService: GlobalEventsService,
     private apiService: ApiService,
     private router: Router,
     private renderer: Renderer) {}
 
-  public onInput():void {
+  public onInput(): void {
     // Moves scroll position on next digest cycle
     this.scrollUpdateNeeded = true;
   }
 
-  public manuelFocus():void {
+  public manuelFocus(): void {
     this.renderer.invokeElementMethod(
       this.search.nativeElement, 'focus', []);
   }
 
-  public ngOnInit():void {
+  public ngOnInit(): void {
     this.backgroundVideoInit();
     // Set listeners related to fixing the search bar
     this.getDimensions();
-    this.globalEventsService.elementsCollection['resize'].emitter$.subscribe(data => {
+    this.globalEventsService.elementsCollection.resize.emitter$.subscribe(data => {
       this.getDimensions();
     });
-    this.globalEventsService.elementsCollection['scroll'].emitter$.subscribe( () => {
+    this.globalEventsService.elementsCollection.scroll.emitter$.subscribe( () => {
       this.yPos = document.body.scrollTop;
       this.updateFixed();
     });
@@ -74,15 +74,15 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
     });
   }
 
-  public ngAfterViewInit():void {
+  public ngAfterViewInit(): void {
     this.manuelFocus();
   }
 
-  public ngAfterViewChecked():void {
+  public ngAfterViewChecked(): void {
     this.updateScrollPosition();
   }
 
-  public ngOnDestroy():void {
+  public ngOnDestroy(): void {
     clearInterval(this.intervalReference);
   }
 
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
   /**
    * Get dimensions related to fixing the search bar
    */
-  private getDimensions():void {
+  private getDimensions(): void {
     // Window height
     let winHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     // Pixels below the top of the page (Desktop: 60px)
@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
    * then changes a variable that changes the 
    * class via ngClass in the Html 
    */
-  private updateFixed():void {
+  private updateFixed(): void {
     if (this.yPos >= this.minScroll) {
       this.searchBarTabIndex = 7;
       this.searchFixed = true;
@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit, AfterViewChecked, O
    * until the position actually changes.
    * http://stackoverflow.com/a/35493028/5357459
    */
-  private updateScrollPosition():void {
+  private updateScrollPosition(): void {
     if (this.scrollUpdateNeeded) {
       if (document.body.scrollTop === this.vcHeight) {
         this.scrollUpdateNeeded = false;

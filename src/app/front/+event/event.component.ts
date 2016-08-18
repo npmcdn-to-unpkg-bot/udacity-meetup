@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
 import { SanitizeHtmlPipe } from '../../shared/pipes/sanitize-html.pipe';
 import { AddTabIndexPipe } from '../../shared/pipes/add-tab-index.pipe';
-import { CroppedImageComponent } from '../../shared/components/cropped-image/cropped-image.component';
+import {
+  CroppedImageComponent
+} from '../../shared/components/cropped-image/cropped-image.component';
 import { DateFormatPipe } from 'angular2-moment';
 import * as moment from 'moment';
 
@@ -20,7 +22,7 @@ import * as moment from 'moment';
     AddTabIndexPipe
   ]
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit, AfterViewInit {
   public zoom: number = 15;
   public lat: number;
   public lng: number;
@@ -31,12 +33,12 @@ export class EventComponent implements OnInit {
   };
   public image: string;
   public eventId: string;
-  public date:string;
+  public date: string;
   public eventData$;
-  
+
   constructor(public apiService: ApiService, private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.eventId = this.activatedRoute.snapshot.url[1].path;
     this.eventData$ = this.apiService.events$
       .map(events => events.find(item => item.id === this.eventId));
@@ -52,7 +54,7 @@ export class EventComponent implements OnInit {
           let venue = data.details.venue;
           this.lat = Number(venue.latitude);
           this.lng = Number(venue.longitude);
-          
+
           let base = '';
           if (this.ifExists(venue.address.city)) {
             base = venue.address.city;
@@ -69,8 +71,8 @@ export class EventComponent implements OnInit {
           if (venue.address.address_1.length > 0) {
             full = venue.address.address_1 + ', ' + base;
           }
-          this.address['base'] = base;
-          this.address['full'] = full;
+          this.address.base = base;
+          this.address.full = full;
           this.mapUrl = 'https://www.google.com/maps/?q=' + full;
         }
         if ('start' in data) {
@@ -89,20 +91,20 @@ export class EventComponent implements OnInit {
     });
   }
 
-  public ngAfterViewInit():void {
+  public ngAfterViewInit(): void {
     document.body.scrollTop = 0;
   }
 
-  private ifExists(item):boolean {
+  public isNumeric(n): boolean {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+  private ifExists(item): boolean {
     if (item !== undefined
       && item !== null
       && item.length > 0) {
-      return true
+      return true;
     }
-  }
-
-  isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
 }

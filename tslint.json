@@ -107,12 +107,9 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-
-
-    
-    "directive-selector-prefix": [true, "as"],
-    "component-selector-prefix": [true, "as"],
-    "pipe-naming": [true, "camelCase", "as"],
+    "directive-selector-prefix": [true, "app"],
+    "component-selector-prefix": [true, "app"],
+    "pipe-naming": [true, "camelCase", "app"],
     "no-attribute-parameter-decorator": true,
     "no-forward-ref" :true,
     "member-access": false,

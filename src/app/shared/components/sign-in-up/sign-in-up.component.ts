@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import {
-  REACTIVE_FORM_DIRECTIVES,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
+import { Validators } from '@angular/forms';
 import { FormComponent } from '../form';
 import { ValidationService } from '../../services/validation.service';
 import { AuthService } from '../../services/auth.service';
@@ -16,14 +17,14 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['sign-in-up.component.css'],
   directives: [FormComponent]
 })
-export class SignInUpComponent implements OnInit {
+export class SignInUpComponent {
   @Input() tabIndex;
   @Input() modeInit;
   @Output() authComplete = new EventEmitter();
   @Output() modeUpdate = new EventEmitter();
   @ViewChild('signForm') appForm;
-  public formErrorMessage:string = null;
-  public formInfo:any = {
+  public formErrorMessage: string = null;
+  public formInfo: any = {
     signup: {
       title: 'Sign up',
       instructions: 'Creating an account will allow you to create events.',
@@ -142,18 +143,16 @@ export class SignInUpComponent implements OnInit {
   };
   constructor(private authService: AuthService) {}
 
-  public ngOnInit():void {}
-
-  public setFocus(delay: number):void {
+  public setFocus(delay: number): void {
     this.appForm.setFocus(delay);
   }
 
-  public reset():void {
+  public reset(): void {
     this.formErrorMessage = null;
     this.appForm.reset();
   }
 
-  public onSubmit(event) {
+  public onSubmit(event): void {
     if (this.authService.signInUp(event)) {
       this.authComplete.emit(true);
     } else {

@@ -7,13 +7,13 @@ export class AddTabIndexPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     if (value === null || value === undefined) { return value; }
-    let search:string;
-    let linkReplacement:string = '<a tabindex="20" aria-label="external content from event creator"';
-    let buttonReplacement:string = '<a tabindex="20"';
+    let search: string;
+    let linkReplacement = '<a tabindex="20" aria-label="external content from event creator"';
+    let buttonReplacement = '<a tabindex="20"';
 
     search = '<a';
     value = value.split(search).join(linkReplacement);
-    
+
     search = '<A';
     value = value.split(search).join(linkReplacement);
 
@@ -22,7 +22,7 @@ export class AddTabIndexPipe implements PipeTransform {
 
     search = '<button';
     value = value.split(search).join(buttonReplacement);
-    
+
     return value;
   }
 

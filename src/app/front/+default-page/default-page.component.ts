@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['default-page.component.css']
 })
 export class DefaultPageComponent implements OnInit {
-  public type:string;
+  public type: string;
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { SignInUpComponent } from '../sign-in-up/index';
@@ -9,14 +9,14 @@ import { SignInUpComponent } from '../sign-in-up/index';
   templateUrl: 'auth-container.component.html',
   styleUrls: ['auth-container.component.css'],
   directives: [MODAL_DIRECTIVES, SignInUpComponent],
-  viewProviders:[BS_VIEW_PROVIDERS]
+  viewProviders: [BS_VIEW_PROVIDERS]
 })
-export class AuthContainerComponent implements OnInit {
+export class AuthContainerComponent {
   @ViewChild('lgModal') public lgModal;
   @ViewChild('form') form;
-  public slideTitle:string = 'Sign in';
-  public modalOpen:boolean = false;
-  public reset:boolean = true;
+  public slideTitle: string = 'Sign in';
+  public modalOpen: boolean = false;
+  public reset: boolean = true;
   constructor(private globalEventsService: GlobalEventsService) {
     globalEventsService.modalState$.subscribe(newState => {
       if (newState.modal === 'auth' && newState.open === true) {
@@ -31,13 +31,12 @@ export class AuthContainerComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
-  public done():void {
+  public done(): void {
     this.reset = true;
     this.lgModal.hide();
   }
 
-  private formInit():void {
+  private formInit(): void {
     this.form.reset();
   }
 

@@ -19,7 +19,7 @@ export class ValuesPipe implements PipeTransform {
         value: value[key],
         key: key
       };
-      dataArr.push(temp)
+      dataArr.push(temp);
     });
     return dataArr;
   }

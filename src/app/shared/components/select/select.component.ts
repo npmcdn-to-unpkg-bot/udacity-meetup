@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef, Renderer } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 
 @Component({
@@ -8,7 +13,7 @@ import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
   styleUrls: ['select.component.css'],
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent {
   @Input() field;
   @Input() tabIndex;
   @Input() control;
@@ -16,14 +21,9 @@ export class SelectComponent implements OnInit {
   @Input() showFieldErrors;
   @Output() controlChange = new EventEmitter();
   @Output() placeAutocomplete = new EventEmitter();
-  public ariaLabel:string = '';
+  public ariaLabel: string = '';
 
-  constructor() {}
-
-  ngOnInit() {
-  }
-
-  public onInput(event):number {
+  public onInput(event): number {
     return event.target.value.length;
   }
 

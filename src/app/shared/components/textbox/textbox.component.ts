@@ -1,6 +1,15 @@
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef, Renderer } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  ViewChild,
+  EventEmitter,
+  ElementRef,
+  Renderer
+} from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
-import { MapsAPILoader } from 'angular2-google-maps/core'; 
+import { MapsAPILoader } from 'angular2-google-maps/core';
 import { GlobalEventsService } from '../../services/global-events.service';
 import { BrowserSupportService } from '../../services/browser-support.service';
 import { Observable } from 'rxjs/Rx';
@@ -23,8 +32,8 @@ export class TextboxComponent implements OnInit {
   @Output() placeAutocomplete = new EventEmitter();
   @ViewChild('fileInput') fileInput;
   public timeout;
-  public ariaLabel:string = '';
-  public type:string;
+  public ariaLabel: string = '';
+  public type: string;
   constructor(
     private mapsApiLoader: MapsAPILoader,
     private globalEventsService: GlobalEventsService,
@@ -35,23 +44,23 @@ export class TextboxComponent implements OnInit {
   ngOnInit() {
     this.checkListeners();
     if (this.field.inputType === 'file') {
-      this.type = 'text'
+      this.type = 'text';
     } else {
       this.type = this.field.inputType;
     }
   }
 
-  public onInput(event):number {
+  public onInput(event): number {
     return event.target.value.length;
   }
 
-  public onBlur(event):void {
+  public onBlur(event): void {
     if (this.type === 'date') {
       this.checkDate(event);
     }
   }
 
-  private checkDate(event):void {
+  private checkDate(event): void {
     if (this.browserSupportService.dateInput) { return; }
     let value = event.target.value;
     let defaultMoment = moment( value, 'M/D/YYYY' );
@@ -63,7 +72,7 @@ export class TextboxComponent implements OnInit {
     }
   }
 
-  private checkListeners() {
+  private checkListeners(): void {
     // Checks if this field should have event listeners
     // or other special functions called
     if ('addListener' in this.field) {
@@ -78,10 +87,10 @@ export class TextboxComponent implements OnInit {
     }
   }
 
-  private listenToModalScroll() {
+  private listenToModalScroll(): void {
     // If this componenent is a child of a `.slide`
     // element, then listen to that element's scroll event
-    let a:any = this.element.nativeElement;
+    let a: any = this.element.nativeElement;
     let scrollElement = null;
     while (a) {
       if (a.classList !== undefined && a.classList.contains('slide')) {
@@ -100,10 +109,10 @@ export class TextboxComponent implements OnInit {
     }
   }
 
-  private hideGoogleMapsAutocomplete() {
+  private hideGoogleMapsAutocomplete(): void {
     // ** Workaround for modal scrolling **
     // 1) Hide autocomplete suggestions on scroll
-    let gmElements:any = document.querySelectorAll('.pac-container');
+    let gmElements: any = document.querySelectorAll('.pac-container');
     for (let i = 0; i < gmElements.length; i++) {
       gmElements[i].style.display = 'none';
     }
@@ -120,11 +129,12 @@ export class TextboxComponent implements OnInit {
     }, 300);
   }
 
-  private autocomplete():void {
+  private autocomplete(): void {
     // Sets up Google Maps autocomplete suggestions
     this.listenToModalScroll();
     this.mapsApiLoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete( this.element.nativeElement.firstElementChild, {});
+      let autocomplete = new google.maps.places.Autocomplete(
+        this.element.nativeElement.firstElementChild, {});
       google.maps.event.addListener(autocomplete, 'place_changed', () => {
           let place = autocomplete.getPlace();
           this.placeAutocomplete.emit(place);
@@ -132,20 +142,20 @@ export class TextboxComponent implements OnInit {
     });
   }
 
-  private getBase64(id):void { // File input
+  private getBase64(id): void { // File input
     let filesSelected = this.fileInput.nativeElement.files;
     if (filesSelected.length > 0) {
       let fileToLoad = filesSelected[0];
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent) => {
-          let item:any = fileLoadedEvent.target;
+          let item: any = fileLoadedEvent.target;
           this.control.markAsDirty();
           this.control.updateValue(item.result);
           this.controlChange.emit(this.control);
-      }
+      };
       fileReader.readAsDataURL(fileToLoad);
     } else {
-      this.control.updateValue("");
+      this.control.updateValue('');
       this.controlChange.emit(this.control);
     }
   }

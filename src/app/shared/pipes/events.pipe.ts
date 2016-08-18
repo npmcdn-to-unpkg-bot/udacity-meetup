@@ -14,12 +14,11 @@ export class EventsPipe implements PipeTransform {
     let filtered = value.filter((item) => {
       if (item.logo !== null && found.indexOf(item.organizer_id) === -1) {
         found.push(item.organizer_id);
-        item['unix'] = moment( item.start.utc ).valueOf();
+        item.unix = moment( item.start.utc ).valueOf();
         if (currentTime < item.unix) {
           return item;
         }
-      }
-      else {
+      } else {
         temp.push(item);
       }
     });

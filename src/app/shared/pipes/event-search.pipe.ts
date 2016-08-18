@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class EventSearchPipe implements PipeTransform {
 
   transform(value: any, term?, filteredCount?): any {
-    
+
     let queries = [];
     if (value === undefined) { return; }
     if (term === null || term === undefined) { return value; }
