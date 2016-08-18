@@ -89,6 +89,10 @@ export class EventComponent implements OnInit {
     });
   }
 
+  public ngAfterViewInit():void {
+    document.body.scrollTop = 0;
+  }
+
   private ifExists(item):boolean {
     if (item !== undefined
       && item !== null
