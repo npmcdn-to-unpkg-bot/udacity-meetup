@@ -14,7 +14,7 @@ import { APP_PROVIDERS } from './app.providers';
   encapsulation: ViewEncapsulation.None,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
+  styleUrls: ['app.component.scss'],
   directives: [
     ROUTER_DIRECTIVES,
     NewEventComponent,

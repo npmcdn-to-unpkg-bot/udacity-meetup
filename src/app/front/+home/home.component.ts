@@ -18,7 +18,7 @@ declare let Vimeo: any;
   moduleId: module.id,
   selector: 'app-home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+  styleUrls: ['home.component.scss'],
   directives: [EventsComponent],
   providers: [PaginationService]
 })

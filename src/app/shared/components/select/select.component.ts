@@ -10,7 +10,7 @@ import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
   moduleId: module.id,
   selector: 'app-select',
   templateUrl: 'select.component.html',
-  styleUrls: ['select.component.css'],
+  styleUrls: ['select.component.scss'],
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class SelectComponent {

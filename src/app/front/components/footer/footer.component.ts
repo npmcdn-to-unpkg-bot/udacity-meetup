@@ -5,7 +5,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   moduleId: module.id,
   selector: 'app-footer',
   templateUrl: 'footer.component.html',
-  styleUrls: ['footer.component.css'],
+  styleUrls: ['footer.component.scss'],
   directives: [ROUTER_DIRECTIVES]
 })
 export class FooterComponent {

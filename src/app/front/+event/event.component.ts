@@ -14,7 +14,7 @@ import * as moment from 'moment';
   moduleId: module.id,
   selector: 'app-event',
   templateUrl: 'event.component.html',
-  styleUrls: ['event.component.css'],
+  styleUrls: ['event.component.scss'],
   directives: [GOOGLE_MAPS_DIRECTIVES, CroppedImageComponent],
   pipes: [
     SanitizeHtmlPipe,

@@ -8,7 +8,7 @@ import { ApiService } from '../../shared/services/api.service';
   moduleId: module.id,
   selector: 'app-front',
   templateUrl: 'front.component.html',
-  styleUrls: ['front.component.css'],
+  styleUrls: ['front.component.scss'],
   directives: [
     ROUTER_DIRECTIVES,
     NavbarComponent,

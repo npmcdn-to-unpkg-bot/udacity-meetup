@@ -7,7 +7,7 @@ import { SignInUpComponent } from '../sign-in-up/index';
   moduleId: module.id,
   selector: 'app-auth-container',
   templateUrl: 'auth-container.component.html',
-  styleUrls: ['auth-container.component.css'],
+  styleUrls: ['auth-container.component.scss'],
   directives: [MODAL_DIRECTIVES, SignInUpComponent],
   viewProviders: [BS_VIEW_PROVIDERS]
 })

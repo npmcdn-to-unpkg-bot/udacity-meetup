@@ -20,7 +20,7 @@ declare var google: any;
   moduleId: module.id,
   selector: 'app-textbox',
   templateUrl: 'textbox.component.html',
-  styleUrls: ['textbox.component.css'],
+  styleUrls: ['textbox.component.scss'],
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class TextboxComponent implements OnInit {

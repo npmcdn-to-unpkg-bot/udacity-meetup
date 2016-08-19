@@ -17,7 +17,7 @@ import { DateFormatPipe } from 'angular2-moment';
   moduleId: module.id,
   selector: 'app-events',
   templateUrl: 'events.component.html',
-  styleUrls: ['events.component.css'],
+  styleUrls: ['events.component.scss'],
   pipes: [
     CleanDatesPipe,
     PaginatePipe,

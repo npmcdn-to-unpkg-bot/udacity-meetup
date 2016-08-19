@@ -6,7 +6,7 @@ import { PaginationControlsCmp } from 'ng2-pagination';
   encapsulation: ViewEncapsulation.None,
   selector: 'app-pagination',
   templateUrl: 'pagination.component.html',
-  styleUrls: ['pagination.component.css'],
+  styleUrls: ['pagination.component.scss'],
   directives: [PaginationControlsCmp]
 })
 export class PaginationComponent {

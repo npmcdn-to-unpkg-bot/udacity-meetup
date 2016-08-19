@@ -4,7 +4,7 @@ import { Component, AfterViewInit, OnChanges, ElementRef, Renderer, Input } from
   moduleId: module.id,
   selector: 'app-cropped-image',
   templateUrl: 'cropped-image.component.html',
-  styleUrls: ['cropped-image.component.css']
+  styleUrls: ['cropped-image.component.scss']
 })
 export class CroppedImageComponent implements AfterViewInit, OnChanges {
   @Input() src;

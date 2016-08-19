@@ -9,7 +9,7 @@ import { AuthService } from '../../../shared/services/auth.service';
   moduleId: module.id,
   selector: 'app-navbar',
   templateUrl: 'navbar.component.html',
-  styleUrls: ['navbar.component.css'],
+  styleUrls: ['navbar.component.scss'],
   directives: [DROPDOWN_DIRECTIVES, CollapseDirective, ROUTER_DIRECTIVES, PageScroll]
 })
 export class NavbarComponent implements OnInit {

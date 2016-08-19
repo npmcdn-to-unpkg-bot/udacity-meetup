@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
   moduleId: module.id,
   selector: 'app-default-page',
   templateUrl: 'default-page.component.html',
-  styleUrls: ['default-page.component.css']
+  styleUrls: ['default-page.component.scss']
 })
 export class DefaultPageComponent implements OnInit {
   public type: string;

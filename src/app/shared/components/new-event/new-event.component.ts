@@ -16,7 +16,7 @@ import * as moment from 'moment';
   moduleId: module.id,
   selector: 'app-new-event',
   templateUrl: 'new-event.component.html',
-  styleUrls: ['new-event.component.css'],
+  styleUrls: ['new-event.component.scss'],
   directives: [
     MODAL_DIRECTIVES,
     SignInUpComponent,

@@ -27,7 +27,7 @@ declare var google: any;
   encapsulation: ViewEncapsulation.None,
   selector: 'app-form',
   templateUrl: 'form.component.html',
-  styleUrls: ['form.component.css'],
+  styleUrls: ['form.component.scss'],
   directives: [
     REACTIVE_FORM_DIRECTIVES,
     TextboxComponent,

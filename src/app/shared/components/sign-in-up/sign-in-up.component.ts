@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
   moduleId: module.id,
   selector: 'app-sign-in-up',
   templateUrl: 'sign-in-up.component.html',
-  styleUrls: ['sign-in-up.component.css'],
+  styleUrls: ['sign-in-up.component.scss'],
   directives: [FormComponent]
 })
 export class SignInUpComponent {
