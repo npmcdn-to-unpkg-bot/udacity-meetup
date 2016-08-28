@@ -13,9 +13,10 @@ This meetup website should help people schedule events, create a guest list and 
 ## Tech Stack
 
 * Front end: [Angular 2](https://github.com/angular/angular) version 2.0.0-rc.4
-* Scaffolding: [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.11-webpack.2.
+* Scaffolding: [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.11-webpack.2
 
 ## Development server
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
