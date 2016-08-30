@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { SearchParamsService } from './search-params.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EventsPipe } from '../pipes/events.pipe';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiService {

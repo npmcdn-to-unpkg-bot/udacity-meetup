@@ -10,18 +10,18 @@ import { provideLazyMapsAPILoaderConfig, GOOGLE_MAPS_PROVIDERS } from 'angular2-
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 export const APP_PROVIDERS = [
-    FORM_PROVIDERS,
-    HTTP_PROVIDERS,
-    ApiService,
-    AuthService,
-    SearchParamsService,
-    GlobalEventsService,
-    BrowserSupportService,
-    EasterEggService,
-    GOOGLE_MAPS_PROVIDERS,
-    SlimLoadingBarService,
-    provideLazyMapsAPILoaderConfig({
-        apiKey: 'AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI',
-        libraries: ['places']
-    })
+  FORM_PROVIDERS,
+  HTTP_PROVIDERS,
+  ApiService,
+  AuthService,
+  SearchParamsService,
+  GlobalEventsService,
+  BrowserSupportService,
+  EasterEggService,
+  GOOGLE_MAPS_PROVIDERS,
+  SlimLoadingBarService,
+  provideLazyMapsAPILoaderConfig({
+    apiKey: 'AIzaSyBE1Bb86PEGx-11LahjWCZS2cFOWMpNseI',
+    libraries: ['places']
+  })
 ];
