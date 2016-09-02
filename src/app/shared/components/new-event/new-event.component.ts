@@ -126,6 +126,7 @@ export class NewEventComponent implements OnInit {
           inputType: 'date',
           classes: 'left-input',
           ariaLabel: 'This is the start date input for your event.',
+          dateGroup: 'd1',
           control: [
             '',
             [
@@ -141,6 +142,7 @@ export class NewEventComponent implements OnInit {
           selectType: 'time',
           classes: 'right-input',
           ariaLabel: 'This is the start time input for your event.',
+          dateGroup: 't1',
           control: ['', Validators.required]
         },
         {
@@ -154,6 +156,7 @@ export class NewEventComponent implements OnInit {
           inputType: 'date',
           classes: 'left-input',
           ariaLabel: 'This is the end date input for your event.',
+          dateGroup: 'd2',
           control: [
             '',
             [
@@ -169,6 +172,7 @@ export class NewEventComponent implements OnInit {
           selectType: 'time',
           classes: 'right-input',
           ariaLabel: 'This is the end time input for your event.',
+          dateGroup: 't2',
           control: ['', Validators.required]
         },
         {

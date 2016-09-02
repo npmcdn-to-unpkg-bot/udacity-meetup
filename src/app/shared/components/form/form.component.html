@@ -31,6 +31,7 @@
         id="{{field.id}}"
         rows="4"
         formControlName="{{field.id}}"
+        [attr.required]="field.required ? true :  null"
         [attr.aria-label]="field.ariaLabel"
         [attr.aria-invalid]="showFieldErrors(field)"
         [attr.aria-describedby]="'error-description-' + field.id"
@@ -57,8 +58,8 @@
         id="error-description-{{field.id}}"
         role="alert">
         <li *ngFor="let error of registerForm.controls[field.id].errors | appValues">
-          <span *ngIf="itemInObject(error.key, errorMessages)">{{ errorMessages[error.key] }}</span>
-          <span *ngIf="!itemInObject(error.key, errorMessages)">{{ error.key }}</span>
+          <span *ngIf="error.value === true && itemInObject(error.key, errorMessages)">{{ errorMessages[error.key] }}</span>
+          <span *ngIf="error.value === true && !itemInObject(error.key, errorMessages)">{{ error.key }}</span>
         </li>
       </p>
       <!-- Password help -->

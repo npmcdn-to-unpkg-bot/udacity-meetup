@@ -2,6 +2,7 @@
   <select
     id="{{field.id}}"
     [formControl]="control"
+    [attr.required]="field.required ? true :  null"
     [attr.aria-label]="field.ariaLabel"
     [attr.aria-invalid]="showFieldErrors"
     [attr.aria-describedby]="'error-description-' + field.id"

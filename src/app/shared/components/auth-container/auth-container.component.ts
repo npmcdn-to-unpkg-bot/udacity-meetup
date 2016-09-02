@@ -36,6 +36,11 @@ export class AuthContainerComponent {
     this.lgModal.hide();
   }
 
+  public onShown(): void {
+    // focus
+    this.form.setFocus(0);
+  }
+
   private formInit(): void {
     this.form.reset();
   }

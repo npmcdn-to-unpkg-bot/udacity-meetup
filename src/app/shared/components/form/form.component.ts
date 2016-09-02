@@ -20,6 +20,7 @@ import { ValidationService } from '../../services/validation.service';
 import { ValuesPipe } from '../../pipes/values.pipe';
 import { TextboxComponent } from '../textbox';
 import { SelectComponent } from '../select';
+import { Validators } from '@angular/forms';
 declare var google: any;
 
 @Component({
@@ -294,6 +295,7 @@ export class FormComponent implements OnInit {
     let inputId = 0;
     let fbGroup = {}; // Form builder group object
     let passwordId, confirmPasswordId;
+    let dateGroup = { d1: null, t1: null, d2: null, t2: null };
     let allowedTypes = [...this.inputTypes, ...this.otherTypes];
     for (let i = 0; i < this.formInfo.fields.length; i++) {
       // Check type
@@ -351,10 +353,21 @@ export class FormComponent implements OnInit {
             this.formInfo.fields[i + 1].autocomplete = 'new-password';
           }
         }
+        // Add Required Attribute
+        if ('control' in this.formInfo.fields[i]) {
+          this.formInfo.fields[i].required = this.isRequired( this.formInfo.fields[i].control[1] );
+        }
         // Save password info
         if ('passwordType' in this.formInfo.fields[i]) {
           if (this.formInfo.fields[i].passwordType === 'password') { passwordId = idString; }
           if (this.formInfo.fields[i].passwordType === 'confirm') { confirmPasswordId = idString; }
+        }
+        // Save date validation info
+        if ('dateGroup' in this.formInfo.fields[i]) {
+          if (this.formInfo.fields[i].dateGroup === 'd1') { dateGroup.d1 = idString; }
+          if (this.formInfo.fields[i].dateGroup === 't1') { dateGroup.t1 = idString; }
+          if (this.formInfo.fields[i].dateGroup === 'd2') { dateGroup.d2 = idString; }
+          if (this.formInfo.fields[i].dateGroup === 't2') { dateGroup.t2 = idString; }
         }
         // Add to form builder group object
         fbGroup[idString] = this.formInfo.fields[i].control;
@@ -368,9 +381,28 @@ export class FormComponent implements OnInit {
       // Form builder
       this.registerForm = this.formBuilder.group(fbGroup,
         {validator: ValidationService.matchingPasswords(passwordId, confirmPasswordId)});
+    } else if (dateGroup.d1 !== null) {
+      // Form builder
+      this.registerForm = this.formBuilder.group(fbGroup,
+        {validator: ValidationService.validDates(dateGroup)});
     } else {
       // Form builder
       this.registerForm = this.formBuilder.group(fbGroup);
+    }
+  }
+
+  private isRequired(control): boolean {
+    if (control === undefined) { return; }
+    if (!this.isArray( control )) { control = [control]; }
+    for (let i = 0; i < control.length; i++) {
+      if (control[i] === Validators.required) { return true; }
+    }
+  }
+
+  // http://stackoverflow.com/a/4775737/5357459
+  private isArray(input: any): boolean {
+    if( Object.prototype.toString.call( input ) === '[object Array]' ) {
+      return true;
     }
   }
 

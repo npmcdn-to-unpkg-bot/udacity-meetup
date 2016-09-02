@@ -117,14 +117,15 @@ form {
     padding-left: 2%;
     clear: both;
   }
-  .left-input {
-    float: left;
+  .left-input, .right-input {
     width: 43%;
+    float: left;
+    list-style: none;
+  }
+  .left-input {
     margin-left: 5%;
   }
   .right-input {
-    float: left;
-    width: 43%;
     margin-left: 4%;
   }
   .submit.btn {
